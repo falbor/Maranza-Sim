@@ -42,7 +42,8 @@ const ActivityModal = () => {
 
   return (
     <Dialog open={showActivityModal} onOpenChange={setShowActivityModal}>
-      <DialogContent className="bg-card rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md border border-primary/20">
+      <DialogContent
+  aria-describedby="activity-modal-description" className="bg-card rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md border border-primary/20">
         <DialogHeader className="flex items-center">
           <div className={`${getIconBackground(selectedActivity.color)} p-3 rounded-lg mb-3`}>
             {getActivityIcon(selectedActivity.image, 28)}
