@@ -52,32 +52,32 @@ const ActivityModal = () => {
             {selectedActivity.title}
           </DialogTitle>
         </DialogHeader>
-        
+
         <div className="mb-4">
           <p className="text-foreground/90 text-center">
             {selectedActivity.description}
           </p>
-          
+
           <div className="mt-6 space-y-3 text-sm bg-background/40 p-4 rounded-lg border border-primary/10">
             <div className="flex items-center">
               <Clock className="w-5 h-5 text-primary mr-2" />
               <span>Durata: {selectedActivity.duration} {selectedActivity.duration === 1 ? 'ora' : 'ore'}</span>
             </div>
-            
+
             {positiveEffects.map((effect, index) => (
               <div key={index} className="flex items-center">
                 <Check className="w-5 h-5 text-green-500 mr-2" />
                 <span>+{formatEffect(effect.type, effect.value)}</span>
               </div>
             ))}
-            
+
             {negativeEffects.map((effect, index) => (
               <div key={index} className="flex items-center">
                 <Minus className="w-5 h-5 text-rose-500 mr-2" />
                 <span>-{formatEffect(effect.type, effect.value)}</span>
               </div>
             ))}
-            
+
             {selectedActivity.possibleOutcomes.length > 0 && (
               <div className="flex items-center mt-2 pt-2 border-t border-primary/10">
                 <Info className="w-5 h-5 text-primary mr-2 shrink-0" />
@@ -86,7 +86,7 @@ const ActivityModal = () => {
             )}
           </div>
         </div>
-        
+
         <DialogFooter className="flex items-center justify-between gap-3 sm:justify-between pt-2">
           <Button
             variant="outline"
