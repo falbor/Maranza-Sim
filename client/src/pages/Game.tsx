@@ -80,7 +80,7 @@ const Game = () => {
               <TabsContent value="activities">
                 <h3 className="font-bold text-xl mb-4 text-primary">Cosa Vuoi Fare Oggi?</h3>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {game.availableActivities.map((activity) => (
                     <ActivityCard key={activity.id} activity={activity} />
                   ))}
