@@ -103,7 +103,7 @@ export default {
         "orbit-3": "orbit-3 8s linear infinite",
         "orbit-4": "orbit-4 8s linear infinite",
         "progress": "progress 3s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
+        "shimmer": "shimmer 2.5s linear infinite",
         "pulse": "pulse 1.5s ease-in-out infinite",
       },
     },

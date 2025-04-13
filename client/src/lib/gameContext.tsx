@@ -190,6 +190,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   }, [gameData]);
 
+  // Determina quando mostrare la schermata di caricamento
+  const showLoadingScreen = isLoadingGame || isPendingActivity || isCreatingCharacter;
+  
+  // Determina il messaggio di caricamento in base all'azione
+  const getLoadingMessage = () => {
+    if (isCreatingCharacter) return "Creando il tuo maranza...";
+    if (isPendingActivity) return "Eseguendo l'attività...";
+    return "Caricamento del gioco...";
+  };
+
   return (
     <GameContext.Provider
       value={{
@@ -215,6 +225,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
         setActiveTab
       }}
     >
+      <LoadingScreen show={showLoadingScreen} message={getLoadingMessage()} />
       {children}
     </GameContext.Provider>
   );
