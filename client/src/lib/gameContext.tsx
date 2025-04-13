@@ -11,6 +11,7 @@ import {
   ActivityResult,
   GameState
 } from "@/lib/types";
+import LoadingScreen from "@/components/LoadingScreen";
 
 interface GameContextType {
   game: GameState;
