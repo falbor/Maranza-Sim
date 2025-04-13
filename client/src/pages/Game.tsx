@@ -9,15 +9,43 @@ import CharacterCreationModal from "@/components/CharacterCreationModal";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Sun, Moon, RefreshCw } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 
 const Game = () => {
   const { 
     game, 
     isLoadingGame, 
     activeTab, 
-    setActiveTab 
+    setActiveTab,
+    resetGame
   } = useGame();
   const [_, setLocation] = useLocation();
+  const [isDarkTheme, setIsDarkTheme] = useState(true); // Default tema scuro
+  
+  // Funzione per cambiare tema
+  const toggleTheme = () => {
+    const newThemeValue = !isDarkTheme;
+    setIsDarkTheme(newThemeValue);
+    
+    // Applica il tema al documento
+    document.documentElement.classList.toggle('dark', newThemeValue);
+    document.documentElement.classList.toggle('light', !newThemeValue);
+    
+    // Salva preferenza in localStorage
+    localStorage.setItem('theme', newThemeValue ? 'dark' : 'light');
+  };
+  
+  // Recupera il tema dalle preferenze all'avvio
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = savedTheme === 'dark' || 
+      (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    setIsDarkTheme(prefersDark);
+    document.documentElement.classList.toggle('dark', prefersDark);
+    document.documentElement.classList.toggle('light', !prefersDark);
+  }, []);
 
   useEffect(() => {
     // If game isn't loaded yet, just wait
@@ -31,10 +59,10 @@ const Game = () => {
 
   if (isLoadingGame) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-primary text-white shadow-lg">
+      <div className="min-h-screen bg-background">
+        <header className="bg-primary shadow-lg">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-            <h1 className="text-2xl md:text-3xl font-bold tracking-wider">Maranza Simulator</h1>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-wider text-primary-foreground">Maranza Simulator</h1>
             <div className="flex items-center space-x-2">
               <Skeleton className="h-6 w-20" />
               <Skeleton className="h-6 w-16" />
@@ -53,14 +81,45 @@ const Game = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-primary text-white shadow-lg">
+    <div className="min-h-screen bg-background">
+      <header className="bg-primary shadow-lg">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-wider">Maranza Simulator</h1>
-          <div className="flex items-center space-x-2">
-            <span className="font-bold">Giorno {game.day}</span>
-            <span className="px-2 py-1 bg-secondary rounded text-sm">{game.time}</span>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-wider text-primary-foreground">Maranza Simulator</h1>
+          <div className="flex items-center space-x-3">
+            <span className="font-bold text-primary-foreground">Giorno {game.day}</span>
+            <span className="px-2 py-1 bg-secondary rounded text-sm text-secondary-foreground">{game.time}</span>
+            
+            {/* Tema chiaro/scuro */}
+            <div className="flex items-center gap-2 bg-background/10 p-1 rounded-md">
+              <Sun className="w-4 h-4 text-primary-foreground/70" />
+              <Switch
+                checked={isDarkTheme}
+                onCheckedChange={toggleTheme}
+                aria-label="Cambia tema"
+              />
+              <Moon className="w-4 h-4 text-primary-foreground/70" />
+            </div>
+            
+            {/* Pulsante di reset */}
+            <Button
+              variant="destructive"
+              size="sm"
+              title="Reset Partita"
+              onClick={() => {
+                if (window.confirm("Sicuro di voler resettare la partita? Questo cancellerà i tuoi progressi.")) {
+                  resetGame();
+                }
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white flex items-center gap-1"
+            >
+              <RefreshCw className="w-3 h-3" /> Reset
+            </Button>
           </div>
+        </div>
+        
+        {/* Barra con info sui comandi */}
+        <div className="bg-secondary/20 p-1 text-xs text-center text-secondary-foreground/80">
+          Cambia tema col pulsante 🌙/☀️ - Reset partita col pulsante rosso
         </div>
       </header>
 
