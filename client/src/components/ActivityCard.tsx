@@ -18,7 +18,7 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
   const getMainEffect = () => {
     const effects = activity.effects;
     const effectTypes = Object.keys(effects) as Array<keyof typeof effects>;
-    
+
     // Sort by effect value and get the most significant one
     const sortedEffects = effectTypes
       .filter(type => effects[type] !== undefined)
@@ -27,25 +27,25 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
         const valB = effects[b] || 0;
         return Math.abs(valB) - Math.abs(valA);
       });
-    
+
     if (sortedEffects.length === 0) return null;
-    
+
     const mainEffectType = sortedEffects[0];
     const mainEffectValue = effects[mainEffectType] || 0;
-    
+
     let label = mainEffectType.charAt(0).toUpperCase() + mainEffectType.slice(1);
     let sign = mainEffectValue > 0 ? "+" : "";
-    
+
     // Special formatting for money
     if (mainEffectType === "money") {
       return `${sign}€${mainEffectValue}`;
     }
-    
+
     return `${sign}${mainEffectValue} ${label}`;
   };
 
   const mainEffect = getMainEffect();
-  
+
   // Determine gradient colors based on activity.color
   const getGradient = () => {
     switch (activity.color) {

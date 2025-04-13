@@ -55,20 +55,20 @@ const Game = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-primary text-white shadow-lg">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="text-2xl md:text-3xl font-bold tracking-wider">Maranza Simulator</h1>
-          <div className="flex items-center space-x-2">
+        <div className="container mx-auto px-3 py-2 flex justify-between items-center">
+          <h1 className="text-xl font-bold tracking-wider">Maranza Simulator</h1>
+          <div className="flex items-center gap-2 text-sm">
             <span className="font-bold">Giorno {game.day}</span>
             <span className="px-2 py-1 bg-secondary rounded text-sm">{game.time}</span>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <main className="container mx-auto px-2 py-3">
+        <div className="flex flex-col gap-4">
           <CharacterSection />
           
-          <div className="md:col-span-2">
+          <div className="w-full">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="w-full">
                 <TabsTrigger value="activities" className="flex-1">Attività</TabsTrigger>
@@ -80,7 +80,7 @@ const Game = () => {
               <TabsContent value="activities">
                 <h3 className="font-bold text-xl mb-4 text-primary">Cosa Vuoi Fare Oggi?</h3>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 gap-2">
                   {game.availableActivities.map((activity) => (
                     <ActivityCard key={activity.id} activity={activity} />
                   ))}
