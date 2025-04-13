@@ -5,9 +5,15 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-background text-foreground touch-manipulation;
+    overscroll-behavior-y: none;
+  }
+
+  input, button {
+    @apply min-h-[44px] sm:min-h-[36px];
   }
 }

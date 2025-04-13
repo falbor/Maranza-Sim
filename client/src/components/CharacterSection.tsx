@@ -49,11 +49,11 @@ const CharacterSection = () => {
   }
 
   const statItems = [
-    { label: "Soldi", value: `€${character.money}`, percentage: character.money / 1000 * 100, color: "bg-amber-400" },
-    { label: "Reputazione", value: `${character.reputation}/100`, percentage: character.reputation, color: "bg-primary" },
-    { label: "Stile", value: `${character.style}/100`, percentage: character.style, color: "bg-secondary" },
-    { label: "Energia", value: `${character.energy}/100`, percentage: character.energy, color: "bg-green-500" },
-    { label: "Rispetto", value: `${character.respect}/100`, percentage: character.respect, color: "bg-red-500" }
+    { label: "Soldi", value: `€${character.money}`, percentage: character.money / 1000 * 100, color: "bg-amber-400", icon: "💰" },
+    { label: "Reputazione", value: `${character.reputation}/100`, percentage: character.reputation, color: "bg-primary", icon: "⭐" },
+    { label: "Stile", value: `${character.style}/100`, percentage: character.style, color: "bg-secondary", icon: "👔" },
+    { label: "Energia", value: `${character.energy}/100`, percentage: character.energy, color: "bg-green-500", icon: "⚡" },
+    { label: "Rispetto", value: `${character.respect}/100`, percentage: character.respect, color: "bg-red-500", icon: "💪" }
   ];
 
   return (

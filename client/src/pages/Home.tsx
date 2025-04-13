@@ -33,8 +33,8 @@ const Home = () => {
         <p className="text-center text-lg opacity-90">La vita di un vero maranza</p>
       </header>
 
-      <main className="flex-grow flex items-center justify-center px-4">
-        <div className="max-w-lg w-full bg-white text-gray-800 rounded-xl shadow-2xl p-8">
+      <main className="flex-grow flex items-center justify-center p-4">
+        <div className="max-w-lg w-full bg-white text-gray-800 rounded-xl shadow-2xl p-4 sm:p-8">
           <h2 className="text-2xl font-bold text-primary mb-4 text-center">Benvenuto nel Simulatore</h2>
           
           <p className="mb-6 text-gray-600">
