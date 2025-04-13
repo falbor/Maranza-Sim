@@ -1,8 +1,6 @@
-import { Clock, Check, ArrowRight } from "lucide-react";
+import { Clock, Check } from "lucide-react";
 import { Activity } from "@/lib/types";
 import { useGame } from "@/lib/gameContext";
-import { Button } from "@/components/ui/button";
-import { getActivityIcon, getIconBackground } from "@/lib/activityIcons";
 
 interface ActivityCardProps {
   activity: Activity;
@@ -48,54 +46,48 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
 
   const mainEffect = getMainEffect();
   
-  // Determine color based on activity.color
-  const getButtonColorClass = () => {
+  // Determine gradient colors based on activity.color
+  const getGradient = () => {
     switch (activity.color) {
       case "primary":
-        return "activity-button-primary";
+        return "from-primary to-secondary";
       case "secondary":
-        return "activity-button-secondary";
+        return "from-secondary to-primary";
       case "accent":
-        return "activity-button-accent";
+        return "from-amber-400 to-primary";
       case "info":
-        return "activity-button-info";
+        return "from-blue-500 to-secondary";
       default:
-        return "activity-button-primary";
+        return "from-primary to-secondary";
     }
   };
 
   return (
-    <Button 
-      className={`activity-button ${getButtonColorClass()}`}
+    <div 
+      className="game-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transform transition-transform hover:-translate-y-1"
       onClick={handleSelectActivity}
-      variant="ghost"
     >
-      <div className="flex items-start w-full">
-        {/* Icona dell'attività */}
-        <div className={`${getIconBackground(activity.color)} mr-3 p-2 rounded-lg shrink-0`}>
-          {getActivityIcon(activity.image, 22)}
+      <div className={`h-32 bg-gradient-to-r ${getGradient()} relative`}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h4 className="text-white font-bold text-lg drop-shadow-lg">{activity.title}</h4>
         </div>
-        
-        <div className="flex-1">
-          <div className="flex justify-between items-center w-full mb-2">
-            <h4 className="font-bold text-lg">{activity.title}</h4>
-            <span className="activity-badge">
-              <Clock className="w-3 h-3 mr-1" />
-              {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
-            </span>
-          </div>
-          
-          <p className="text-sm mb-2">{activity.description}</p>
-          
+      </div>
+      <div className="p-4">
+        <p className="text-gray-700 text-sm">{activity.description}</p>
+        <div className="flex justify-between mt-3 text-xs">
+          <span className="inline-flex items-center">
+            <Clock className="w-4 h-4 mr-1 text-primary" />
+            {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
+          </span>
           {mainEffect && (
-            <div className="activity-badge mt-auto">
-              <Check className="w-3 h-3 mr-1" />
+            <span className="inline-flex items-center">
+              <Check className="w-4 h-4 mr-1 text-green-500" />
               {mainEffect}
-            </div>
+            </span>
           )}
         </div>
       </div>
-    </Button>
+    </div>
   );
 };
 

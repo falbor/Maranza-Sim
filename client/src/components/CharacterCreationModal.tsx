@@ -45,7 +45,7 @@ const CharacterCreationModal = () => {
     const names = ["Kevin", "Lorenzo", "Matteo", "Simone", "Federico", "Manuel"];
     const styles = ["casual", "sportivo", "firmato"] as const;
     const personalities = ["audace", "ribelle", "carismatico"] as const;
-
+    
     setName(names[Math.floor(Math.random() * names.length)]);
     setStyle(styles[Math.floor(Math.random() * styles.length)]);
     setPersonality(personalities[Math.floor(Math.random() * personalities.length)]);
@@ -54,16 +54,14 @@ const CharacterCreationModal = () => {
 
   return (
     <Dialog open={showCharacterCreation} onOpenChange={setShowCharacterCreation}>
-      <DialogContent
-        aria-describedby="character-creation-description"
-        className="bg-white rounded-xl shadow-xl max-w-lg w-full mx-4 p-6 sm:max-w-lg">
+      <DialogContent className="bg-white rounded-xl shadow-xl max-w-lg w-full mx-4 p-6 sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-center font-bold text-2xl text-primary">
             Crea il Tuo Maranza
           </DialogTitle>
-          <p id="character-creation-description" className="text-center text-gray-600">Personalizza il tuo personaggio</p>
+          <p className="text-center text-gray-600">Personalizza il tuo personaggio</p>
         </DialogHeader>
-
+        
         <div className="mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -80,7 +78,7 @@ const CharacterCreationModal = () => {
                   className="border rounded w-full py-2 px-3 text-gray-700"
                 />
               </div>
-
+              
               <div className="mb-4">
                 <Label className="block text-gray-700 text-sm font-bold mb-2">
                   Stile
@@ -109,7 +107,7 @@ const CharacterCreationModal = () => {
                   </Button>
                 </div>
               </div>
-
+              
               <div className="mb-4">
                 <Label className="block text-gray-700 text-sm font-bold mb-2">
                   Personalità
@@ -139,7 +137,7 @@ const CharacterCreationModal = () => {
                 </div>
               </div>
             </div>
-
+            
             <div className="flex flex-col items-center justify-center">
               <div className="relative w-32 h-32 mb-4">
                 <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-4 border-primary">
@@ -152,7 +150,7 @@ const CharacterCreationModal = () => {
                   </span>
                 </div>
               </div>
-
+              
               <div className="flex space-x-2">
                 <Button 
                   variant="outline"
@@ -172,7 +170,7 @@ const CharacterCreationModal = () => {
             </div>
           </div>
         </div>
-
+        
         <DialogFooter className="flex justify-between mt-6 gap-2 sm:justify-between">
           <Button
             variant="outline"
