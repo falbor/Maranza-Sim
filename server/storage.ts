@@ -815,12 +815,12 @@ export class DatabaseStorage implements IStorage {
 
   async getAvailableActivities(day: number): Promise<Activity[]> {
     // Query for activities with no unlockDay or unlockDay <= day
-    const result = await db
-      .select()
-      .from(activities)
-      .where(activities.unlockDay.isNull().or(activities.unlockDay.lte(day)));
+    const availableActivities = await db.select().from(activities);
     
-    return result;
+    // Filter in JavaScript instead of SQL for simpler handling
+    return availableActivities.filter(activity => 
+      activity.unlockDay === null || activity.unlockDay <= day
+    );
   }
 
   async getGameState(userId: number): Promise<GameState | undefined> {
