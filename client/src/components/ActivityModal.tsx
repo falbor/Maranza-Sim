@@ -2,6 +2,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button";
 import { useGame } from "@/lib/gameContext";
 import { Clock, Check, Minus, Info } from "lucide-react";
+import { getActivityIcon, getIconBackground } from "@/lib/activityIcons";
 
 const ActivityModal = () => {
   const { 
@@ -41,19 +42,22 @@ const ActivityModal = () => {
 
   return (
     <Dialog open={showActivityModal} onOpenChange={setShowActivityModal}>
-      <DialogContent className="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-center font-bold text-2xl text-primary">
+      <DialogContent className="bg-card rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md border border-primary/20">
+        <DialogHeader className="flex items-center">
+          <div className={`${getIconBackground(selectedActivity.color)} p-3 rounded-lg mb-3`}>
+            {getActivityIcon(selectedActivity.image, 28)}
+          </div>
+          <DialogTitle className="text-center font-bold text-2xl text-primary bg-gradient-to-r from-primary to-purple-500 text-transparent bg-clip-text">
             {selectedActivity.title}
           </DialogTitle>
         </DialogHeader>
         
         <div className="mb-4">
-          <p className="text-gray-700">
+          <p className="text-foreground/90 text-center">
             {selectedActivity.description}
           </p>
           
-          <div className="mt-4 space-y-2 text-sm">
+          <div className="mt-6 space-y-3 text-sm bg-background/40 p-4 rounded-lg border border-primary/10">
             <div className="flex items-center">
               <Clock className="w-5 h-5 text-primary mr-2" />
               <span>Durata: {selectedActivity.duration} {selectedActivity.duration === 1 ? 'ora' : 'ore'}</span>
@@ -68,31 +72,31 @@ const ActivityModal = () => {
             
             {negativeEffects.map((effect, index) => (
               <div key={index} className="flex items-center">
-                <Minus className="w-5 h-5 text-red-500 mr-2" />
+                <Minus className="w-5 h-5 text-rose-500 mr-2" />
                 <span>-{formatEffect(effect.type, effect.value)}</span>
               </div>
             ))}
             
             {selectedActivity.possibleOutcomes.length > 0 && (
-              <div className="flex items-center">
-                <Info className="w-5 h-5 text-blue-500 mr-2" />
+              <div className="flex items-center mt-2 pt-2 border-t border-primary/10">
+                <Info className="w-5 h-5 text-primary mr-2 shrink-0" />
                 <span>{selectedActivity.possibleOutcomes[0]}</span>
               </div>
             )}
           </div>
         </div>
         
-        <DialogFooter className="flex items-center justify-between gap-2 sm:justify-between">
+        <DialogFooter className="flex items-center justify-between gap-3 sm:justify-between pt-2">
           <Button
             variant="outline"
             onClick={handleClose}
-            className="px-4 py-2"
+            className="px-4 py-2 border-primary/20"
           >
             Annulla
           </Button>
           <Button
             onClick={handleConfirm}
-            className="px-4 py-2 bg-primary hover:bg-primary/90 text-white"
+            className="px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
             disabled={isPendingActivity}
           >
             {isPendingActivity ? "Attendere..." : "Fai Attività"}

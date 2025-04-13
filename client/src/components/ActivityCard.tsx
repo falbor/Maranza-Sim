@@ -2,6 +2,7 @@ import { Clock, Check } from "lucide-react";
 import { Activity } from "@/lib/types";
 import { useGame } from "@/lib/gameContext";
 import { Button } from "@/components/ui/button";
+import { getActivityIcon, getIconBackground } from "@/lib/activityIcons";
 
 interface ActivityCardProps {
   activity: Activity;
@@ -69,22 +70,31 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
       onClick={handleSelectActivity}
       variant="ghost"
     >
-      <div className="flex justify-between items-center w-full mb-2">
-        <h4 className="font-bold text-lg">{activity.title}</h4>
-        <span className="activity-badge">
-          <Clock className="w-3 h-3 mr-1" />
-          {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
-        </span>
-      </div>
-      
-      <p className="text-sm mb-2">{activity.description}</p>
-      
-      {mainEffect && (
-        <div className="activity-badge mt-auto">
-          <Check className="w-3 h-3 mr-1" />
-          {mainEffect}
+      <div className="flex items-start w-full">
+        {/* Icona dell'attività */}
+        <div className={`${getIconBackground(activity.color)} mr-3 p-2 rounded-lg shrink-0`}>
+          {getActivityIcon(activity.image, 22)}
         </div>
-      )}
+        
+        <div className="flex-1">
+          <div className="flex justify-between items-center w-full mb-2">
+            <h4 className="font-bold text-lg">{activity.title}</h4>
+            <span className="activity-badge">
+              <Clock className="w-3 h-3 mr-1" />
+              {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
+            </span>
+          </div>
+          
+          <p className="text-sm mb-2">{activity.description}</p>
+          
+          {mainEffect && (
+            <div className="activity-badge mt-auto">
+              <Check className="w-3 h-3 mr-1" />
+              {mainEffect}
+            </div>
+          )}
+        </div>
+      </div>
     </Button>
   );
 };
