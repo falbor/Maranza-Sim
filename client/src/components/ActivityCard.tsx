@@ -48,38 +48,39 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
   const mainEffect = getMainEffect();
   
   // Determine color based on activity.color
-  const getButtonColor = () => {
+  const getButtonColorClass = () => {
     switch (activity.color) {
       case "primary":
-        return "bg-primary hover:bg-primary/90 text-white";
+        return "activity-button-primary";
       case "secondary":
-        return "bg-secondary hover:bg-secondary/90 text-white";
+        return "activity-button-secondary";
       case "accent":
-        return "bg-amber-400 hover:bg-amber-500 text-white";
+        return "activity-button-accent";
       case "info":
-        return "bg-blue-500 hover:bg-blue-600 text-white";
+        return "activity-button-info";
       default:
-        return "bg-primary hover:bg-primary/90 text-white";
+        return "activity-button-primary";
     }
   };
 
   return (
     <Button 
-      className={`w-full flex flex-col items-start text-left p-4 h-auto ${getButtonColor()} shadow-md hover:shadow-lg`}
+      className={`activity-button ${getButtonColorClass()}`}
       onClick={handleSelectActivity}
+      variant="ghost"
     >
       <div className="flex justify-between items-center w-full mb-2">
         <h4 className="font-bold text-lg">{activity.title}</h4>
-        <span className="inline-flex items-center text-xs bg-white/20 px-2 py-1 rounded-full">
+        <span className="activity-badge">
           <Clock className="w-3 h-3 mr-1" />
           {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
         </span>
       </div>
       
-      <p className="text-sm opacity-90 mb-2">{activity.description}</p>
+      <p className="text-sm mb-2">{activity.description}</p>
       
       {mainEffect && (
-        <div className="inline-flex items-center text-xs bg-white/30 px-2 py-1 rounded-full mt-auto">
+        <div className="activity-badge mt-auto">
           <Check className="w-3 h-3 mr-1" />
           {mainEffect}
         </div>
