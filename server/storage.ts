@@ -695,6 +695,26 @@ export class MemStorage implements IStorage {
         category: "competition",
         color: "primary"
       });
+
+      await this.createActivity({
+        title: "Vai a Scuola",
+        description: "Frequenta le lezioni a scuola. Non è molto maranza, ma i tuoi ci tengono e potrebbe tornarti utile.",
+        image: "school",
+        duration: 6,
+        effects: {
+          energy: -40,
+          reputation: 5,
+          respect: -5,
+          money: -5
+        },
+        possibleOutcomes: [
+          "Potresti imparare qualcosa di utile",
+          "Potresti conoscere nuovi compagni di classe",
+          "Potresti avere problemi con i professori"
+        ],
+        category: "education",
+        color: "info"
+      });
     }
   }
 }

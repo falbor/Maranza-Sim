@@ -115,6 +115,11 @@ function generateResultText(activityTitle: string): string {
       "Hai partecipato alla sfida di stile e tutti hanno ammirato il tuo look da vero maranza!",
       "La tua combinazione di vestiti ha impressionato anche i più esigenti. Sei un'icona di stile!",
       "La sfida è stata combattuta, ma il tuo stile maranza ha brillato. Che vittoria!"
+    ],
+    "Vai a Scuola": [
+      "La giornata a scuola è stata lunga ma hai imparato qualcosa di utile. Non proprio da maranza, ma serve anche questo!",
+      "I professori ti hanno dato del filo da torcere, ma hai mantenuto il tuo stile maranza anche in classe!",
+      "Hai socializzato con i compagni di classe durante le pause. Non tutto è perduto!"
     ]
   };
 
@@ -359,7 +364,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         "Giro in Piazza": ["Parlata Slang", "Carisma Sociale"],
         "Social Media": ["Carisma Sociale"],
         "Sfida di Stile": ["Stile nel Vestire"],
-        "Raduno di Auto Tuning": ["Carisma Sociale"]
+        "Raduno di Auto Tuning": ["Carisma Sociale"],
+        "Vai a Scuola": ["Contrattazione", "Carisma Sociale"]
       };
       
       const relevantSkills = skillMap[activity.title] || [];
