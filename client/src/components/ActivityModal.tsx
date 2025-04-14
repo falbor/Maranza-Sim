@@ -41,7 +41,7 @@ const ActivityModal = () => {
 
   return (
     <Dialog open={showActivityModal} onOpenChange={setShowActivityModal}>
-      <DialogContent className="bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md">
+      <DialogContent className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center font-bold text-2xl text-primary">
             {selectedActivity.title}

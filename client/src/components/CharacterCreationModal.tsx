@@ -54,7 +54,7 @@ const CharacterCreationModal = () => {
 
   return (
     <Dialog open={showCharacterCreation} onOpenChange={setShowCharacterCreation}>
-      <DialogContent className="bg-white rounded-xl shadow-xl max-w-lg w-full mx-4 p-6 sm:max-w-lg">
+      <DialogContent className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] bg-white rounded-xl shadow-xl max-w-lg w-full mx-4 p-6 sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-center font-bold text-2xl text-primary">
             Crea il Tuo Maranza
