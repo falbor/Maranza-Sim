@@ -41,19 +41,19 @@ const ActivityModal = () => {
 
   return (
     <Dialog open={showActivityModal} onOpenChange={setShowActivityModal}>
-      <DialogContent className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md">
+      <DialogContent className="w-[90vw] max-w-md mx-auto">
         <DialogHeader>
-          <DialogTitle className="text-center font-bold text-2xl text-primary">
+          <DialogTitle className="text-xl md:text-2xl text-primary font-bold">
             {selectedActivity.title}
           </DialogTitle>
         </DialogHeader>
         
-        <div className="mb-4">
-          <p className="text-gray-700">
+        <div className="space-y-4">
+          <p className="text-sm md:text-base text-gray-700">
             {selectedActivity.description}
           </p>
           
-          <div className="mt-4 space-y-2 text-sm">
+          <div className="space-y-2 text-sm md:text-base">
             <div className="flex items-center">
               <Clock className="w-5 h-5 text-primary mr-2" />
               <span>Durata: {selectedActivity.duration} {selectedActivity.duration === 1 ? 'ora' : 'ore'}</span>

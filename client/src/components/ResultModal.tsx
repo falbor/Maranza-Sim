@@ -35,19 +35,19 @@ const ResultModal = () => {
 
   return (
     <Dialog open={showResultModal} onOpenChange={setShowResultModal}>
-      <DialogContent className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6 sm:max-w-md">
+      <DialogContent className="w-[90vw] max-w-md mx-auto">
         <DialogHeader>
-          <DialogTitle className="text-center font-bold text-2xl text-primary">
+          <DialogTitle className="text-xl md:text-2xl text-primary font-bold">
             Risultato Attività
           </DialogTitle>
         </DialogHeader>
         
-        <div className="mb-6">
-          <p className="text-gray-700 mb-4">
+        <div className="space-y-4">
+          <p className="text-sm md:text-base text-gray-700">
             {activityResult.text}
           </p>
           
-          <div className="bg-gray-50 rounded-lg p-4 space-y-2">
+          <div className="bg-gray-50 rounded-lg p-3 md:p-4 space-y-2">
             {changes.map((change, index) => (
               change.value !== 0 && (
                 <div key={index} className={`flex items-center ${change.value > 0 ? 'text-green-500' : 'text-red-500'}`}>
