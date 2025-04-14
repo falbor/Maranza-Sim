@@ -386,6 +386,22 @@ export class MemStorage implements IStorage {
         // Delete character
         this.characters.delete(gameState.characterId);
       }
+
+      // Clear all collections
+      this.items.clear();
+      this.skills.clear();
+      this.activities.clear();
+      
+      // Reset all ID counters
+      this.userId = 1;
+      this.characterId = 1;
+      this.itemId = 1;
+      this.characterItemId = 1;
+      this.skillId = 1;
+      this.characterSkillId = 1;
+      this.contactId = 1;
+      this.activityId = 1;
+      this.gameStateId = 1;
       
       // Reset game state
       this.gameStates.set(gameState.id, {
@@ -396,6 +412,9 @@ export class MemStorage implements IStorage {
         gameStarted: false,
         hoursLeft: 16
       });
+
+      // Reinitialize default data
+      await this.initializeDefaultData();
     }
   }
 
