@@ -420,273 +420,282 @@ export class MemStorage implements IStorage {
 
   // Initialize default data
   async initializeDefaultData(): Promise<void> {
-    // Only initialize if no data exists
+    // Get existing data
     const skills = await this.getSkills();
     const activities = await this.getActivities();
     const items = await this.getItems();
     
+    // If all data exists, skip initialization
     if (skills.length > 0 && activities.length > 0 && items.length > 0) {
-      return; // Data already exists, skip initialization
+      return;
     }
 
-    // Create default user
-    const user = await this.createUser({
-      username: "player",
-      password: "password"
-    });
-    
-    // Create default game state
-    await this.createGameState({
-      userId: user.id,
-      day: 1,
-      time: "08:00",
-      gameStarted: false,
-      hoursLeft: 16
-    });
+    // Create default user only if no users exist
+    const existingUsers = Array.from(this.users.values());
+    if (existingUsers.length === 0) {
+      const user = await this.createUser({
+        username: "player",
+        password: "password"
+      });
+      
+      await this.createGameState({
+        userId: user.id,
+        day: 1,
+        time: "08:00",
+        gameStarted: false,
+        hoursLeft: 16
+      });
+    }
 
-    // Create default skills
-    await this.createSkill({
-      name: "Stile nel Vestire",
-      description: "Capacità di abbinare capi firmati e creare outfit da vero maranza"
-    });
-    
-    await this.createSkill({
-      name: "Parlata Slang",
-      description: "Abilità nel parlare usando il gergo maranza e abbreviazioni"
-    });
-    
-    await this.createSkill({
-      name: "Contrattazione",
-      description: "Capacità di ottenere sconti e affari vantaggiosi"
-    });
-    
-    await this.createSkill({
-      name: "Ballo",
-      description: "Abilità nelle mosse di danza tipiche del maranza"
-    });
-    
-    await this.createSkill({
-      name: "Carisma Sociale",
-      description: "Capacità di farsi nuovi amici e influenzare gli altri"
-    });
+    // Create default skills if none exist
+    if (skills.length === 0) {
+      await this.createSkill({
+        name: "Stile nel Vestire",
+        description: "Capacità di abbinare capi firmati e creare outfit da vero maranza"
+      });
+      
+      await this.createSkill({
+        name: "Parlata Slang",
+        description: "Abilità nel parlare usando il gergo maranza e abbreviazioni"
+      });
+      
+      await this.createSkill({
+        name: "Contrattazione",
+        description: "Capacità di ottenere sconti e affari vantaggiosi"
+      });
+      
+      await this.createSkill({
+        name: "Ballo",
+        description: "Abilità nelle mosse di danza tipiche del maranza"
+      });
+      
+      await this.createSkill({
+        name: "Carisma Sociale",
+        description: "Capacità di farsi nuovi amici e influenzare gli altri"
+      });
+    }
 
-    // Create default items
-    await this.createItem({
-      name: "Felpa Firmata",
-      description: "Una felpa di marca perfetta per il tuo stile maranza",
-      effect: { type: "style", value: 15 },
-      price: 150,
-      image: "hoodie",
-      unlockDay: 2,
-      category: "clothing"
-    });
-    
-    await this.createItem({
-      name: "Marsupio Griffato",
-      description: "Un marsupio di marca da portare a tracolla",
-      effect: { type: "style", value: 10 },
-      price: 80,
-      image: "bag",
-      category: "accessory"
-    });
-    
-    await this.createItem({
-      name: "Cappellino con Visiera",
-      description: "Un cappellino con logo ben visibile, indispensabile per un maranza",
-      effect: { type: "style", value: 8 },
-      price: 40,
-      image: "cap",
-      category: "accessory"
-    });
-    
-    await this.createItem({
-      name: "Tuta Sportiva",
-      description: "Una tuta sportiva di marca, comoda e alla moda",
-      effect: { type: "style", value: 12 },
-      price: 120,
-      image: "tracksuit",
-      category: "clothing"
-    });
-    
-    await this.createItem({
-      name: "Scarpe Costose",
-      description: "Scarpe sportive estremamente costose con design vistoso",
-      effect: { type: "style", value: 20 },
-      price: 250,
-      image: "shoes",
-      unlockDay: 4,
-      category: "clothing"
-    });
-    
-    await this.createItem({
-      name: "Energy Drink",
-      description: "Una bevanda energetica per ricaricarti",
-      effect: { type: "energy", value: 25 },
-      price: 3,
-      image: "drink",
-      category: "consumable"
-    });
+    // Create default items if none exist
+    if (items.length === 0) {
+      await this.createItem({
+        name: "Felpa Firmata",
+        description: "Una felpa di marca perfetta per il tuo stile maranza",
+        effect: { type: "style", value: 15 },
+        price: 150,
+        image: "hoodie",
+        unlockDay: 2,
+        category: "clothing"
+      });
+      
+      await this.createItem({
+        name: "Marsupio Griffato",
+        description: "Un marsupio di marca da portare a tracolla",
+        effect: { type: "style", value: 10 },
+        price: 80,
+        image: "bag",
+        category: "accessory"
+      });
+      
+      await this.createItem({
+        name: "Cappellino con Visiera",
+        description: "Un cappellino con logo ben visibile, indispensabile per un maranza",
+        effect: { type: "style", value: 8 },
+        price: 40,
+        image: "cap",
+        category: "accessory"
+      });
+      
+      await this.createItem({
+        name: "Tuta Sportiva",
+        description: "Una tuta sportiva di marca, comoda e alla moda",
+        effect: { type: "style", value: 12 },
+        price: 120,
+        image: "tracksuit",
+        category: "clothing"
+      });
+      
+      await this.createItem({
+        name: "Scarpe Costose",
+        description: "Scarpe sportive estremamente costose con design vistoso",
+        effect: { type: "style", value: 20 },
+        price: 250,
+        image: "shoes",
+        unlockDay: 4,
+        category: "clothing"
+      });
+      
+      await this.createItem({
+        name: "Energy Drink",
+        description: "Una bevanda energetica per ricaricarti",
+        effect: { type: "energy", value: 25 },
+        price: 3,
+        image: "drink",
+        category: "consumable"
+      });
+    }
 
-    // Create default activities
-    await this.createActivity({
-      title: "Giro in Piazza",
-      description: "Fai un giro nella piazza principale per mostrare il tuo stile e incontrare altri maranza.",
-      image: "plaza",
-      duration: 1,
-      effects: {
-        reputation: 15,
-        energy: -10
-      },
-      possibleOutcomes: [
-        "Possibile incontro con altri maranza",
-        "Potresti incontrare qualcuno di importante"
-      ],
-      category: "social",
-      color: "primary"
-    });
-    
-    await this.createActivity({
-      title: "Shopping al Centro",
-      description: "Vai al centro commerciale per acquistare nuovi vestiti di marca e accessori. Aumenta il tuo stile!",
-      image: "mall",
-      duration: 2,
-      effects: {
-        style: 20,
-        money: -100,
-        energy: -5
-      },
-      possibleOutcomes: [
-        "Potresti trovare capi in saldo",
-        "Potrebbe esserci una nuova collezione"
-      ],
-      category: "shopping",
-      color: "secondary"
-    });
-    
-    await this.createActivity({
-      title: "Palestra",
-      description: "Allenati in palestra per aumentare la tua forma fisica e guadagnare rispetto dagli altri maranza.",
-      image: "gym",
-      duration: 3,
-      effects: {
-        respect: 25,
-        energy: -30
-      },
-      possibleOutcomes: [
-        "Potresti incontrare un personal trainer",
-        "Potresti impressionare qualcuno"
-      ],
-      category: "fitness",
-      color: "accent"
-    });
-    
-    await this.createActivity({
-      title: "Serata in Discoteca",
-      description: "Vai in discoteca per ballare, incontrare gente e mostrare le tue mosse migliori.",
-      image: "club",
-      duration: 5,
-      effects: {
-        reputation: 30,
-        energy: -50,
-        money: -50
-      },
-      possibleOutcomes: [
-        "Potresti conoscere nuove persone",
-        "Potresti metterti in mostra con le tue mosse di ballo"
-      ],
-      category: "nightlife",
-      color: "info"
-    });
-    
-    await this.createActivity({
-      title: "Lavoretto Part-time",
-      description: "Fai un piccolo lavoro per guadagnare un po' di soldi. Non molto maranza, ma necessario.",
-      image: "work",
-      duration: 4,
-      effects: {
-        money: 80,
-        energy: -20,
-        reputation: -5
-      },
-      possibleOutcomes: [
-        "Potresti ricevere una mancia extra",
-        "Potresti incontrare un collega interessante"
-      ],
-      category: "work",
-      color: "primary"
-    });
-    
-    await this.createActivity({
-      title: "Riposo a Casa",
-      description: "Resta a casa per recuperare energia. Un vero maranza sa quando ricaricarsi.",
-      image: "home",
-      duration: 2,
-      effects: {
-        energy: 40
-      },
-      possibleOutcomes: [
-        "Recuperi completamente le forze",
-        "Potresti avere idee per nuovi outfit"
-      ],
-      category: "rest",
-      color: "secondary"
-    });
-    
-    await this.createActivity({
-      title: "Social Media",
-      description: "Pubblica foto e video sui social media per aumentare la tua presenza online e reputazione.",
-      image: "social",
-      duration: 1,
-      effects: {
-        reputation: 10,
-        energy: -5
-      },
-      possibleOutcomes: [
-        "Potresti diventare virale",
-        "Potresti ricevere molti like"
-      ],
-      category: "social",
-      color: "info"
-    });
-    
-    await this.createActivity({
-      title: "Raduno di Auto Tuning",
-      description: "Partecipa a un raduno di auto modificate. Un classico appuntamento per i maranza.",
-      image: "cars",
-      duration: 3,
-      effects: {
-        respect: 20,
-        reputation: 15,
-        energy: -15
-      },
-      unlockDay: 3,
-      possibleOutcomes: [
-        "Potresti conoscere altri appassionati",
-        "Potresti vedere auto impressionanti"
-      ],
-      category: "entertainment",
-      color: "accent"
-    });
-    
-    await this.createActivity({
-      title: "Sfida di Stile",
-      description: "Partecipa a una sfida di stile con altri maranza. Mostra chi è il più alla moda!",
-      image: "style",
-      duration: 2,
-      effects: {
-        style: 30,
-        reputation: 20,
-        respect: 15,
-        energy: -10
-      },
-      unlockDay: 5,
-      possibleOutcomes: [
-        "Potresti vincere un premio",
-        "Potresti impressionare tutti con il tuo look"
-      ],
-      category: "competition",
-      color: "primary"
-    });
+    // Create default activities if none exist
+    if (activities.length === 0) {
+      await this.createActivity({
+        title: "Giro in Piazza",
+        description: "Fai un giro nella piazza principale per mostrare il tuo stile e incontrare altri maranza.",
+        image: "plaza",
+        duration: 1,
+        effects: {
+          reputation: 15,
+          energy: -10
+        },
+        possibleOutcomes: [
+          "Possibile incontro con altri maranza",
+          "Potresti incontrare qualcuno di importante"
+        ],
+        category: "social",
+        color: "primary"
+      });
+      
+      await this.createActivity({
+        title: "Shopping al Centro",
+        description: "Vai al centro commerciale per acquistare nuovi vestiti di marca e accessori. Aumenta il tuo stile!",
+        image: "mall",
+        duration: 2,
+        effects: {
+          style: 20,
+          money: -100,
+          energy: -5
+        },
+        possibleOutcomes: [
+          "Potresti trovare capi in saldo",
+          "Potrebbe esserci una nuova collezione"
+        ],
+        category: "shopping",
+        color: "secondary"
+      });
+      
+      await this.createActivity({
+        title: "Palestra",
+        description: "Allenati in palestra per aumentare la tua forma fisica e guadagnare rispetto dagli altri maranza.",
+        image: "gym",
+        duration: 3,
+        effects: {
+          respect: 25,
+          energy: -30
+        },
+        possibleOutcomes: [
+          "Potresti incontrare un personal trainer",
+          "Potresti impressionare qualcuno"
+        ],
+        category: "fitness",
+        color: "accent"
+      });
+      
+      await this.createActivity({
+        title: "Serata in Discoteca",
+        description: "Vai in discoteca per ballare, incontrare gente e mostrare le tue mosse migliori.",
+        image: "club",
+        duration: 5,
+        effects: {
+          reputation: 30,
+          energy: -50,
+          money: -50
+        },
+        possibleOutcomes: [
+          "Potresti conoscere nuove persone",
+          "Potresti metterti in mostra con le tue mosse di ballo"
+        ],
+        category: "nightlife",
+        color: "info"
+      });
+      
+      await this.createActivity({
+        title: "Lavoretto Part-time",
+        description: "Fai un piccolo lavoro per guadagnare un po' di soldi. Non molto maranza, ma necessario.",
+        image: "work",
+        duration: 4,
+        effects: {
+          money: 80,
+          energy: -20,
+          reputation: -5
+        },
+        possibleOutcomes: [
+          "Potresti ricevere una mancia extra",
+          "Potresti incontrare un collega interessante"
+        ],
+        category: "work",
+        color: "primary"
+      });
+      
+      await this.createActivity({
+        title: "Riposo a Casa",
+        description: "Resta a casa per recuperare energia. Un vero maranza sa quando ricaricarsi.",
+        image: "home",
+        duration: 2,
+        effects: {
+          energy: 40
+        },
+        possibleOutcomes: [
+          "Recuperi completamente le forze",
+          "Potresti avere idee per nuovi outfit"
+        ],
+        category: "rest",
+        color: "secondary"
+      });
+      
+      await this.createActivity({
+        title: "Social Media",
+        description: "Pubblica foto e video sui social media per aumentare la tua presenza online e reputazione.",
+        image: "social",
+        duration: 1,
+        effects: {
+          reputation: 10,
+          energy: -5
+        },
+        possibleOutcomes: [
+          "Potresti diventare virale",
+          "Potresti ricevere molti like"
+        ],
+        category: "social",
+        color: "info"
+      });
+      
+      await this.createActivity({
+        title: "Raduno di Auto Tuning",
+        description: "Partecipa a un raduno di auto modificate. Un classico appuntamento per i maranza.",
+        image: "cars",
+        duration: 3,
+        effects: {
+          respect: 20,
+          reputation: 15,
+          energy: -15
+        },
+        unlockDay: 3,
+        possibleOutcomes: [
+          "Potresti conoscere altri appassionati",
+          "Potresti vedere auto impressionanti"
+        ],
+        category: "entertainment",
+        color: "accent"
+      });
+      
+      await this.createActivity({
+        title: "Sfida di Stile",
+        description: "Partecipa a una sfida di stile con altri maranza. Mostra chi è il più alla moda!",
+        image: "style",
+        duration: 2,
+        effects: {
+          style: 30,
+          reputation: 20,
+          respect: 15,
+          energy: -10
+        },
+        unlockDay: 5,
+        possibleOutcomes: [
+          "Potresti vincere un premio",
+          "Potresti impressionare tutti con il tuo look"
+        ],
+        category: "competition",
+        color: "primary"
+      });
+    }
   }
 }
 
@@ -695,15 +704,41 @@ export class FileStorage extends MemStorage {
 
   constructor() {
     super();
-    // Ensure we create an absolute path to the data directory
     this.dataPath = path.resolve(__dirname, '..', 'data', 'storage.json');
     
-    // Create data directory if it doesn't exist
     const dataDir = path.dirname(this.dataPath);
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
     this.loadFromFile();
+    this.wrapMethodsWithSave();
+  }
+
+  private wrapMethodsWithSave() {
+    const methodsToWrap = [
+      'createUser',
+      'createCharacter',
+      'updateCharacter',
+      'createItem',
+      'addItemToCharacter',
+      'createSkill',
+      'addSkillToCharacter',
+      'updateCharacterSkill',
+      'createContact',
+      'createActivity',
+      'createGameState',
+      'updateGameState',
+      'resetGameState'
+    ];
+
+    methodsToWrap.forEach(methodName => {
+      const originalMethod = this[methodName];
+      this[methodName] = async (...args) => {
+        const result = await originalMethod.apply(this, args);
+        this.saveToFile();
+        return result;
+      };
+    });
   }
 
   private loadFromFile() {
@@ -775,84 +810,6 @@ export class FileStorage extends MemStorage {
     } catch (error) {
       console.error('Error saving data:', error);
     }
-  }
-
-  // Override all methods that modify data to save after changes
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const user = await super.createUser(insertUser);
-    this.saveToFile();
-    return user;
-  }
-
-  async createCharacter(insertCharacter: InsertCharacter): Promise<Character> {
-    const character = await super.createCharacter(insertCharacter);
-    this.saveToFile();
-    return character;
-  }
-
-  async updateCharacter(id: number, updates: Partial<Character>): Promise<Character> {
-    const character = await super.updateCharacter(id, updates);
-    this.saveToFile();
-    return character;
-  }
-
-  async createItem(insertItem: InsertItem): Promise<Item> {
-    const item = await super.createItem(insertItem);
-    this.saveToFile();
-    return item;
-  }
-
-  async addItemToCharacter(insertCharacterItem: InsertCharacterItem): Promise<CharacterItem> {
-    const characterItem = await super.addItemToCharacter(insertCharacterItem);
-    this.saveToFile();
-    return characterItem;
-  }
-
-  async createSkill(insertSkill: InsertSkill): Promise<Skill> {
-    const skill = await super.createSkill(insertSkill);
-    this.saveToFile();
-    return skill;
-  }
-
-  async addSkillToCharacter(insertCharacterSkill: InsertCharacterSkill): Promise<CharacterSkill> {
-    const characterSkill = await super.addSkillToCharacter(insertCharacterSkill);
-    this.saveToFile();
-    return characterSkill;
-  }
-
-  async updateCharacterSkill(characterId: number, skillId: number, updates: Partial<CharacterSkill>): Promise<CharacterSkill> {
-    const characterSkill = await super.updateCharacterSkill(characterId, skillId, updates);
-    this.saveToFile();
-    return characterSkill;
-  }
-
-  async createContact(insertContact: InsertContact): Promise<Contact> {
-    const contact = await super.createContact(insertContact);
-    this.saveToFile();
-    return contact;
-  }
-
-  async createActivity(insertActivity: InsertActivity): Promise<Activity> {
-    const activity = await super.createActivity(insertActivity);
-    this.saveToFile();
-    return activity;
-  }
-
-  async createGameState(insertGameState: InsertGameState): Promise<GameState> {
-    const gameState = await super.createGameState(insertGameState);
-    this.saveToFile();
-    return gameState;
-  }
-
-  async updateGameState(userId: number, updates: Partial<GameState>): Promise<GameState> {
-    const gameState = await super.updateGameState(userId, updates);
-    this.saveToFile();
-    return gameState;
-  }
-
-  async resetGameState(userId: number): Promise<void> {
-    await super.resetGameState(userId);
-    this.saveToFile();
   }
 }
 

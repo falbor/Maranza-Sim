@@ -49,24 +49,7 @@
       }
     ]
   ],
-  "characters": [
-    [
-      1,
-      {
-        "name": "Kevin",
-        "look": "casual",
-        "personality": "ribelle",
-        "avatarId": 1,
-        "money": 250,
-        "reputation": 50,
-        "energy": 100,
-        "respect": 30,
-        "style": 60,
-        "userId": 1,
-        "id": 1
-      }
-    ]
-  ],
+  "characters": [],
   "items": [
     [
       1,
@@ -208,63 +191,7 @@
       }
     ]
   ],
-  "characterSkills": [
-    [
-      1,
-      {
-        "characterId": 1,
-        "skillId": 1,
-        "level": 3,
-        "progress": 36,
-        "maxLevel": 100,
-        "id": 1
-      }
-    ],
-    [
-      2,
-      {
-        "characterId": 1,
-        "skillId": 2,
-        "level": 1,
-        "progress": 41,
-        "maxLevel": 100,
-        "id": 2
-      }
-    ],
-    [
-      3,
-      {
-        "characterId": 1,
-        "skillId": 3,
-        "level": 2,
-        "progress": 18,
-        "maxLevel": 100,
-        "id": 3
-      }
-    ],
-    [
-      4,
-      {
-        "characterId": 1,
-        "skillId": 4,
-        "level": 2,
-        "progress": 42,
-        "maxLevel": 100,
-        "id": 4
-      }
-    ],
-    [
-      5,
-      {
-        "characterId": 1,
-        "skillId": 5,
-        "level": 1,
-        "progress": 44,
-        "maxLevel": 100,
-        "id": 5
-      }
-    ]
-  ],
+  "characterSkills": [],
   "contacts": [],
   "activities": [
     [
@@ -478,16 +405,16 @@
         "userId": 1,
         "day": 1,
         "time": "08:00",
-        "gameStarted": true,
+        "gameStarted": false,
         "hoursLeft": 16,
         "id": 1,
-        "characterId": 1
+        "characterId": null
       }
     ],
     [
       2,
       {
-        "userId": 1,
+        "userId": 2,
         "day": 1,
         "time": "08:00",
         "gameStarted": false,
@@ -499,7 +426,7 @@
     [
       3,
       {
-        "userId": 1,
+        "userId": 3,
         "day": 1,
         "time": "08:00",
         "gameStarted": false,
@@ -569,13 +496,13 @@
       }
     ]
   ],
-  "userId": 2,
-  "characterId": 2,
+  "userId": 1,
+  "characterId": 1,
   "itemId": 7,
   "characterItemId": 1,
   "skillId": 6,
-  "characterSkillId": 6,
+  "characterSkillId": 1,
   "contactId": 1,
   "activityId": 10,
-  "gameStateId": 2
+  "gameStateId": 1
 }
