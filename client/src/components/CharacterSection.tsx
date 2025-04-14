@@ -1,7 +1,6 @@
 import { useGame } from "@/lib/gameContext";
 import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
-import { ChevronUp, ChevronDown } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import { useState } from "react";
 
 export default function CharacterSection() {
@@ -22,36 +21,24 @@ export default function CharacterSection() {
   ];
 
   return (
-    <div className={`fixed bottom-0 left-0 right-0 bg-white shadow-lg transition-transform duration-300 transform z-50 ${isOpen ? 'translate-y-0' : 'translate-y-[calc(100%-3.5rem)]'}`}>
-      <Button
-        variant="ghost"
-        className="absolute -top-8 right-4 h-8 w-20 rounded-t-lg bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] flex items-center justify-center gap-1"
+    <div className={`fixed bottom-0 left-0 right-0 bg-white shadow-lg transition-transform duration-300 transform z-50 ${isOpen ? 'translate-y-0' : 'translate-y-[calc(100%-4.5rem)]'}`}>
+      <div 
+        className="h-[4.5rem] bg-white px-4 py-3 flex items-center justify-between cursor-pointer border-b"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {isOpen ? (
-          <>
-            Chiudi
-            <ChevronDown className="w-4 h-4" />
-          </>
-        ) : (
-          <>
-            Apri
-            <ChevronUp className="w-4 h-4" />
-          </>
-        )}
-      </Button>
-
-      <div className="p-4 sm:p-6">
-        <div className="flex items-center gap-4 mb-4 border-b pb-4">
-          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
             <span className="text-xl">{character.look === 'casual' ? '👕' : '🧢'}</span>
           </div>
           <div>
-            <h2 className="font-bold text-lg">{character.name}</h2>
-            <p className="text-sm text-gray-500">{character.personality}</p>
+            <h2 className="font-bold text-base leading-tight">{character.name}</h2>
+            <p className="text-sm text-gray-500 leading-tight">{character.personality}</p>
           </div>
         </div>
+        <ChevronUp className={`w-5 h-5 text-gray-500 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+      </div>
 
+      <div className="p-4 sm:p-6">
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
           {statItems.map((stat) => (
             <div key={stat.label} className="bg-gray-50 rounded-lg p-3">
