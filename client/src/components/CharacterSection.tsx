@@ -4,6 +4,7 @@ import { ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { ProfilePic1 } from "@/assets";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 
 export default function CharacterSection() {
   const { game } = useGame();

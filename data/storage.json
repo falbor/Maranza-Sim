@@ -53,15 +53,15 @@
     [
       1,
       {
-        "name": "Matteo",
-        "look": "firmato",
+        "name": "Fouad",
+        "look": "casual",
         "personality": "audace",
         "avatarId": 3,
-        "money": 250,
-        "reputation": 50,
-        "energy": 100,
-        "respect": 30,
-        "style": 60,
+        "money": -50,
+        "reputation": 65,
+        "energy": 45,
+        "respect": 55,
+        "style": 100,
         "userId": 1,
         "id": 1
       }
@@ -206,6 +206,166 @@
         "description": "Capacità di farsi nuovi amici e influenzare gli altri",
         "id": 5
       }
+    ],
+    [
+      6,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 6
+      }
+    ],
+    [
+      7,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 7
+      }
+    ],
+    [
+      8,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 8
+      }
+    ],
+    [
+      9,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 9
+      }
+    ],
+    [
+      10,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 10
+      }
+    ],
+    [
+      11,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 11
+      }
+    ],
+    [
+      12,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 12
+      }
+    ],
+    [
+      13,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 13
+      }
+    ],
+    [
+      14,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 14
+      }
+    ],
+    [
+      15,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 15
+      }
+    ],
+    [
+      16,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 16
+      }
+    ],
+    [
+      17,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 17
+      }
+    ],
+    [
+      18,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 18
+      }
+    ],
+    [
+      19,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 19
+      }
+    ],
+    [
+      20,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 20
+      }
+    ],
+    [
+      21,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 21
+      }
+    ],
+    [
+      22,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 22
+      }
+    ],
+    [
+      23,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 23
+      }
+    ],
+    [
+      24,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 24
+      }
+    ],
+    [
+      25,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 25
+      }
     ]
   ],
   "characterSkills": [
@@ -214,8 +374,8 @@
       {
         "characterId": 1,
         "skillId": 1,
-        "level": 1,
-        "progress": 30,
+        "level": 2,
+        "progress": 12,
         "maxLevel": 100,
         "id": 1
       }
@@ -225,8 +385,8 @@
       {
         "characterId": 1,
         "skillId": 2,
-        "level": 1,
-        "progress": 10,
+        "level": 3,
+        "progress": 27,
         "maxLevel": 100,
         "id": 2
       }
@@ -237,7 +397,7 @@
         "characterId": 1,
         "skillId": 3,
         "level": 3,
-        "progress": 23,
+        "progress": 61,
         "maxLevel": 100,
         "id": 3
       }
@@ -247,8 +407,8 @@
       {
         "characterId": 1,
         "skillId": 4,
-        "level": 2,
-        "progress": 29,
+        "level": 1,
+        "progress": 39,
         "maxLevel": 100,
         "id": 4
       }
@@ -258,14 +418,67 @@
       {
         "characterId": 1,
         "skillId": 5,
-        "level": 1,
-        "progress": 44,
+        "level": 3,
+        "progress": 29,
         "maxLevel": 100,
         "id": 5
       }
     ]
   ],
-  "contacts": [],
+  "contacts": [
+    [
+      1,
+      {
+        "characterId": 1,
+        "name": "Lorenzo Ferro",
+        "type": "Amico d'infanzia",
+        "respect": "medio",
+        "meetDay": 1,
+        "avatarInitials": "LF",
+        "avatarColor": "amber-400",
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "characterId": 1,
+        "name": "Marco Bello",
+        "type": "Compagno di palestra",
+        "respect": "alto",
+        "meetDay": 1,
+        "avatarInitials": "MB",
+        "avatarColor": "info",
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "characterId": 1,
+        "name": "Federico Ferro",
+        "type": "Conosciuto al raduno",
+        "respect": "medio",
+        "meetDay": 1,
+        "avatarInitials": "FF",
+        "avatarColor": "primary",
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "characterId": 1,
+        "name": "Giulia Boss",
+        "type": "Conosciuto in discoteca",
+        "respect": "medio",
+        "meetDay": 1,
+        "avatarInitials": "GB",
+        "avatarColor": "amber-400",
+        "id": 4
+      }
+    ]
+  ],
   "activities": [
     [
       1,
@@ -502,9 +715,9 @@
       {
         "userId": 1,
         "day": 1,
-        "time": "08:00",
+        "time": "18:00",
         "gameStarted": true,
-        "hoursLeft": 16,
+        "hoursLeft": 6,
         "id": 1,
         "characterId": 1
       }
@@ -598,9 +811,9 @@
   "characterId": 2,
   "itemId": 7,
   "characterItemId": 1,
-  "skillId": 6,
+  "skillId": 26,
   "characterSkillId": 6,
-  "contactId": 1,
+  "contactId": 5,
   "activityId": 11,
   "gameStateId": 1
 }

@@ -49,17 +49,17 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
 
   return (
     <Card 
-      className={`border-l-4 ${getColors()} cursor-pointer shadow transition-all duration-200 hover:shadow-md`}
+      className={`border-2 ${getColors()} cursor-pointer shadow transition-all duration-200 hover:shadow-md w-full aspect-square flex flex-col`}
       onClick={handleSelectActivity}
     >
-      <div className="p-3 flex items-center space-x-3">
-        <div className="text-3xl">
+      <div className="p-3 flex flex-col items-center justify-center h-full text-center">
+        <div className="text-4xl mb-3">
           {getActivityIcon()}
         </div>
         <div>
           <h4 className="font-bold">{activity.title}</h4>
-          <p className="text-xs opacity-70 line-clamp-1">{activity.description}</p>
-          <div className="text-xs mt-1 opacity-80">
+          <p className="text-xs opacity-70 line-clamp-2 mt-1">{activity.description}</p>
+          <div className="text-xs mt-2 opacity-80">
             {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
           </div>
         </div>

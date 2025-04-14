@@ -5,7 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useGame } from "@/lib/gameContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ProfilePic1 } from "@/assets";
+import { ProfilePic1, ProfilePic2, ProfilePic3, ProfilePic4, ProfilePic5 } from "@/assets";
+
+const avatarList = [ProfilePic1, ProfilePic2, ProfilePic3, ProfilePic4, ProfilePic5];
 
 const CharacterCreationModal = () => {
   const { 
@@ -43,7 +45,29 @@ const CharacterCreationModal = () => {
   };
 
   const handleRandomize = () => {
-    const names = ["Kevin", "Lorenzo", "Matteo", "Simone", "Federico", "Manuel"];
+    const names = [
+      "Kevin", "Lorenzo", "Matteo", "Simone", "Federico", "Manuel",
+      "Alessandro", "Andrea", "Davide", "Gabriele", "Riccardo", "Francesco",
+      "Giovanni", "Edoardo", "Luca", "Marco", "Tommaso", "Niccolò", "Stefano",
+      "Antonio", "Giuseppe", "Michele", "Salvatore", "Pietro", "Samuele",
+      "Leonardo", "Enrico", "Daniele", "Alberto", "Carlo", "Cristian",
+      "Diego", "Filippo", "Giorgio", "Jacopo", "Luigi", "Mario", "Paolo",
+      "Raffaele", "Roberto", "Sergio", "Vincenzo", "Youssef", "Omar", "Karim",
+      "Samir", "Anis", "Walid", "Nabil", "Rachid", "Reda", "Mehdi", "Ayoub",
+      "Mohamed", "Ahmed", "Mustafa", "Hassan", "Amine", "Bilal", "Ali",
+      "Sami", "Tarek", "Adil", "Imad", "Hamza", "Sofiane", "Khalil", "Idris",
+      "Abdel", "Mounir", "Yassine", "Saad", "Fouad", "Ziad", "Amin", "Farid",
+      "Nadir", "Hakim", "Ismail", "Rami", "Tarik", "Younes", "Soufiane",
+      "Abdallah", "Ilyas", "Mourad", "Nassim", "Salah", "Lotfi", "Said",
+      "Brahim", "Jamal", "Kamal", "Samy", "Riyad", "Zaki", "Malik", "Faris",
+      "Elia", "Giulio", "Massimo", "Valerio", "Dario", "Claudio", "Fabio",
+      "Gianni", "Mirko", "Nicolò", "Ruggero", "Sebastiano", "Tiziano",
+      "Vittorio", "Walter", "Yassin", "Ayman", "Mazen", "Bassam", "Fadi",
+      "Hicham", "Jad", "Kais", "Lyes", "Marwan", "Nour", "Othman", "Rayan",
+      "Selim", "Yahya", "Zine", "Abdelhak", "Badr", "Chafik", "Driss", "Fethi",
+      "Ghassan", "Habib", "Ibrahim", "Jalal", "Khaled", "Lamine", "Mazen",
+      "Nacer", "Omar", "Qais", "Rafik", "Saber", "Taha", "Yacine"
+    ];
     const styles = ["casual", "sportivo", "firmato"] as const;
     const personalities = ["audace", "ribelle", "carismatico"] as const;
     
@@ -144,7 +168,7 @@ const CharacterCreationModal = () => {
             <div className="flex flex-col items-center justify-center">
               <div className="relative w-32 h-32 mb-4">
                 <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-4 border-primary">
-                  <img src={ProfilePic1} alt="Profile" className="w-full h-full object-cover" />
+                  <img src={avatarList[avatarId - 1]} alt="Profile" className="w-full h-full object-cover" />
                 </div>
               </div>
               
