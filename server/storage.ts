@@ -401,6 +401,15 @@ export class MemStorage implements IStorage {
 
   // Initialize default data
   async initializeDefaultData(): Promise<void> {
+    // Only initialize if no data exists
+    const skills = await this.getSkills();
+    const activities = await this.getActivities();
+    const items = await this.getItems();
+    
+    if (skills.length > 0 && activities.length > 0 && items.length > 0) {
+      return; // Data already exists, skip initialization
+    }
+
     // Create default user
     const user = await this.createUser({
       username: "player",

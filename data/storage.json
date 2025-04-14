@@ -7,23 +7,47 @@
         "password": "password",
         "id": 1
       }
+    ],
+    [
+      2,
+      {
+        "username": "player",
+        "password": "password",
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "username": "player",
+        "password": "password",
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "username": "player",
+        "password": "password",
+        "id": 4
+      }
     ]
   ],
   "characters": [
     [
-      1,
+      4,
       {
-        "name": "Lorenzo",
+        "name": "Kevin",
         "look": "casual",
         "personality": "ribelle",
-        "avatarId": 4,
+        "avatarId": 1,
         "money": 250,
         "reputation": 50,
         "energy": 100,
         "respect": 30,
         "style": 60,
         "userId": 1,
-        "id": 1
+        "id": 4
       }
     ]
   ],
@@ -125,7 +149,7 @@
       }
     ],
     [
-      7,
+      31,
       {
         "name": "Felpa Firmata",
         "description": "Una felpa di marca perfetta per il tuo stile maranza",
@@ -137,11 +161,11 @@
         "image": "hoodie",
         "unlockDay": 2,
         "category": "clothing",
-        "id": 7
+        "id": 31
       }
     ],
     [
-      8,
+      32,
       {
         "name": "Marsupio Griffato",
         "description": "Un marsupio di marca da portare a tracolla",
@@ -152,12 +176,12 @@
         "price": 80,
         "image": "bag",
         "category": "accessory",
-        "id": 8,
+        "id": 32,
         "unlockDay": null
       }
     ],
     [
-      9,
+      33,
       {
         "name": "Cappellino con Visiera",
         "description": "Un cappellino con logo ben visibile, indispensabile per un maranza",
@@ -168,12 +192,12 @@
         "price": 40,
         "image": "cap",
         "category": "accessory",
-        "id": 9,
+        "id": 33,
         "unlockDay": null
       }
     ],
     [
-      10,
+      34,
       {
         "name": "Tuta Sportiva",
         "description": "Una tuta sportiva di marca, comoda e alla moda",
@@ -184,12 +208,12 @@
         "price": 120,
         "image": "tracksuit",
         "category": "clothing",
-        "id": 10,
+        "id": 34,
         "unlockDay": null
       }
     ],
     [
-      11,
+      35,
       {
         "name": "Scarpe Costose",
         "description": "Scarpe sportive estremamente costose con design vistoso",
@@ -201,11 +225,11 @@
         "image": "shoes",
         "unlockDay": 4,
         "category": "clothing",
-        "id": 11
+        "id": 35
       }
     ],
     [
-      12,
+      36,
       {
         "name": "Energy Drink",
         "description": "Una bevanda energetica per ricaricarti",
@@ -216,7 +240,7 @@
         "price": 3,
         "image": "drink",
         "category": "consumable",
-        "id": 12,
+        "id": 36,
         "unlockDay": null
       }
     ]
@@ -264,155 +288,155 @@
       }
     ],
     [
-      6,
+      16,
       {
         "name": "Stile nel Vestire",
         "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
-        "id": 6
+        "id": 16
       }
     ],
     [
-      7,
+      17,
       {
         "name": "Parlata Slang",
         "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
-        "id": 7
+        "id": 17
       }
     ],
     [
-      8,
+      18,
       {
         "name": "Contrattazione",
         "description": "Capacità di ottenere sconti e affari vantaggiosi",
-        "id": 8
+        "id": 18
       }
     ],
     [
-      9,
+      19,
       {
         "name": "Ballo",
         "description": "Abilità nelle mosse di danza tipiche del maranza",
-        "id": 9
+        "id": 19
       }
     ],
     [
-      10,
+      20,
       {
         "name": "Carisma Sociale",
         "description": "Capacità di farsi nuovi amici e influenzare gli altri",
-        "id": 10
+        "id": 20
       }
     ]
   ],
   "characterSkills": [
     [
-      1,
+      36,
       {
-        "characterId": 1,
+        "characterId": 4,
         "skillId": 1,
         "level": 2,
-        "progress": 26,
-        "maxLevel": 100,
-        "id": 1
-      }
-    ],
-    [
-      2,
-      {
-        "characterId": 1,
-        "skillId": 2,
-        "level": 3,
-        "progress": 12,
-        "maxLevel": 100,
-        "id": 2
-      }
-    ],
-    [
-      3,
-      {
-        "characterId": 1,
-        "skillId": 3,
-        "level": 2,
-        "progress": 11,
-        "maxLevel": 100,
-        "id": 3
-      }
-    ],
-    [
-      4,
-      {
-        "characterId": 1,
-        "skillId": 4,
-        "level": 2,
-        "progress": 40,
-        "maxLevel": 100,
-        "id": 4
-      }
-    ],
-    [
-      5,
-      {
-        "characterId": 1,
-        "skillId": 5,
-        "level": 1,
-        "progress": 27,
-        "maxLevel": 100,
-        "id": 5
-      }
-    ],
-    [
-      6,
-      {
-        "characterId": 1,
-        "skillId": 6,
-        "level": 3,
-        "progress": 31,
-        "maxLevel": 100,
-        "id": 6
-      }
-    ],
-    [
-      7,
-      {
-        "characterId": 1,
-        "skillId": 7,
-        "level": 2,
-        "progress": 13,
-        "maxLevel": 100,
-        "id": 7
-      }
-    ],
-    [
-      8,
-      {
-        "characterId": 1,
-        "skillId": 8,
-        "level": 1,
         "progress": 37,
         "maxLevel": 100,
-        "id": 8
+        "id": 36
       }
     ],
     [
-      9,
+      37,
       {
-        "characterId": 1,
-        "skillId": 9,
+        "characterId": 4,
+        "skillId": 2,
+        "level": 2,
+        "progress": 27,
+        "maxLevel": 100,
+        "id": 37
+      }
+    ],
+    [
+      38,
+      {
+        "characterId": 4,
+        "skillId": 3,
+        "level": 1,
+        "progress": 39,
+        "maxLevel": 100,
+        "id": 38
+      }
+    ],
+    [
+      39,
+      {
+        "characterId": 4,
+        "skillId": 4,
+        "level": 2,
+        "progress": 25,
+        "maxLevel": 100,
+        "id": 39
+      }
+    ],
+    [
+      40,
+      {
+        "characterId": 4,
+        "skillId": 5,
+        "level": 3,
+        "progress": 34,
+        "maxLevel": 100,
+        "id": 40
+      }
+    ],
+    [
+      41,
+      {
+        "characterId": 4,
+        "skillId": 16,
         "level": 3,
         "progress": 38,
         "maxLevel": 100,
-        "id": 9
+        "id": 41
       }
     ],
     [
-      10,
+      42,
       {
-        "characterId": 1,
-        "skillId": 10,
+        "characterId": 4,
+        "skillId": 17,
         "level": 1,
-        "progress": 24,
+        "progress": 39,
         "maxLevel": 100,
-        "id": 10
+        "id": 42
+      }
+    ],
+    [
+      43,
+      {
+        "characterId": 4,
+        "skillId": 18,
+        "level": 2,
+        "progress": 26,
+        "maxLevel": 100,
+        "id": 43
+      }
+    ],
+    [
+      44,
+      {
+        "characterId": 4,
+        "skillId": 19,
+        "level": 3,
+        "progress": 43,
+        "maxLevel": 100,
+        "id": 44
+      }
+    ],
+    [
+      45,
+      {
+        "characterId": 4,
+        "skillId": 20,
+        "level": 3,
+        "progress": 32,
+        "maxLevel": 100,
+        "id": 45
       }
     ]
   ],
@@ -622,7 +646,7 @@
       }
     ],
     [
-      10,
+      28,
       {
         "title": "Giro in Piazza",
         "description": "Fai un giro nella piazza principale per mostrare il tuo stile e incontrare altri maranza.",
@@ -638,13 +662,13 @@
         ],
         "category": "social",
         "color": "primary",
-        "id": 10,
+        "id": 28,
         "unlockDay": null,
         "requirements": null
       }
     ],
     [
-      11,
+      29,
       {
         "title": "Shopping al Centro",
         "description": "Vai al centro commerciale per acquistare nuovi vestiti di marca e accessori. Aumenta il tuo stile!",
@@ -661,13 +685,13 @@
         ],
         "category": "shopping",
         "color": "secondary",
-        "id": 11,
+        "id": 29,
         "unlockDay": null,
         "requirements": null
       }
     ],
     [
-      12,
+      30,
       {
         "title": "Palestra",
         "description": "Allenati in palestra per aumentare la tua forma fisica e guadagnare rispetto dagli altri maranza.",
@@ -683,13 +707,13 @@
         ],
         "category": "fitness",
         "color": "accent",
-        "id": 12,
+        "id": 30,
         "unlockDay": null,
         "requirements": null
       }
     ],
     [
-      13,
+      31,
       {
         "title": "Serata in Discoteca",
         "description": "Vai in discoteca per ballare, incontrare gente e mostrare le tue mosse migliori.",
@@ -706,13 +730,13 @@
         ],
         "category": "nightlife",
         "color": "info",
-        "id": 13,
+        "id": 31,
         "unlockDay": null,
         "requirements": null
       }
     ],
     [
-      14,
+      32,
       {
         "title": "Lavoretto Part-time",
         "description": "Fai un piccolo lavoro per guadagnare un po' di soldi. Non molto maranza, ma necessario.",
@@ -729,13 +753,13 @@
         ],
         "category": "work",
         "color": "primary",
-        "id": 14,
+        "id": 32,
         "unlockDay": null,
         "requirements": null
       }
     ],
     [
-      15,
+      33,
       {
         "title": "Riposo a Casa",
         "description": "Resta a casa per recuperare energia. Un vero maranza sa quando ricaricarsi.",
@@ -750,13 +774,13 @@
         ],
         "category": "rest",
         "color": "secondary",
-        "id": 15,
+        "id": 33,
         "unlockDay": null,
         "requirements": null
       }
     ],
     [
-      16,
+      34,
       {
         "title": "Social Media",
         "description": "Pubblica foto e video sui social media per aumentare la tua presenza online e reputazione.",
@@ -772,13 +796,13 @@
         ],
         "category": "social",
         "color": "info",
-        "id": 16,
+        "id": 34,
         "unlockDay": null,
         "requirements": null
       }
     ],
     [
-      17,
+      35,
       {
         "title": "Raduno di Auto Tuning",
         "description": "Partecipa a un raduno di auto modificate. Un classico appuntamento per i maranza.",
@@ -796,12 +820,12 @@
         ],
         "category": "entertainment",
         "color": "accent",
-        "id": 17,
+        "id": 35,
         "requirements": null
       }
     ],
     [
-      18,
+      36,
       {
         "title": "Sfida di Stile",
         "description": "Partecipa a una sfida di stile con altri maranza. Mostra chi è il più alla moda!",
@@ -820,7 +844,7 @@
         ],
         "category": "competition",
         "color": "primary",
-        "id": 18,
+        "id": 36,
         "requirements": null
       }
     ]
@@ -835,7 +859,7 @@
         "gameStarted": true,
         "hoursLeft": 16,
         "id": 1,
-        "characterId": 1
+        "characterId": 4
       }
     ],
     [
@@ -849,15 +873,63 @@
         "id": 2,
         "characterId": null
       }
+    ],
+    [
+      3,
+      {
+        "userId": 1,
+        "day": 1,
+        "time": "08:00",
+        "gameStarted": false,
+        "hoursLeft": 16,
+        "id": 3,
+        "characterId": null
+      }
+    ],
+    [
+      4,
+      {
+        "userId": 2,
+        "day": 1,
+        "time": "08:00",
+        "gameStarted": false,
+        "hoursLeft": 16,
+        "id": 4,
+        "characterId": null
+      }
+    ],
+    [
+      5,
+      {
+        "userId": 3,
+        "day": 1,
+        "time": "08:00",
+        "gameStarted": false,
+        "hoursLeft": 16,
+        "id": 5,
+        "characterId": null
+      }
+    ],
+    [
+      6,
+      {
+        "userId": 4,
+        "day": 1,
+        "time": "08:00",
+        "gameStarted": false,
+        "hoursLeft": 16,
+        "id": 6,
+        "characterId": null
+      }
     ]
   ],
-  "userId": 2,
-  "characterId": 2,
-  "itemId": 13,
+  "userId": 5,
+  "characterId": 5,
+  "itemId": 37,
   "characterItemId": 1,
-  "skillId": 11,
-  "characterSkillId": 11,
+  "skillId": 21,
+  "characterSkillId": 46,
   "contactId": 1,
-  "activityId": 19,
-  "gameStateId": 3
+  "activityId": 37,
+  "gameStateId": 7
 }
