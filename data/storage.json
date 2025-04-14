@@ -1,0 +1,863 @@
+{
+  "users": [
+    [
+      1,
+      {
+        "username": "player",
+        "password": "password",
+        "id": 1
+      }
+    ]
+  ],
+  "characters": [
+    [
+      1,
+      {
+        "name": "Lorenzo",
+        "look": "casual",
+        "personality": "ribelle",
+        "avatarId": 4,
+        "money": 250,
+        "reputation": 50,
+        "energy": 100,
+        "respect": 30,
+        "style": 60,
+        "userId": 1,
+        "id": 1
+      }
+    ]
+  ],
+  "items": [
+    [
+      1,
+      {
+        "name": "Felpa Firmata",
+        "description": "Una felpa di marca perfetta per il tuo stile maranza",
+        "effect": {
+          "type": "style",
+          "value": 15
+        },
+        "price": 150,
+        "image": "hoodie",
+        "unlockDay": 2,
+        "category": "clothing",
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "name": "Marsupio Griffato",
+        "description": "Un marsupio di marca da portare a tracolla",
+        "effect": {
+          "type": "style",
+          "value": 10
+        },
+        "price": 80,
+        "image": "bag",
+        "category": "accessory",
+        "id": 2,
+        "unlockDay": null
+      }
+    ],
+    [
+      3,
+      {
+        "name": "Cappellino con Visiera",
+        "description": "Un cappellino con logo ben visibile, indispensabile per un maranza",
+        "effect": {
+          "type": "style",
+          "value": 8
+        },
+        "price": 40,
+        "image": "cap",
+        "category": "accessory",
+        "id": 3,
+        "unlockDay": null
+      }
+    ],
+    [
+      4,
+      {
+        "name": "Tuta Sportiva",
+        "description": "Una tuta sportiva di marca, comoda e alla moda",
+        "effect": {
+          "type": "style",
+          "value": 12
+        },
+        "price": 120,
+        "image": "tracksuit",
+        "category": "clothing",
+        "id": 4,
+        "unlockDay": null
+      }
+    ],
+    [
+      5,
+      {
+        "name": "Scarpe Costose",
+        "description": "Scarpe sportive estremamente costose con design vistoso",
+        "effect": {
+          "type": "style",
+          "value": 20
+        },
+        "price": 250,
+        "image": "shoes",
+        "unlockDay": 4,
+        "category": "clothing",
+        "id": 5
+      }
+    ],
+    [
+      6,
+      {
+        "name": "Energy Drink",
+        "description": "Una bevanda energetica per ricaricarti",
+        "effect": {
+          "type": "energy",
+          "value": 25
+        },
+        "price": 3,
+        "image": "drink",
+        "category": "consumable",
+        "id": 6,
+        "unlockDay": null
+      }
+    ],
+    [
+      7,
+      {
+        "name": "Felpa Firmata",
+        "description": "Una felpa di marca perfetta per il tuo stile maranza",
+        "effect": {
+          "type": "style",
+          "value": 15
+        },
+        "price": 150,
+        "image": "hoodie",
+        "unlockDay": 2,
+        "category": "clothing",
+        "id": 7
+      }
+    ],
+    [
+      8,
+      {
+        "name": "Marsupio Griffato",
+        "description": "Un marsupio di marca da portare a tracolla",
+        "effect": {
+          "type": "style",
+          "value": 10
+        },
+        "price": 80,
+        "image": "bag",
+        "category": "accessory",
+        "id": 8,
+        "unlockDay": null
+      }
+    ],
+    [
+      9,
+      {
+        "name": "Cappellino con Visiera",
+        "description": "Un cappellino con logo ben visibile, indispensabile per un maranza",
+        "effect": {
+          "type": "style",
+          "value": 8
+        },
+        "price": 40,
+        "image": "cap",
+        "category": "accessory",
+        "id": 9,
+        "unlockDay": null
+      }
+    ],
+    [
+      10,
+      {
+        "name": "Tuta Sportiva",
+        "description": "Una tuta sportiva di marca, comoda e alla moda",
+        "effect": {
+          "type": "style",
+          "value": 12
+        },
+        "price": 120,
+        "image": "tracksuit",
+        "category": "clothing",
+        "id": 10,
+        "unlockDay": null
+      }
+    ],
+    [
+      11,
+      {
+        "name": "Scarpe Costose",
+        "description": "Scarpe sportive estremamente costose con design vistoso",
+        "effect": {
+          "type": "style",
+          "value": 20
+        },
+        "price": 250,
+        "image": "shoes",
+        "unlockDay": 4,
+        "category": "clothing",
+        "id": 11
+      }
+    ],
+    [
+      12,
+      {
+        "name": "Energy Drink",
+        "description": "Una bevanda energetica per ricaricarti",
+        "effect": {
+          "type": "energy",
+          "value": 25
+        },
+        "price": 3,
+        "image": "drink",
+        "category": "consumable",
+        "id": 12,
+        "unlockDay": null
+      }
+    ]
+  ],
+  "characterItems": [],
+  "skills": [
+    [
+      1,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 5
+      }
+    ],
+    [
+      6,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 6
+      }
+    ],
+    [
+      7,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 7
+      }
+    ],
+    [
+      8,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 8
+      }
+    ],
+    [
+      9,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 9
+      }
+    ],
+    [
+      10,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 10
+      }
+    ]
+  ],
+  "characterSkills": [
+    [
+      1,
+      {
+        "characterId": 1,
+        "skillId": 1,
+        "level": 2,
+        "progress": 26,
+        "maxLevel": 100,
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "characterId": 1,
+        "skillId": 2,
+        "level": 3,
+        "progress": 12,
+        "maxLevel": 100,
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "characterId": 1,
+        "skillId": 3,
+        "level": 2,
+        "progress": 11,
+        "maxLevel": 100,
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "characterId": 1,
+        "skillId": 4,
+        "level": 2,
+        "progress": 40,
+        "maxLevel": 100,
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "characterId": 1,
+        "skillId": 5,
+        "level": 1,
+        "progress": 27,
+        "maxLevel": 100,
+        "id": 5
+      }
+    ],
+    [
+      6,
+      {
+        "characterId": 1,
+        "skillId": 6,
+        "level": 3,
+        "progress": 31,
+        "maxLevel": 100,
+        "id": 6
+      }
+    ],
+    [
+      7,
+      {
+        "characterId": 1,
+        "skillId": 7,
+        "level": 2,
+        "progress": 13,
+        "maxLevel": 100,
+        "id": 7
+      }
+    ],
+    [
+      8,
+      {
+        "characterId": 1,
+        "skillId": 8,
+        "level": 1,
+        "progress": 37,
+        "maxLevel": 100,
+        "id": 8
+      }
+    ],
+    [
+      9,
+      {
+        "characterId": 1,
+        "skillId": 9,
+        "level": 3,
+        "progress": 38,
+        "maxLevel": 100,
+        "id": 9
+      }
+    ],
+    [
+      10,
+      {
+        "characterId": 1,
+        "skillId": 10,
+        "level": 1,
+        "progress": 24,
+        "maxLevel": 100,
+        "id": 10
+      }
+    ]
+  ],
+  "contacts": [],
+  "activities": [
+    [
+      1,
+      {
+        "title": "Giro in Piazza",
+        "description": "Fai un giro nella piazza principale per mostrare il tuo stile e incontrare altri maranza.",
+        "image": "plaza",
+        "duration": 1,
+        "effects": {
+          "reputation": 15,
+          "energy": -10
+        },
+        "possibleOutcomes": [
+          "Possibile incontro con altri maranza",
+          "Potresti incontrare qualcuno di importante"
+        ],
+        "category": "social",
+        "color": "primary",
+        "id": 1,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      2,
+      {
+        "title": "Shopping al Centro",
+        "description": "Vai al centro commerciale per acquistare nuovi vestiti di marca e accessori. Aumenta il tuo stile!",
+        "image": "mall",
+        "duration": 2,
+        "effects": {
+          "style": 20,
+          "money": -100,
+          "energy": -5
+        },
+        "possibleOutcomes": [
+          "Potresti trovare capi in saldo",
+          "Potrebbe esserci una nuova collezione"
+        ],
+        "category": "shopping",
+        "color": "secondary",
+        "id": 2,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      3,
+      {
+        "title": "Palestra",
+        "description": "Allenati in palestra per aumentare la tua forma fisica e guadagnare rispetto dagli altri maranza.",
+        "image": "gym",
+        "duration": 3,
+        "effects": {
+          "respect": 25,
+          "energy": -30
+        },
+        "possibleOutcomes": [
+          "Potresti incontrare un personal trainer",
+          "Potresti impressionare qualcuno"
+        ],
+        "category": "fitness",
+        "color": "accent",
+        "id": 3,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      4,
+      {
+        "title": "Serata in Discoteca",
+        "description": "Vai in discoteca per ballare, incontrare gente e mostrare le tue mosse migliori.",
+        "image": "club",
+        "duration": 5,
+        "effects": {
+          "reputation": 30,
+          "energy": -50,
+          "money": -50
+        },
+        "possibleOutcomes": [
+          "Potresti conoscere nuove persone",
+          "Potresti metterti in mostra con le tue mosse di ballo"
+        ],
+        "category": "nightlife",
+        "color": "info",
+        "id": 4,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      5,
+      {
+        "title": "Lavoretto Part-time",
+        "description": "Fai un piccolo lavoro per guadagnare un po' di soldi. Non molto maranza, ma necessario.",
+        "image": "work",
+        "duration": 4,
+        "effects": {
+          "money": 80,
+          "energy": -20,
+          "reputation": -5
+        },
+        "possibleOutcomes": [
+          "Potresti ricevere una mancia extra",
+          "Potresti incontrare un collega interessante"
+        ],
+        "category": "work",
+        "color": "primary",
+        "id": 5,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      6,
+      {
+        "title": "Riposo a Casa",
+        "description": "Resta a casa per recuperare energia. Un vero maranza sa quando ricaricarsi.",
+        "image": "home",
+        "duration": 2,
+        "effects": {
+          "energy": 40
+        },
+        "possibleOutcomes": [
+          "Recuperi completamente le forze",
+          "Potresti avere idee per nuovi outfit"
+        ],
+        "category": "rest",
+        "color": "secondary",
+        "id": 6,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      7,
+      {
+        "title": "Social Media",
+        "description": "Pubblica foto e video sui social media per aumentare la tua presenza online e reputazione.",
+        "image": "social",
+        "duration": 1,
+        "effects": {
+          "reputation": 10,
+          "energy": -5
+        },
+        "possibleOutcomes": [
+          "Potresti diventare virale",
+          "Potresti ricevere molti like"
+        ],
+        "category": "social",
+        "color": "info",
+        "id": 7,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      8,
+      {
+        "title": "Raduno di Auto Tuning",
+        "description": "Partecipa a un raduno di auto modificate. Un classico appuntamento per i maranza.",
+        "image": "cars",
+        "duration": 3,
+        "effects": {
+          "respect": 20,
+          "reputation": 15,
+          "energy": -15
+        },
+        "unlockDay": 3,
+        "possibleOutcomes": [
+          "Potresti conoscere altri appassionati",
+          "Potresti vedere auto impressionanti"
+        ],
+        "category": "entertainment",
+        "color": "accent",
+        "id": 8,
+        "requirements": null
+      }
+    ],
+    [
+      9,
+      {
+        "title": "Sfida di Stile",
+        "description": "Partecipa a una sfida di stile con altri maranza. Mostra chi è il più alla moda!",
+        "image": "style",
+        "duration": 2,
+        "effects": {
+          "style": 30,
+          "reputation": 20,
+          "respect": 15,
+          "energy": -10
+        },
+        "unlockDay": 5,
+        "possibleOutcomes": [
+          "Potresti vincere un premio",
+          "Potresti impressionare tutti con il tuo look"
+        ],
+        "category": "competition",
+        "color": "primary",
+        "id": 9,
+        "requirements": null
+      }
+    ],
+    [
+      10,
+      {
+        "title": "Giro in Piazza",
+        "description": "Fai un giro nella piazza principale per mostrare il tuo stile e incontrare altri maranza.",
+        "image": "plaza",
+        "duration": 1,
+        "effects": {
+          "reputation": 15,
+          "energy": -10
+        },
+        "possibleOutcomes": [
+          "Possibile incontro con altri maranza",
+          "Potresti incontrare qualcuno di importante"
+        ],
+        "category": "social",
+        "color": "primary",
+        "id": 10,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      11,
+      {
+        "title": "Shopping al Centro",
+        "description": "Vai al centro commerciale per acquistare nuovi vestiti di marca e accessori. Aumenta il tuo stile!",
+        "image": "mall",
+        "duration": 2,
+        "effects": {
+          "style": 20,
+          "money": -100,
+          "energy": -5
+        },
+        "possibleOutcomes": [
+          "Potresti trovare capi in saldo",
+          "Potrebbe esserci una nuova collezione"
+        ],
+        "category": "shopping",
+        "color": "secondary",
+        "id": 11,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      12,
+      {
+        "title": "Palestra",
+        "description": "Allenati in palestra per aumentare la tua forma fisica e guadagnare rispetto dagli altri maranza.",
+        "image": "gym",
+        "duration": 3,
+        "effects": {
+          "respect": 25,
+          "energy": -30
+        },
+        "possibleOutcomes": [
+          "Potresti incontrare un personal trainer",
+          "Potresti impressionare qualcuno"
+        ],
+        "category": "fitness",
+        "color": "accent",
+        "id": 12,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      13,
+      {
+        "title": "Serata in Discoteca",
+        "description": "Vai in discoteca per ballare, incontrare gente e mostrare le tue mosse migliori.",
+        "image": "club",
+        "duration": 5,
+        "effects": {
+          "reputation": 30,
+          "energy": -50,
+          "money": -50
+        },
+        "possibleOutcomes": [
+          "Potresti conoscere nuove persone",
+          "Potresti metterti in mostra con le tue mosse di ballo"
+        ],
+        "category": "nightlife",
+        "color": "info",
+        "id": 13,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      14,
+      {
+        "title": "Lavoretto Part-time",
+        "description": "Fai un piccolo lavoro per guadagnare un po' di soldi. Non molto maranza, ma necessario.",
+        "image": "work",
+        "duration": 4,
+        "effects": {
+          "money": 80,
+          "energy": -20,
+          "reputation": -5
+        },
+        "possibleOutcomes": [
+          "Potresti ricevere una mancia extra",
+          "Potresti incontrare un collega interessante"
+        ],
+        "category": "work",
+        "color": "primary",
+        "id": 14,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      15,
+      {
+        "title": "Riposo a Casa",
+        "description": "Resta a casa per recuperare energia. Un vero maranza sa quando ricaricarsi.",
+        "image": "home",
+        "duration": 2,
+        "effects": {
+          "energy": 40
+        },
+        "possibleOutcomes": [
+          "Recuperi completamente le forze",
+          "Potresti avere idee per nuovi outfit"
+        ],
+        "category": "rest",
+        "color": "secondary",
+        "id": 15,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      16,
+      {
+        "title": "Social Media",
+        "description": "Pubblica foto e video sui social media per aumentare la tua presenza online e reputazione.",
+        "image": "social",
+        "duration": 1,
+        "effects": {
+          "reputation": 10,
+          "energy": -5
+        },
+        "possibleOutcomes": [
+          "Potresti diventare virale",
+          "Potresti ricevere molti like"
+        ],
+        "category": "social",
+        "color": "info",
+        "id": 16,
+        "unlockDay": null,
+        "requirements": null
+      }
+    ],
+    [
+      17,
+      {
+        "title": "Raduno di Auto Tuning",
+        "description": "Partecipa a un raduno di auto modificate. Un classico appuntamento per i maranza.",
+        "image": "cars",
+        "duration": 3,
+        "effects": {
+          "respect": 20,
+          "reputation": 15,
+          "energy": -15
+        },
+        "unlockDay": 3,
+        "possibleOutcomes": [
+          "Potresti conoscere altri appassionati",
+          "Potresti vedere auto impressionanti"
+        ],
+        "category": "entertainment",
+        "color": "accent",
+        "id": 17,
+        "requirements": null
+      }
+    ],
+    [
+      18,
+      {
+        "title": "Sfida di Stile",
+        "description": "Partecipa a una sfida di stile con altri maranza. Mostra chi è il più alla moda!",
+        "image": "style",
+        "duration": 2,
+        "effects": {
+          "style": 30,
+          "reputation": 20,
+          "respect": 15,
+          "energy": -10
+        },
+        "unlockDay": 5,
+        "possibleOutcomes": [
+          "Potresti vincere un premio",
+          "Potresti impressionare tutti con il tuo look"
+        ],
+        "category": "competition",
+        "color": "primary",
+        "id": 18,
+        "requirements": null
+      }
+    ]
+  ],
+  "gameStates": [
+    [
+      1,
+      {
+        "userId": 1,
+        "day": 1,
+        "time": "08:00",
+        "gameStarted": true,
+        "hoursLeft": 16,
+        "id": 1,
+        "characterId": 1
+      }
+    ],
+    [
+      2,
+      {
+        "userId": 1,
+        "day": 1,
+        "time": "08:00",
+        "gameStarted": false,
+        "hoursLeft": 16,
+        "id": 2,
+        "characterId": null
+      }
+    ]
+  ],
+  "userId": 2,
+  "characterId": 2,
+  "itemId": 13,
+  "characterItemId": 1,
+  "skillId": 11,
+  "characterSkillId": 11,
+  "contactId": 1,
+  "activityId": 19,
+  "gameStateId": 3
+}

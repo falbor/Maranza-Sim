@@ -6,9 +6,11 @@ import ActivityCard from "@/components/ActivityCard";
 import ActivityModal from "@/components/ActivityModal";
 import ResultModal from "@/components/ResultModal";
 import CharacterCreationModal from "@/components/CharacterCreationModal";
+import OptionsModal from "@/components/OptionsModal";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Settings } from "lucide-react";
 
 const Game = () => {
   const { 
@@ -18,6 +20,7 @@ const Game = () => {
     setActiveTab 
   } = useGame();
   const [_, setLocation] = useLocation();
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     // If game isn't loaded yet, just wait
@@ -57,9 +60,17 @@ const Game = () => {
       <header className="bg-primary text-white shadow-lg">
         <div className="container mx-auto px-3 py-2 flex justify-between items-center">
           <h1 className="text-xl font-bold tracking-wider">Maranza Simulator</h1>
-          <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-2">
             <span className="font-bold">Giorno {game.day}</span>
             <span className="px-2 py-1 bg-secondary rounded text-sm">{game.time}</span>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="text-white hover:text-white/90"
+              onClick={() => setShowOptions(true)}
+            >
+              <Settings className="h-5 w-5" />
+            </Button>
           </div>
         </div>
       </header>
@@ -194,6 +205,7 @@ const Game = () => {
       <ActivityModal />
       <ResultModal />
       <CharacterCreationModal />
+      <OptionsModal isOpen={showOptions} onClose={() => setShowOptions(false)} />
     </div>
   );
 };

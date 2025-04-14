@@ -189,6 +189,20 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   }, [gameData]);
 
+  useEffect(() => {
+    // Add event listener for storage saves
+    const handleStorageSave = () => {
+      toast({
+        title: "Gioco Salvato",
+        description: "I tuoi progressi sono stati salvati automaticamente.",
+        duration: 2000
+      });
+    };
+
+    window.addEventListener('maranza-save', handleStorageSave);
+    return () => window.removeEventListener('maranza-save', handleStorageSave);
+  }, [toast]);
+
   return (
     <GameContext.Provider
       value={{

@@ -1,3 +1,11 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get current file's directory in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import {
   User,
   InsertUser,
@@ -17,7 +25,7 @@ import {
   InsertCharacterSkill,
   GameState,
   InsertGameState
-} from "@shared/schema";
+} from "../shared/schema";
 
 // Define the storage interface
 export interface IStorage {
@@ -68,25 +76,25 @@ export interface IStorage {
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private characters: Map<number, Character>;
-  private items: Map<number, Item>;
-  private characterItems: Map<number, CharacterItem>;
-  private skills: Map<number, Skill>;
-  private characterSkills: Map<number, CharacterSkill>;
-  private contacts: Map<number, Contact>;
-  private activities: Map<number, Activity>;
-  private gameStates: Map<number, GameState>;
+  protected users: Map<number, User>;
+  protected characters: Map<number, Character>;
+  protected items: Map<number, Item>;
+  protected characterItems: Map<number, CharacterItem>;
+  protected skills: Map<number, Skill>;
+  protected characterSkills: Map<number, CharacterSkill>;
+  protected contacts: Map<number, Contact>;
+  protected activities: Map<number, Activity>;
+  protected gameStates: Map<number, GameState>;
   
-  private userId: number;
-  private characterId: number;
-  private itemId: number;
-  private characterItemId: number;
-  private skillId: number;
-  private characterSkillId: number;
-  private contactId: number;
-  private activityId: number;
-  private gameStateId: number;
+  protected userId: number;
+  protected characterId: number;
+  protected itemId: number;
+  protected characterItemId: number;
+  protected skillId: number;
+  protected characterSkillId: number;
+  protected contactId: number;
+  protected activityId: number;
+  protected gameStateId: number;
 
   constructor() {
     this.users = new Map();
@@ -144,7 +152,16 @@ export class MemStorage implements IStorage {
 
   async createCharacter(insertCharacter: InsertCharacter): Promise<Character> {
     const id = this.characterId++;
-    const character: Character = { ...insertCharacter, id };
+    const character: Character = {
+      ...insertCharacter,
+      id,
+      style: insertCharacter.style ?? 0,
+      money: insertCharacter.money ?? 0,
+      reputation: insertCharacter.reputation ?? 0,
+      energy: insertCharacter.energy ?? 100,
+      respect: insertCharacter.respect ?? 0,
+      avatarId: insertCharacter.avatarId ?? 1
+    };
     this.characters.set(id, character);
     return character;
   }
@@ -171,7 +188,11 @@ export class MemStorage implements IStorage {
 
   async createItem(insertItem: InsertItem): Promise<Item> {
     const id = this.itemId++;
-    const item: Item = { ...insertItem, id };
+    const item: Item = {
+      ...insertItem,
+      id,
+      unlockDay: insertItem.unlockDay ?? null
+    };
     this.items.set(id, item);
     return item;
   }
@@ -193,7 +214,12 @@ export class MemStorage implements IStorage {
 
   async addItemToCharacter(insertCharacterItem: InsertCharacterItem): Promise<CharacterItem> {
     const id = this.characterItemId++;
-    const characterItem: CharacterItem = { ...insertCharacterItem, id };
+    const characterItem: CharacterItem = {
+      ...insertCharacterItem,
+      id,
+      acquired: insertCharacterItem.acquired ?? true,
+      acquiredDay: insertCharacterItem.acquiredDay ?? null
+    };
     this.characterItems.set(id, characterItem);
     return characterItem;
   }
@@ -250,7 +276,13 @@ export class MemStorage implements IStorage {
 
   async addSkillToCharacter(insertCharacterSkill: InsertCharacterSkill): Promise<CharacterSkill> {
     const id = this.characterSkillId++;
-    const characterSkill: CharacterSkill = { ...insertCharacterSkill, id };
+    const characterSkill: CharacterSkill = {
+      ...insertCharacterSkill,
+      id,
+      level: insertCharacterSkill.level ?? 1,
+      progress: insertCharacterSkill.progress ?? 0,
+      maxLevel: insertCharacterSkill.maxLevel ?? 100
+    };
     this.characterSkills.set(id, characterSkill);
     return characterSkill;
   }
@@ -279,7 +311,12 @@ export class MemStorage implements IStorage {
 
   async createActivity(insertActivity: InsertActivity): Promise<Activity> {
     const id = this.activityId++;
-    const activity: Activity = { ...insertActivity, id };
+    const activity: Activity = {
+      ...insertActivity,
+      id,
+      unlockDay: insertActivity.unlockDay ?? null,
+      requirements: insertActivity.requirements ?? null
+    };
     this.activities.set(id, activity);
     return activity;
   }
@@ -297,7 +334,15 @@ export class MemStorage implements IStorage {
 
   async createGameState(insertGameState: InsertGameState): Promise<GameState> {
     const id = this.gameStateId++;
-    const gameState: GameState = { ...insertGameState, id };
+    const gameState: GameState = {
+      ...insertGameState,
+      id,
+      characterId: insertGameState.characterId ?? null,
+      day: insertGameState.day ?? 1,
+      time: insertGameState.time ?? "08:00",
+      gameStarted: insertGameState.gameStarted ?? false,
+      hoursLeft: insertGameState.hoursLeft ?? 16
+    };
     this.gameStates.set(id, gameState);
     return gameState;
   }
@@ -345,7 +390,7 @@ export class MemStorage implements IStorage {
       // Reset game state
       this.gameStates.set(gameState.id, {
         ...gameState,
-        characterId: undefined,
+        characterId: null,
         day: 1,
         time: "08:00",
         gameStarted: false,
@@ -372,27 +417,27 @@ export class MemStorage implements IStorage {
     });
 
     // Create default skills
-    const styleSkill = await this.createSkill({
+    await this.createSkill({
       name: "Stile nel Vestire",
       description: "Capacità di abbinare capi firmati e creare outfit da vero maranza"
     });
     
-    const slangSkill = await this.createSkill({
+    await this.createSkill({
       name: "Parlata Slang",
       description: "Abilità nel parlare usando il gergo maranza e abbreviazioni"
     });
     
-    const negotiationSkill = await this.createSkill({
+    await this.createSkill({
       name: "Contrattazione",
       description: "Capacità di ottenere sconti e affari vantaggiosi"
     });
     
-    const danceSkill = await this.createSkill({
+    await this.createSkill({
       name: "Ballo",
       description: "Abilità nelle mosse di danza tipiche del maranza"
     });
     
-    const socialSkill = await this.createSkill({
+    await this.createSkill({
       name: "Carisma Sociale",
       description: "Capacità di farsi nuovi amici e influenzare gli altri"
     });
@@ -617,4 +662,171 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class FileStorage extends MemStorage {
+  private dataPath: string;
+
+  constructor() {
+    super();
+    // Ensure we create an absolute path to the data directory
+    this.dataPath = path.resolve(__dirname, '..', 'data', 'storage.json');
+    
+    // Create data directory if it doesn't exist
+    const dataDir = path.dirname(this.dataPath);
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+    }
+    this.loadFromFile();
+  }
+
+  private loadFromFile() {
+    try {
+      if (fs.existsSync(this.dataPath)) {
+        const savedData = JSON.parse(fs.readFileSync(this.dataPath, 'utf-8'));
+        if (savedData) {
+          this.users = new Map(savedData.users);
+          this.characters = new Map(savedData.characters);
+          this.items = new Map(savedData.items);
+          this.characterItems = new Map(savedData.characterItems);
+          this.skills = new Map(savedData.skills);
+          this.characterSkills = new Map(savedData.characterSkills);
+          this.contacts = new Map(savedData.contacts);
+          this.activities = new Map(savedData.activities);
+          this.gameStates = new Map(savedData.gameStates);
+          
+          this.userId = savedData.userId;
+          this.characterId = savedData.characterId;
+          this.itemId = savedData.itemId;
+          this.characterItemId = savedData.characterItemId;
+          this.skillId = savedData.skillId;
+          this.characterSkillId = savedData.characterSkillId;
+          this.contactId = savedData.contactId;
+          this.activityId = savedData.activityId;
+          this.gameStateId = savedData.gameStateId;
+        }
+      }
+    } catch (error) {
+      console.error('Error loading saved data:', error);
+      // If there's an error loading the file, we'll keep using the default initialized data
+    }
+  }
+
+  private saveToFile() {
+    try {
+      if (!this.dataPath) {
+        throw new Error('Data path is not initialized');
+      }
+
+      const data = {
+        users: Array.from(this.users.entries()),
+        characters: Array.from(this.characters.entries()),
+        items: Array.from(this.items.entries()),
+        characterItems: Array.from(this.characterItems.entries()),
+        skills: Array.from(this.skills.entries()),
+        characterSkills: Array.from(this.characterSkills.entries()),
+        contacts: Array.from(this.contacts.entries()),
+        activities: Array.from(this.activities.entries()),
+        gameStates: Array.from(this.gameStates.entries()),
+        userId: this.userId,
+        characterId: this.characterId,
+        itemId: this.itemId,
+        characterItemId: this.characterItemId,
+        skillId: this.skillId,
+        characterSkillId: this.characterSkillId,
+        contactId: this.contactId,
+        activityId: this.activityId,
+        gameStateId: this.gameStateId
+      };
+      
+      // Ensure the directory exists before writing
+      const dataDir = path.dirname(this.dataPath);
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
+
+      fs.writeFileSync(this.dataPath, JSON.stringify(data, null, 2));
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  }
+
+  // Override all methods that modify data to save after changes
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const user = await super.createUser(insertUser);
+    this.saveToFile();
+    return user;
+  }
+
+  async createCharacter(insertCharacter: InsertCharacter): Promise<Character> {
+    const character = await super.createCharacter(insertCharacter);
+    this.saveToFile();
+    return character;
+  }
+
+  async updateCharacter(id: number, updates: Partial<Character>): Promise<Character> {
+    const character = await super.updateCharacter(id, updates);
+    this.saveToFile();
+    return character;
+  }
+
+  async createItem(insertItem: InsertItem): Promise<Item> {
+    const item = await super.createItem(insertItem);
+    this.saveToFile();
+    return item;
+  }
+
+  async addItemToCharacter(insertCharacterItem: InsertCharacterItem): Promise<CharacterItem> {
+    const characterItem = await super.addItemToCharacter(insertCharacterItem);
+    this.saveToFile();
+    return characterItem;
+  }
+
+  async createSkill(insertSkill: InsertSkill): Promise<Skill> {
+    const skill = await super.createSkill(insertSkill);
+    this.saveToFile();
+    return skill;
+  }
+
+  async addSkillToCharacter(insertCharacterSkill: InsertCharacterSkill): Promise<CharacterSkill> {
+    const characterSkill = await super.addSkillToCharacter(insertCharacterSkill);
+    this.saveToFile();
+    return characterSkill;
+  }
+
+  async updateCharacterSkill(characterId: number, skillId: number, updates: Partial<CharacterSkill>): Promise<CharacterSkill> {
+    const characterSkill = await super.updateCharacterSkill(characterId, skillId, updates);
+    this.saveToFile();
+    return characterSkill;
+  }
+
+  async createContact(insertContact: InsertContact): Promise<Contact> {
+    const contact = await super.createContact(insertContact);
+    this.saveToFile();
+    return contact;
+  }
+
+  async createActivity(insertActivity: InsertActivity): Promise<Activity> {
+    const activity = await super.createActivity(insertActivity);
+    this.saveToFile();
+    return activity;
+  }
+
+  async createGameState(insertGameState: InsertGameState): Promise<GameState> {
+    const gameState = await super.createGameState(insertGameState);
+    this.saveToFile();
+    return gameState;
+  }
+
+  async updateGameState(userId: number, updates: Partial<GameState>): Promise<GameState> {
+    const gameState = await super.updateGameState(userId, updates);
+    this.saveToFile();
+    return gameState;
+  }
+
+  async resetGameState(userId: number): Promise<void> {
+    await super.resetGameState(userId);
+    this.saveToFile();
+  }
+}
+
+// Export an instance of FileStorage instead of LocalStorage
+export const storage = new FileStorage();
