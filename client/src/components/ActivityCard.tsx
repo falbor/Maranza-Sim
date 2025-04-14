@@ -4,9 +4,10 @@ import { Card } from "@/components/ui/card";
 
 interface ActivityCardProps {
   activity: Activity;
+  className?: string;
 }
 
-const ActivityCard = ({ activity }: ActivityCardProps) => {
+const ActivityCard = ({ activity, className = "" }: ActivityCardProps) => {
   const { setSelectedActivity, setShowActivityModal } = useGame();
 
   const handleSelectActivity = () => {
@@ -18,15 +19,15 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
   const getColors = () => {
     switch (activity.color) {
       case "primary":
-        return "border-primary bg-primary/5 hover:bg-primary/10";
+        return "border-primary bg-primary/10 hover:bg-primary/20";
       case "secondary":
-        return "border-secondary bg-secondary/5 hover:bg-secondary/10";
+        return "border-secondary bg-secondary/10 hover:bg-secondary/20";
       case "accent":
-        return "border-amber-400 bg-amber-400/5 hover:bg-amber-400/10";
+        return "border-amber-400 bg-amber-400/10 hover:bg-amber-400/20";
       case "info":
-        return "border-blue-500 bg-blue-500/5 hover:bg-blue-500/10";
+        return "border-blue-500 bg-blue-500/10 hover:bg-blue-500/20";
       default:
-        return "border-primary bg-primary/5 hover:bg-primary/10";
+        return "border-primary bg-primary/10 hover:bg-primary/20";
     }
   };
 
@@ -49,19 +50,15 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
 
   return (
     <Card 
-      className={`border-2 ${getColors()} cursor-pointer shadow transition-all duration-200 hover:shadow-md w-full aspect-square flex flex-col`}
+      className={`border ${getColors()} cursor-pointer shadow-sm rounded-2xl transition-all duration-200 hover:shadow-md w-full aspect-square flex flex-col ${className}`}
       onClick={handleSelectActivity}
     >
-      <div className="p-3 flex flex-col items-center justify-center h-full text-center">
-        <div className="text-4xl mb-3">
+      <div className="p-2 flex flex-col items-center justify-center h-full text-center">
+        <div className="text-3xl mb-1">
           {getActivityIcon()}
         </div>
         <div>
-          <h4 className="font-bold">{activity.title}</h4>
-          <p className="text-xs opacity-70 line-clamp-2 mt-1">{activity.description}</p>
-          <div className="text-xs mt-2 opacity-80">
-            {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
-          </div>
+          <h4 className="font-semibold text-xs truncate w-full">{activity.title}</h4>
         </div>
       </div>
     </Card>
