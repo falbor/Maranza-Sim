@@ -361,8 +361,9 @@ export class MemStorage implements IStorage {
   async resetGameState(userId: number): Promise<void> {
     const gameState = await this.getGameState(userId);
     if (gameState) {
-      // Delete character skills
+      // 1. Delete all character-related data
       if (gameState.characterId) {
+        // Delete character skills
         for (const [id, characterSkill] of this.characterSkills.entries()) {
           if (characterSkill.characterId === gameState.characterId) {
             this.characterSkills.delete(id);
@@ -387,13 +388,19 @@ export class MemStorage implements IStorage {
         this.characters.delete(gameState.characterId);
       }
 
-      // Clear all collections
+      // 2. Clear collections fully
       this.items.clear();
-      this.skills.clear();
+      this.skills.clear();  
       this.activities.clear();
       
-      // Reset all ID counters
-      this.userId = 1;
+      // 3. Clean up game states for this user (except current one)
+      for (const [id, state] of this.gameStates.entries()) {
+        if (state.userId === userId && id !== gameState.id) {
+          this.gameStates.delete(id);
+        }
+      }
+      
+      // 4. Reset ID counters but maintain current gameState ID
       this.characterId = 1;
       this.itemId = 1;
       this.characterItemId = 1;
@@ -401,9 +408,8 @@ export class MemStorage implements IStorage {
       this.characterSkillId = 1;
       this.contactId = 1;
       this.activityId = 1;
-      this.gameStateId = 1;
       
-      // Reset game state
+      // 5. Reset game state to initial values
       this.gameStates.set(gameState.id, {
         ...gameState,
         characterId: null,
@@ -413,7 +419,7 @@ export class MemStorage implements IStorage {
         hoursLeft: 16
       });
 
-      // Reinitialize default data
+      // 6. Reinitialize default data (skills, items, activities)
       await this.initializeDefaultData();
     }
   }

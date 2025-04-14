@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Settings } from "lucide-react";
+import MaranzaImage from "@/assets/backgrounds/maranza.png";
+import BackgroundPark from "@/assets/backgrounds/background_park_1.png";
 
 const Game = () => {
   const { 
@@ -31,6 +33,21 @@ const Game = () => {
       setLocation("/");
     }
   }, [game, isLoadingGame, setLocation]);
+
+  const splitActivities = (activities) => {
+    const leftColumn = [];
+    const rightColumn = [];
+    
+    activities.forEach((activity, index) => {
+      if (index % 2 === 0) {
+        leftColumn.push(activity);
+      } else {
+        rightColumn.push(activity);
+      }
+    });
+    
+    return { leftColumn, rightColumn };
+  };
 
   if (isLoadingGame) {
     return (
@@ -54,6 +71,8 @@ const Game = () => {
       </div>
     );
   }
+
+  const { leftColumn, rightColumn } = splitActivities(game.availableActivities);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -85,11 +104,34 @@ const Game = () => {
                 <TabsTrigger value="activities" className="flex-1">Attività</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="activities">
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
-                  {game.availableActivities.map((activity) => (
-                    <ActivityCard key={activity.id} activity={activity} />
-                  ))}
+              <TabsContent value="activities" className="p-4 rounded-lg bg-opacity-80 backdrop-blur-sm" style={{ 
+                backgroundImage: `url(${BackgroundPark})`, 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center' 
+              }}>
+                <div className="flex flex-col md:flex-row justify-between">
+                  {/* Left column */}
+                  <div className="w-full md:w-1/3 space-y-3">
+                    {leftColumn.map((activity) => (
+                      <ActivityCard key={activity.id} activity={activity} />
+                    ))}
+                  </div>
+                  
+                  {/* Center image */}
+                  <div className="hidden md:block md:w-1/3 px-4 py-6">
+                    <img 
+                      src={MaranzaImage} 
+                      alt="Maranza" 
+                      className="w-full max-h-80 object-contain mx-auto drop-shadow-lg"
+                    />
+                  </div>
+                  
+                  {/* Right column */}
+                  <div className="w-full md:w-1/3 space-y-3">
+                    {rightColumn.map((activity) => (
+                      <ActivityCard key={activity.id} activity={activity} />
+                    ))}
+                  </div>
                 </div>
               </TabsContent>
             </Tabs>

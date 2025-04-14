@@ -1,5 +1,6 @@
 import { Activity } from "@/lib/types";
 import { useGame } from "@/lib/gameContext";
+import { Card } from "@/components/ui/card";
 
 interface ActivityCardProps {
   activity: Activity;
@@ -13,36 +14,57 @@ const ActivityCard = ({ activity }: ActivityCardProps) => {
     setShowActivityModal(true);
   };
 
-  // Determine gradient colors based on activity.color
-  const getGradient = () => {
+  // Determine colors based on activity.color
+  const getColors = () => {
     switch (activity.color) {
       case "primary":
-        return "from-primary to-secondary";
+        return "border-primary bg-primary/5 hover:bg-primary/10";
       case "secondary":
-        return "from-secondary to-primary";
+        return "border-secondary bg-secondary/5 hover:bg-secondary/10";
       case "accent":
-        return "from-amber-400 to-primary";
+        return "border-amber-400 bg-amber-400/5 hover:bg-amber-400/10";
       case "info":
-        return "from-blue-500 to-secondary";
+        return "border-blue-500 bg-blue-500/5 hover:bg-blue-500/10";
       default:
-        return "from-primary to-secondary";
+        return "border-primary bg-primary/5 hover:bg-primary/10";
+    }
+  };
+
+  // Convert image string to emoji or icon based on activity type
+  const getActivityIcon = () => {
+    switch (activity.image) {
+      case "plaza": return "🏙️";
+      case "mall": return "🛍️";
+      case "gym": return "💪";
+      case "club": return "🎵";
+      case "work": return "💼";
+      case "home": return "🏠";
+      case "social": return "📱";
+      case "cars": return "🚗";
+      case "style": return "👕";
+      case "school": return "🏫";
+      default: return "⭐";
     }
   };
 
   return (
-    <div 
-      className="game-card rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transform transition-transform hover:-translate-y-1"
+    <Card 
+      className={`border-l-4 ${getColors()} cursor-pointer shadow transition-all duration-200 hover:shadow-md`}
       onClick={handleSelectActivity}
     >
-      <div className={`aspect-square bg-gradient-to-r ${getGradient()} relative`}>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="text-4xl mb-2">
-            {activity.image}
+      <div className="p-3 flex items-center space-x-3">
+        <div className="text-3xl">
+          {getActivityIcon()}
+        </div>
+        <div>
+          <h4 className="font-bold">{activity.title}</h4>
+          <p className="text-xs opacity-70 line-clamp-1">{activity.description}</p>
+          <div className="text-xs mt-1 opacity-80">
+            {activity.duration} {activity.duration === 1 ? 'ora' : 'ore'}
           </div>
-          <h4 className="text-white font-bold text-sm px-2 text-center drop-shadow-lg">{activity.title}</h4>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
