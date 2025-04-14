@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useGame } from "@/lib/gameContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ProfilePic1 } from "@/assets";
 
 const CharacterCreationModal = () => {
   const { 
@@ -143,13 +144,7 @@ const CharacterCreationModal = () => {
             <div className="flex flex-col items-center justify-center">
               <div className="relative w-32 h-32 mb-4">
                 <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-4 border-primary">
-                  <span className="text-5xl font-bold text-primary">
-                    {avatarId === 1 && "K"}
-                    {avatarId === 2 && "L"}
-                    {avatarId === 3 && "M"}
-                    {avatarId === 4 && "G"}
-                    {avatarId === 5 && "S"}
-                  </span>
+                  <img src={ProfilePic1} alt="Profile" className="w-full h-full object-cover" />
                 </div>
               </div>
               

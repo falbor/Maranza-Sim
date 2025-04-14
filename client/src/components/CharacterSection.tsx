@@ -2,6 +2,7 @@ import { useGame } from "@/lib/gameContext";
 import { Progress } from "@/components/ui/progress";
 import { ChevronUp } from "lucide-react";
 import { useState } from "react";
+import { ProfilePic1 } from "@/assets";
 
 export default function CharacterSection() {
   const { game } = useGame();
@@ -27,8 +28,8 @@ export default function CharacterSection() {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-            <span className="text-xl">{character.look === 'casual' ? '👕' : '🧢'}</span>
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+            <img src={ProfilePic1} alt="Profile" className="w-full h-full object-cover" />
           </div>
           <div>
             <h2 className="font-bold text-base leading-tight">{character.name}</h2>
