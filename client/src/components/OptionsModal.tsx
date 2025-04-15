@@ -19,32 +19,32 @@ const OptionsModal = ({ isOpen, onClose }: OptionsModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="w-[90vw] max-w-lg mx-auto bg-black/95 border-primary/30 text-white">
         <DialogHeader>
-          <DialogTitle>Opzioni</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl md:text-2xl text-primary font-bold">Opzioni</DialogTitle>
+          <DialogDescription className="text-white/80">
             Gestisci le impostazioni del tuo gioco
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
           <div>
-            <h3 className="font-medium mb-2">Informazioni di Gioco</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="font-medium mb-2 text-white">Informazioni di Gioco</h3>
+            <p className="text-sm text-white/70">
               Maranza Simulator è un gioco dove vivi la vita di un vero maranza.
               Gestisci il tuo stile, la tua reputazione e il tuo rispetto nella comunità.
             </p>
           </div>
 
           <div>
-            <h3 className="font-medium text-red-600 mb-2">Zona Pericolosa</h3>
-            <p className="text-sm text-gray-500 mb-2">
+            <h3 className="font-medium text-red-500 mb-2">Zona Pericolosa</h3>
+            <p className="text-sm text-white/70 mb-2">
               Attenzione: resettare il gioco cancellerà tutti i tuoi progressi.
             </p>
             <Button 
               variant="destructive" 
               onClick={handleReset}
-              className="w-full"
+              className="w-full bg-red-700 hover:bg-red-600 text-white"
             >
               Resetta Gioco
             </Button>
@@ -52,7 +52,7 @@ const OptionsModal = ({ isOpen, onClose }: OptionsModalProps) => {
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" onClick={onClose} className="border-white/30 text-white hover:bg-white/10">
             Chiudi
           </Button>
         </DialogFooter>

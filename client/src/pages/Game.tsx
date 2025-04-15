@@ -26,195 +26,129 @@ const Game = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [currentSecond, setCurrentSecond] = useState(new Date().getSeconds());
 
-  // Aggiorniamo i secondi per animare l'orologio
+  // Set up clock timer
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSecond(new Date().getSeconds());
     }, 1000);
-    
     return () => clearInterval(timer);
   }, []);
 
-  const getDayTimeIcon = () => {
-    // Assumi che game.time sia in formato "Mattina", "Pomeriggio", "Sera", "Notte"
-    const timeOfDay = game.time.toLowerCase();
-    if (timeOfDay.includes("mattina") || timeOfDay.includes("pomeriggio")) {
-      return <Sun className="h-5 w-5 text-yellow-300 animate-pulse" />;
-    } else {
-      return <Moon className="h-5 w-5 text-blue-100 animate-pulse" />;
-    }
-  };
-
+  // Redirect if no game or character
   useEffect(() => {
-    // If game isn't loaded yet, just wait
-    if (isLoadingGame) return;
-    
-    // If game isn't started and we have a character, redirect to home
-    if (!game.gameStarted && !game.character) {
+    if (!isLoadingGame && (!game.gameStarted || !game.character)) {
       setLocation("/");
     }
   }, [game, isLoadingGame, setLocation]);
 
-  if (isLoadingGame) {
+  if (isLoadingGame || !game.character) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <header className="bg-primary text-white shadow-lg">
-          <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-            <Skeleton className="h-10 w-40" />
-            <div className="flex items-center space-x-2">
-              <Skeleton className="h-6 w-20" />
-              <Skeleton className="h-6 w-16" />
-            </div>
+      <div className="min-h-screen bg-background text-foreground p-4 flex flex-col">
+        <div className="flex justify-between items-center mb-4">
+          <Skeleton className="h-8 w-24" />
+          <Skeleton className="h-8 w-8 rounded-full" />
+        </div>
+        
+        <div className="grid grid-cols-1 gap-4 mt-4">
+          <Skeleton className="h-20 w-full" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {[...Array(8)].map((_, i) => (
+              <Skeleton key={i} className="h-24 w-full rounded-xl" />
+            ))}
           </div>
-        </header>
-
-        <main className="container mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Skeleton className="h-[500px]" />
-            <Skeleton className="h-[500px] md:col-span-2" />
-          </div>
-        </main>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="h-screen overflow-hidden bg-game-background bg-fixed bg-cover bg-center flex flex-col">
-      <header className="bg-primary/90 backdrop-blur-sm text-white shadow-lg">
-        <div className="container mx-auto px-3 py-2 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <img src={logoImage} alt="Maranza Simulator Logo" className="h-8" />
-            {game.character && (
-              <div className="flex items-center bg-amber-400/20 text-amber-300 text-xs font-medium px-2 py-1 rounded-lg ml-2">
-                <span className="mr-1">💰</span>
-                €{game.character.money}
+    <div 
+      className="min-h-screen flex flex-col text-foreground relative" 
+      style={{
+        backgroundImage: `url(${citybg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Header */}
+      <header className="sticky top-0 z-40 w-full border-b border-border/50 backdrop-blur-lg bg-black/70">
+        <div className="container flex h-14 items-center">
+          <div className="flex flex-1 items-center justify-between space-x-2">
+            <div className="w-full flex justify-between items-center relative">
+              {/* Left side - Logo only */}
+              <div className="flex items-center">
+                {/* Logo on the left */}
+                <img src={logoImage} alt="Maranza Simulator" className="h-10 mr-1 ml-1" />
               </div>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="clock-container flex items-center drop-shadow-md">
-              <span className="font-bold bg-gradient-to-r from-primary/40 to-primary/50 backdrop-blur-sm px-1.5 sm:px-2 py-1 rounded-l-lg border-l-2 border-y-2 border-secondary/80 flex items-center text-xs sm:text-sm">
-                <Clock className="h-3 w-3 sm:h-4 sm:w-4 mr-0.5 sm:mr-1 text-secondary" />
-                <span className="whitespace-nowrap">Giorno {game.day}</span>
-              </span>
-              <div className="relative overflow-hidden group">
-                <span className="px-1.5 sm:px-3 py-1 bg-gradient-to-r from-secondary/80 to-secondary/90 backdrop-blur-sm rounded-r-lg flex items-center gap-0.5 sm:gap-1 border-r-2 border-y-2 border-secondary/80 font-mono transition-all duration-300 hover:bg-secondary shadow-inner text-xs sm:text-sm">
-                  {getDayTimeIcon()} 
-                  <span className="relative transition-transform duration-300 group-hover:scale-110 whitespace-nowrap">
-                    {game.time}
-                  </span>
-                </span>
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none -translate-x-full animate-shimmer"
-                  style={{ 
-                    animationDuration: '2s',
-                    animationIterationCount: 'infinite'
-                  }}
-                ></div>
+              
+              {/* Center - Day and Time */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+                <div className="flex items-center bg-black/30 px-3 py-1 rounded-full">
+                  <span className="font-semibold text-white">Giorno {game.day}</span>
+                  <Clock className="w-4 h-4 text-primary ml-2 mr-1" />
+                  <span className="font-bold text-primary">{game.time}</span>
+                  {game.time.includes('AM') || (game.time.includes('PM') && parseInt(game.time.split(':')[0]) < 6) ? (
+                    <Sun className="h-4 w-4 text-yellow-400 ml-2" />
+                  ) : (
+                    <Moon className="h-4 w-4 text-blue-300 ml-2" />
+                  )}
+                </div>
+              </div>
+              
+              {/* Right side - Money and Settings */}
+              <div className="flex items-center space-x-2">
+                <div className="flex items-center bg-black/30 px-3 py-1 rounded-full">
+                  <span className="font-bold text-primary">€{game.character.money}</span>
+                </div>
+                
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => setShowOptions(true)}
+                >
+                  <Settings className="h-5 w-5 text-white" />
+                </Button>
               </div>
             </div>
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="text-white hover:text-purple/90"
-              onClick={() => setShowOptions(true)}
-            >
-              <Settings className="h-5 w-5" />
-            </Button>
           </div>
         </div>
       </header>
 
-      <main className="flex-grow relative">
-        {/* Area di gioco principale che rimane fissa */}
-        <div className="absolute inset-0 pointer-events-none z-0" />
+      {/* Main content */}
+      <main className="container z-10 relative flex flex-col flex-grow">
+        <div className="flex-grow"></div>
         
-        {/* Attività posizionate in modo permanente in basso */}
-        <div className="fixed bottom-[4.5rem] left-0 w-full bg-gradient-to-t from-black/70 to-transparent">
-          <div className="w-full px-0">
-            <div className="grid grid-cols-4 gap-1">
-              {game.availableActivities.slice(0, 8).map((activity) => (
-                <ActivityCard key={activity.id} activity={activity} className="scale-90 transform-origin-bottom" />
-              ))}
+        {/* Activity Grid - posizionato in basso */}
+        <div className="mb-20">
+          {game.availableActivities && game.availableActivities.length > 0 ? (
+            <div className="bg-black/30 p-3 rounded-lg backdrop-blur-sm">
+              <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2 max-h-[16rem] overflow-y-auto">
+                {game.availableActivities.map((activity) => (
+                  <ActivityCard 
+                    key={activity.id} 
+                    activity={activity} 
+                    className="h-20 sm:h-24"
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="text-center p-4 bg-black/40 rounded-lg backdrop-blur-sm">
+              <p className="text-white/70">Nessuna attività disponibile al momento.</p>
+            </div>
+          )}
         </div>
       </main>
-      
+
+      {/* Character Section (Bottom sheet) */}
       <CharacterSection />
       
+      {/* Modals */}
       <ActivityModal />
       <ResultModal />
       <CharacterCreationModal />
       <OptionsModal isOpen={showOptions} onClose={() => setShowOptions(false)} />
-
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-          }
-          .animate-shimmer {
-            animation-name: shimmer;
-          }
-          .clock-container {
-            position: relative;
-          }
-          .clock-container::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 8px;
-            padding: 1px;
-            background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-          }
-          
-          .bg-game-background {
-            background-image: url('${citybg}');
-            position: relative;
-          }
-          
-          .bg-game-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 0;
-          }
-          
-          .bg-game-background > * {
-            position: relative;
-            z-index: 1;
-          }
-          
-          /* Stili specifici per mobile */
-          @media (max-width: 640px) {
-            .clock-container {
-              scale: 0.95;
-              margin-right: -0.25rem;
-            }
-            .clock-container span {
-              letter-spacing: -0.02em;
-            }
-          }
-          
-          /* Fix per iPhone e dispositivi iOS */
-          @supports (-webkit-touch-callout: none) {
-            .backdrop-blur-sm {
-              backdrop-filter: blur(8px);
-              -webkit-backdrop-filter: blur(8px);
-            }
-          }
-        `
-      }} />
     </div>
   );
 };

@@ -53,14 +53,14 @@
     [
       1,
       {
-        "name": "Said",
-        "look": "casual",
-        "personality": "carismatico",
-        "avatarId": 2,
-        "money": 60,
-        "reputation": 85,
-        "energy": 75,
-        "respect": 30,
+        "name": "Karim",
+        "look": "firmato",
+        "personality": "audace",
+        "avatarId": 3,
+        "money": 0,
+        "reputation": 100,
+        "energy": 0,
+        "respect": 55,
         "style": 100,
         "userId": 1,
         "id": 1
@@ -406,86 +406,6 @@
         "description": "Capacità di farsi nuovi amici e influenzare gli altri",
         "id": 30
       }
-    ],
-    [
-      31,
-      {
-        "name": "Stile nel Vestire",
-        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
-        "id": 31
-      }
-    ],
-    [
-      32,
-      {
-        "name": "Parlata Slang",
-        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
-        "id": 32
-      }
-    ],
-    [
-      33,
-      {
-        "name": "Contrattazione",
-        "description": "Capacità di ottenere sconti e affari vantaggiosi",
-        "id": 33
-      }
-    ],
-    [
-      34,
-      {
-        "name": "Ballo",
-        "description": "Abilità nelle mosse di danza tipiche del maranza",
-        "id": 34
-      }
-    ],
-    [
-      35,
-      {
-        "name": "Carisma Sociale",
-        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
-        "id": 35
-      }
-    ],
-    [
-      36,
-      {
-        "name": "Stile nel Vestire",
-        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
-        "id": 36
-      }
-    ],
-    [
-      37,
-      {
-        "name": "Parlata Slang",
-        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
-        "id": 37
-      }
-    ],
-    [
-      38,
-      {
-        "name": "Contrattazione",
-        "description": "Capacità di ottenere sconti e affari vantaggiosi",
-        "id": 38
-      }
-    ],
-    [
-      39,
-      {
-        "name": "Ballo",
-        "description": "Abilità nelle mosse di danza tipiche del maranza",
-        "id": 39
-      }
-    ],
-    [
-      40,
-      {
-        "name": "Carisma Sociale",
-        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
-        "id": 40
-      }
     ]
   ],
   "characterSkills": [
@@ -495,7 +415,7 @@
         "characterId": 1,
         "skillId": 1,
         "level": 3,
-        "progress": 73,
+        "progress": 27,
         "maxLevel": 100,
         "id": 1
       }
@@ -505,8 +425,8 @@
       {
         "characterId": 1,
         "skillId": 2,
-        "level": 3,
-        "progress": 35,
+        "level": 2,
+        "progress": 11,
         "maxLevel": 100,
         "id": 2
       }
@@ -516,8 +436,8 @@
       {
         "characterId": 1,
         "skillId": 3,
-        "level": 2,
-        "progress": 40,
+        "level": 1,
+        "progress": 47,
         "maxLevel": 100,
         "id": 3
       }
@@ -527,8 +447,8 @@
       {
         "characterId": 1,
         "skillId": 4,
-        "level": 3,
-        "progress": 28,
+        "level": 2,
+        "progress": 22,
         "maxLevel": 100,
         "id": 4
       }
@@ -538,8 +458,8 @@
       {
         "characterId": 1,
         "skillId": 5,
-        "level": 2,
-        "progress": 66,
+        "level": 1,
+        "progress": 43,
         "maxLevel": 100,
         "id": 5
       }
@@ -550,12 +470,12 @@
       1,
       {
         "characterId": 1,
-        "name": "Sara Bomber",
+        "name": "Marco Furioso",
         "type": "Amico d'infanzia",
-        "respect": "alto",
+        "respect": "basso",
         "meetDay": 1,
-        "avatarInitials": "SB",
-        "avatarColor": "info",
+        "avatarInitials": "MF",
+        "avatarColor": "secondary",
         "id": 1
       }
     ],
@@ -563,12 +483,12 @@
       2,
       {
         "characterId": 1,
-        "name": "Matteo Diva",
+        "name": "Manuel Ferro",
         "type": "Amico d'infanzia",
-        "respect": "alto",
+        "respect": "basso",
         "meetDay": 1,
-        "avatarInitials": "MD",
-        "avatarColor": "primary",
+        "avatarInitials": "MF",
+        "avatarColor": "secondary",
         "id": 2
       }
     ],
@@ -576,13 +496,26 @@
       3,
       {
         "characterId": 1,
-        "name": "Matteo Diva",
+        "name": "Luca Diva",
+        "type": "Conosciuto in discoteca",
+        "respect": "alto",
+        "meetDay": 1,
+        "avatarInitials": "LD",
+        "avatarColor": "secondary",
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "characterId": 1,
+        "name": "Matteo Bomber",
         "type": "Compagno di palestra",
         "respect": "medio",
-        "meetDay": 2,
-        "avatarInitials": "MD",
-        "avatarColor": "amber-400",
-        "id": 3
+        "meetDay": 1,
+        "avatarInitials": "MB",
+        "avatarColor": "green-500",
+        "id": 4
       }
     ]
   ],
@@ -821,10 +754,10 @@
       1,
       {
         "userId": 1,
-        "day": 2,
-        "time": "06:00",
+        "day": 1,
+        "time": "22:00",
         "gameStarted": true,
-        "hoursLeft": 18,
+        "hoursLeft": 2,
         "id": 1,
         "characterId": 1
       }
@@ -918,9 +851,9 @@
   "characterId": 2,
   "itemId": 7,
   "characterItemId": 1,
-  "skillId": 41,
+  "skillId": 31,
   "characterSkillId": 6,
-  "contactId": 4,
+  "contactId": 5,
   "activityId": 11,
   "gameStateId": 1
 }

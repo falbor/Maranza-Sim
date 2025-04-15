@@ -41,7 +41,17 @@ const ActivityModal = () => {
 
   return (
     <Dialog open={showActivityModal} onOpenChange={setShowActivityModal}>
-      <DialogContent className="w-[90vw] max-w-md mx-auto">
+      <DialogContent 
+        className="w-[90vw] max-w-md mx-auto max-h-[65vh] overflow-y-auto bg-black/90 border-primary/30 text-white"
+        style={{
+          position: "fixed",
+          left: "50%",
+          top: "calc(50% + 2rem)",
+          transform: "translate(-50%, -50%)",
+          margin: "0 auto",
+          zIndex: 100,
+        }}
+      >
         <DialogHeader>
           <DialogTitle className="text-xl md:text-2xl text-primary font-bold">
             {selectedActivity.title}
@@ -49,7 +59,7 @@ const ActivityModal = () => {
         </DialogHeader>
         
         <div className="space-y-4">
-          <p className="text-sm md:text-base text-gray-700">
+          <p className="text-sm md:text-base text-white/90">
             {selectedActivity.description}
           </p>
           
@@ -86,7 +96,7 @@ const ActivityModal = () => {
           <Button
             variant="outline"
             onClick={handleClose}
-            className="px-4 py-2"
+            className="px-4 py-2 text-white border-white/30 hover:bg-white/10"
           >
             Annulla
           </Button>

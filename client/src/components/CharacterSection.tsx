@@ -42,18 +42,18 @@ export default function CharacterSection() {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-50">
+    <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-lg shadow-lg z-50 border-t border-white/10">
       <div 
-        className="h-[4.5rem] bg-white px-4 py-3 flex items-center justify-between cursor-pointer border-b"
+        className="h-[4.5rem] px-4 py-3 flex items-center justify-between cursor-pointer border-b border-white/10"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
+          <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 overflow-hidden">
             <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
           </div>
           <div>
-            <h2 className="font-bold text-base leading-tight">{character.name}</h2>
-            <p className="text-xs text-gray-500 leading-tight">{character.personality}</p>
+            <h2 className="font-bold text-base leading-tight text-white">{character.name}</h2>
+            <p className="text-xs text-primary/80 leading-tight">{character.personality}</p>
           </div>
         </div>
         
@@ -61,16 +61,16 @@ export default function CharacterSection() {
           <div className="stats-container grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 px-1">
             {statItems.map((stat) => (
               <div key={stat.label} className="stat-item">
-                <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                <div className="relative h-3 bg-white/10 rounded-full overflow-hidden">
                   <div 
                     className={`h-full ${stat.color}`} 
                     style={{ width: `${stat.percentage}%` }}
                   ></div>
-                  <div className="absolute top-0 left-0 w-full h-full flex items-center">
-                    <span className="text-[9px] ml-1.5 text-white drop-shadow-sm font-medium flex items-center">
-                      {stat.icon} {stat.label}
+                  <div className="absolute top-0 left-0 w-full h-full flex items-center justify-between px-1.5">
+                    <span className="text-[10px] text-white drop-shadow-sm font-medium flex items-center gap-1">
+                      <span>{stat.icon}</span> <span>{stat.label}</span>
                     </span>
-                    <span className="absolute right-0 text-[9px] mr-1.5 text-white drop-shadow-sm font-medium">
+                    <span className="text-[10px] text-white drop-shadow-sm font-medium">
                       {stat.value}
                     </span>
                   </div>
@@ -80,11 +80,11 @@ export default function CharacterSection() {
           </div>
         </div>
         
-        <ChevronUp className={`ml-1 w-5 h-5 text-gray-500 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronUp className={`ml-1 w-5 h-5 text-primary transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </div>
 
       <div 
-        className="overflow-y-auto transition-all duration-300"
+        className="overflow-y-auto transition-all duration-300 bg-black/90"
         style={{ 
           height: isOpen ? 'calc(100vh - 4.5rem)' : '0',
           opacity: isOpen ? 1 : 0,
@@ -95,28 +95,28 @@ export default function CharacterSection() {
           {/* Tabs per Inventory, Social, Skills */}
           <div className="w-full">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-              <TabsList className="w-full">
-                <TabsTrigger value="inventory" className="flex-1">Inventario</TabsTrigger>
-                <TabsTrigger value="social" className="flex-1">Sociale</TabsTrigger>
-                <TabsTrigger value="skills" className="flex-1">Abilità</TabsTrigger>
+              <TabsList className="w-full bg-black/50 border border-white/10">
+                <TabsTrigger value="inventory" className="flex-1 data-[state=active]:bg-primary data-[state=active]:text-white text-gray-300">Inventario</TabsTrigger>
+                <TabsTrigger value="social" className="flex-1 data-[state=active]:bg-primary data-[state=active]:text-white text-gray-300">Sociale</TabsTrigger>
+                <TabsTrigger value="skills" className="flex-1 data-[state=active]:bg-primary data-[state=active]:text-white text-gray-300">Abilità</TabsTrigger>
               </TabsList>
               <TabsContent value="inventory">
                 <h3 className="font-bold text-xl mb-4 text-primary">Il Tuo Inventario</h3>
-                <div className="bg-white rounded-lg shadow-md p-4">
+                <div className="bg-black/50 rounded-lg shadow-md p-4 border border-white/10">
                   {game.inventory.length === 0 ? (
-                    <p className="text-gray-500 text-center py-8">Non hai ancora nessun oggetto. Fai shopping!</p>
+                    <p className="text-gray-400 text-center py-8">Non hai ancora nessun oggetto. Fai shopping!</p>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {game.inventory.map((item) => (
-                        <div key={item.id} className="flex items-center p-3 border border-gray-200 rounded-lg">
-                          <div className="w-12 h-12 bg-gray-50 rounded-md flex items-center justify-center mr-3">
+                        <div key={item.id} className="flex items-center p-3 border border-white/10 rounded-lg bg-black/30">
+                          <div className="w-12 h-12 bg-black/50 rounded-md flex items-center justify-center mr-3">
                             <svg className="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                               <path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd"></path>
                             </svg>
                           </div>
                           <div>
-                            <h4 className="font-bold">{item.name}</h4>
-                            <p className="text-xs text-gray-500">
+                            <h4 className="font-bold text-white">{item.name}</h4>
+                            <p className="text-xs text-gray-400">
                               {item.effect.value > 0 ? '+' : ''}{item.effect.value} {item.effect.type.charAt(0).toUpperCase() + item.effect.type.slice(1)}
                               {item.unlockDay && `, Sbloccato Giorno ${item.unlockDay}`}
                             </p>
@@ -129,11 +129,11 @@ export default function CharacterSection() {
               </TabsContent>
               <TabsContent value="social">
                 <h3 className="font-bold text-xl mb-4 text-primary">La Tua Cerchia Sociale</h3>
-                <div className="bg-white rounded-lg shadow-md p-4">
+                <div className="bg-black/50 rounded-lg shadow-md p-4 border border-white/10">
                   {game.contacts.length === 0 ? (
-                    <p className="text-gray-500 text-center py-8">Non hai ancora nessun contatto. Socializza!</p>
+                    <p className="text-gray-400 text-center py-8">Non hai ancora nessun contatto. Socializza!</p>
                   ) : (
-                    <ul className="divide-y divide-gray-200">
+                    <ul className="divide-y divide-white/10">
                       {game.contacts.map((contact) => (
                         <li key={contact.id} className="py-3 flex items-center justify-between">
                           <div className="flex items-center">
@@ -143,15 +143,15 @@ export default function CharacterSection() {
                               </span>
                             </div>
                             <div>
-                              <h4 className="font-bold">{contact.name}</h4>
-                              <p className="text-xs text-gray-500">{contact.type}</p>
+                              <h4 className="font-bold text-white">{contact.name}</h4>
+                              <p className="text-xs text-gray-400">{contact.type}</p>
                             </div>
                           </div>
                           <div className="flex items-center space-x-1">
                             <div className={`text-xs px-2 py-1 ${
-                              contact.respect === "alto" ? "bg-green-500/20 text-green-500" :
-                              contact.respect === "medio" ? "bg-blue-500/20 text-blue-500" :
-                              "bg-amber-400/20 text-amber-500"
+                              contact.respect === "alto" ? "bg-green-500/20 text-green-400" :
+                              contact.respect === "medio" ? "bg-blue-500/20 text-blue-400" :
+                              "bg-amber-400/20 text-amber-400"
                             } rounded-full`}>
                               Rispetto: {contact.respect.charAt(0).toUpperCase() + contact.respect.slice(1)}
                             </div>
@@ -169,21 +169,21 @@ export default function CharacterSection() {
               </TabsContent>
               <TabsContent value="skills">
                 <h3 className="font-bold text-xl mb-4 text-primary">Le Tue Abilità</h3>
-                <div className="bg-white rounded-lg shadow-md p-4">
+                <div className="bg-black/50 rounded-lg shadow-md p-4 border border-white/10">
                   <div className="space-y-4">
                     {game.skills.map((skill) => (
                       <div key={skill.id} className="skill-item">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-bold">{skill.name}</span>
+                          <span className="font-bold text-white">{skill.name}</span>
                           <span className={`text-xs ${
                             skill.level >= 4 ? "bg-secondary/20 text-secondary" :
                             skill.level >= 3 ? "bg-primary/20 text-primary" :
-                            "bg-amber-400/20 text-amber-500/80"
+                            "bg-amber-400/20 text-amber-300"
                           } px-2 py-1 rounded-full`}>
                             Livello {skill.level}
                           </span>
                         </div>
-                        <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-2 bg-white/10 rounded-full overflow-hidden">
                           <div 
                             className={`h-full ${
                               skill.level >= 4 ? "bg-secondary" :
@@ -193,7 +193,7 @@ export default function CharacterSection() {
                             style={{ width: `${(skill.progress / skill.maxLevel) * 100}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">{skill.description}</p>
+                        <p className="text-xs text-gray-400 mt-1">{skill.description}</p>
                       </div>
                     ))}
                   </div>

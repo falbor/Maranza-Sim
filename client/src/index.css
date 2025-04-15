@@ -3,6 +3,38 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 222.2 47.4% 55%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    
+    --radius: 0.5rem;
+  }
+
   * {
     @apply border-border;
     -webkit-tap-highlight-color: transparent;
@@ -11,9 +43,47 @@
   body {
     @apply font-sans antialiased bg-background text-foreground touch-manipulation;
     overscroll-behavior-y: none;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   input, button {
     @apply min-h-[44px] sm:min-h-[36px];
+  }
+
+  /* Dark mode specific adjustments */
+  .text-gray-500, .text-gray-600, .text-gray-700 {
+    color: hsl(var(--muted-foreground));
+  }
+  
+  .bg-white {
+    background-color: hsl(var(--card));
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+  }
+  
+  .bg-gray-50, .bg-gray-100, .bg-gray-200 {
+    background-color: hsl(var(--muted));
+  }
+}
+
+/* Utility classes for dark theme */
+@layer utilities {
+  .dark-card {
+    @apply bg-card text-card-foreground;
+  }
+  
+  .dark-text {
+    @apply text-foreground;
+  }
+  
+  .dark-muted {
+    @apply text-muted-foreground;
+  }
+  
+  .dark-border {
+    @apply border-border;
   }
 }

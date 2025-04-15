@@ -119,22 +119,60 @@ export function GameProvider({ children }: { children: ReactNode }) {
       refetch();
     },
     onError: (error: any) => {
-      // Check for specific error messages
-      if (error.message && error.message.includes("Not enough hours left in the day")) {
-        toast({
-          title: "Tempo Insufficiente",
-          description: "Non hai abbastanza ore rimaste in questo giorno per completare questa attività. Riposati o passa al giorno successivo.",
-          variant: "destructive",
-          duration: 3000
-        });
-      } else {
-        toast({
-          title: "Errore",
-          description: "Impossibile completare l'attività. Riprova.",
-          variant: "destructive",
-          duration: 3000
-        });
+      // Verifica i messaggi di errore specifici provenienti dal server
+      let errorMessage = "Impossibile completare l'attività. Riprova.";
+      let errorTitle = "Errore";
+      
+      if (error.message) {
+        // Estrai il messaggio pulito rimuovendo il codice di stato e formattandolo correttamente
+        let cleanMessage = "";
+        
+        // Verifica se il messaggio è nel formato "codice: messaggio"
+        if (error.message.includes(": ")) {
+          // Prendi solo la parte dopo i due punti e spazio
+          cleanMessage = error.message.split(": ").slice(1).join(": ").trim();
+        } else {
+          cleanMessage = error.message;
+        }
+        
+        // Controllo dei messaggi relativi ai soldi
+        if (cleanMessage.includes("soldi") || cleanMessage.includes("money") || cleanMessage.includes("cash")) {
+          errorTitle = "Soldi Insufficienti";
+          errorMessage = cleanMessage;
+        }
+        // Controllo dei messaggi relativi allo shopping
+        else if (cleanMessage.includes("shopping") || cleanMessage.includes("Shopping")) {
+          errorTitle = "Soldi Insufficienti per lo Shopping";
+          errorMessage = cleanMessage;
+        }
+        // Controllo dei messaggi relativi alla discoteca
+        else if (cleanMessage.includes("discoteca") || cleanMessage.includes("Discoteca")) {
+          errorTitle = "Soldi Insufficienti per la Discoteca";
+          errorMessage = cleanMessage;
+        }
+        // Controllo del tempo insufficiente
+        else if (cleanMessage.includes("Not enough hours") || cleanMessage.includes("ore rimaste") || cleanMessage.includes("tempo")) {
+          errorTitle = "Tempo Insufficiente";
+          errorMessage = "Non hai abbastanza ore rimaste in questo giorno per completare questa attività.";
+        }
+        // Controllo energia insufficiente
+        else if (cleanMessage.includes("energy") || cleanMessage.includes("energia")) {
+          errorTitle = "Energia Insufficiente";
+          errorMessage = cleanMessage;
+        }
+        // Per altri errori, usa il messaggio pulito
+        else {
+          errorMessage = cleanMessage;
+        }
       }
+      
+      toast({
+        title: errorTitle,
+        description: errorMessage,
+        variant: "destructive",
+        duration: 3000
+      });
+      
       console.error("Failed to complete activity:", error);
     }
   });

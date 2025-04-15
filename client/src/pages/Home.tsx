@@ -27,25 +27,25 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary to-secondary text-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-black text-white flex flex-col">
       <header className="container mx-auto px-4 py-6">
         <h1 className="text-4xl md:text-6xl font-bold text-center mb-2">Maranza Simulator</h1>
         <p className="text-center text-lg opacity-90">La vita di un vero maranza</p>
       </header>
 
       <main className="flex-grow flex items-center justify-center p-4">
-        <div className="max-w-lg w-full bg-white text-gray-800 rounded-xl shadow-2xl p-4 sm:p-8">
+        <div className="max-w-lg w-full bg-black/70 text-white rounded-xl shadow-2xl p-4 sm:p-8 backdrop-blur-lg border border-primary/20">
           <h2 className="text-2xl font-bold text-primary mb-4 text-center">Benvenuto nel Simulatore</h2>
           
-          <p className="mb-6 text-gray-600">
+          <p className="mb-6 text-gray-300">
             Vivi la vita di un vero maranza! Fai shopping di vestiti firmati, vai in giro in piazza, 
             allenati in palestra, e aumenta il tuo rispetto tra gli altri maranza della città.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div className="bg-gray-50 p-4 rounded-lg">
+            <div className="bg-black/50 p-4 rounded-lg border border-primary/10">
               <h3 className="font-bold text-primary mb-2">Caratteristiche</h3>
-              <ul className="text-sm space-y-1">
+              <ul className="text-sm space-y-1 text-gray-300">
                 <li>• Personalizza il tuo maranza</li>
                 <li>• Guadagna soldi e rispetto</li>
                 <li>• Migliora il tuo stile</li>
@@ -53,9 +53,9 @@ const Home = () => {
               </ul>
             </div>
             
-            <div className="bg-gray-50 p-4 rounded-lg">
+            <div className="bg-black/50 p-4 rounded-lg border border-primary/10">
               <h3 className="font-bold text-primary mb-2">Attività</h3>
-              <ul className="text-sm space-y-1">
+              <ul className="text-sm space-y-1 text-gray-300">
                 <li>• Shopping di vestiti firmati</li>
                 <li>• Giro in piazza</li>
                 <li>• Sessioni in palestra</li>
@@ -75,7 +75,7 @@ const Home = () => {
             {game.character && (
               <Button 
                 variant="outline" 
-                className="w-full md:w-auto"
+                className="w-full md:w-auto text-white border-white/30 hover:bg-white/10"
                 onClick={() => resetGame()}
               >
                 Reset Gioco

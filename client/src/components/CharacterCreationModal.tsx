@@ -79,12 +79,12 @@ const CharacterCreationModal = () => {
 
   return (
     <Dialog open={showCharacterCreation} onOpenChange={setShowCharacterCreation}>
-      <DialogContent className="w-[90vw] max-w-xl mx-auto">
+      <DialogContent className="w-[90vw] max-w-xl mx-auto bg-black/80 border-primary/20 text-white">
         <DialogHeader>
           <DialogTitle className="text-xl md:text-2xl text-primary font-bold">
             Crea il Tuo Maranza
           </DialogTitle>
-          <p className="text-sm md:text-base text-gray-600">
+          <p className="text-sm md:text-base text-gray-300">
             Personalizza il tuo personaggio
           </p>
         </DialogHeader>
@@ -93,7 +93,7 @@ const CharacterCreationModal = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div>
               <div className="mb-4">
-                <Label className="text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+                <Label className="text-white text-sm font-bold mb-2" htmlFor="name">
                   Nome
                 </Label>
                 <Input 
@@ -102,32 +102,32 @@ const CharacterCreationModal = () => {
                   placeholder="Inserisci un nome" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="border rounded w-full py-2 px-3 text-gray-700"
+                  className="border border-primary/20 bg-black/40 text-white"
                 />
               </div>
               
               <div className="mb-4">
-                <Label className="block text-gray-700 text-sm font-bold mb-2">
+                <Label className="block text-white text-sm font-bold mb-2">
                   Stile
                 </Label>
                 <div className="flex space-x-2">
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${style === "casual" ? "bg-primary text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded-lg text-sm ${style === "casual" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
                     onClick={() => setStyle("casual")}
                   >
                     Casual
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${style === "sportivo" ? "bg-primary text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded-lg text-sm ${style === "sportivo" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
                     onClick={() => setStyle("sportivo")}
                   >
                     Sportivo
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${style === "firmato" ? "bg-primary text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded-lg text-sm ${style === "firmato" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
                     onClick={() => setStyle("firmato")}
                   >
                     Firmato
@@ -136,27 +136,27 @@ const CharacterCreationModal = () => {
               </div>
               
               <div className="mb-4">
-                <Label className="block text-gray-700 text-sm font-bold mb-2">
+                <Label className="block text-white text-sm font-bold mb-2">
                   Personalità
                 </Label>
                 <div className="flex space-x-2">
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${personality === "audace" ? "bg-primary text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded-lg text-sm ${personality === "audace" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
                     onClick={() => setPersonality("audace")}
                   >
                     Audace
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${personality === "ribelle" ? "bg-primary text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded-lg text-sm ${personality === "ribelle" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
                     onClick={() => setPersonality("ribelle")}
                   >
                     Ribelle
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${personality === "carismatico" ? "bg-primary text-white" : "bg-gray-200"}`}
+                    className={`px-3 py-2 rounded-lg text-sm ${personality === "carismatico" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
                     onClick={() => setPersonality("carismatico")}
                   >
                     Carismatico
@@ -175,14 +175,14 @@ const CharacterCreationModal = () => {
               <div className="flex space-x-2">
                 <Button 
                   variant="outline"
-                  className="p-2 bg-gray-200 rounded-full"
+                  className="p-2 bg-black/50 text-white border border-white/20 rounded-full hover:bg-white/10"
                   onClick={handlePrevAvatar}
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </Button>
                 <Button 
                   variant="outline"
-                  className="p-2 bg-gray-200 rounded-full"
+                  className="p-2 bg-black/50 text-white border border-white/20 rounded-full hover:bg-white/10"
                   onClick={handleNextAvatar}
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -196,7 +196,7 @@ const CharacterCreationModal = () => {
           <Button
             variant="outline"
             onClick={handleRandomize}
-            className="px-4 py-2 bg-gray-200"
+            className="px-4 py-2 bg-black/50 text-white border border-white/20 hover:bg-white/10"
           >
             Randomizza
           </Button>

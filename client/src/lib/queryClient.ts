@@ -6,15 +6,42 @@ async function throwIfResNotOk(res: Response) {
     const text = await res.text();
     const errorMessage = `${res.status}: ${text}`;
     
-    // Verifica se l'errore è relativo ai soldi insufficienti
-    if (text.includes("soldi") && res.status === 400) {
-      toast({
-        variant: "destructive",
-        title: "Soldi insufficienti",
-        description: text,
-      });
+    // Gestione più dettagliata dei messaggi di errore relativi ai soldi
+    if (res.status === 400) {
+      // Shopping e attività che richiedono soldi
+      if (text.includes("shopping") || text.includes("Shopping")) {
+        toast({
+          variant: "destructive",
+          title: "Soldi insufficienti per lo shopping",
+          description: text,
+        });
+      }
+      // Discoteca
+      else if (text.includes("discoteca") || text.includes("Discoteca")) {
+        toast({
+          variant: "destructive",
+          title: "Soldi insufficienti per la discoteca",
+          description: text,
+        });
+      }
+      // Altri messaggi relativi ai soldi
+      else if (text.includes("soldi") || text.includes("money") || text.includes("cash")) {
+        toast({
+          variant: "destructive",
+          title: "Soldi insufficienti",
+          description: text,
+        });
+      }
+      // Altri errori 400
+      else {
+        toast({
+          variant: "destructive",
+          title: "Errore",
+          description: text,
+        });
+      }
     } else {
-      // Mostra l'errore come notifica toast generico
+      // Altri tipi di errori non 400
       toast({
         variant: "destructive",
         title: "Errore",

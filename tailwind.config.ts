@@ -61,6 +61,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Dark theme specific colors
+        dark: {
+          primary: "#4B5EFC",
+          secondary: "#8F94FB",
+          accent: "#FFA933",
+          background: "#121212",
+          card: "#1E1E1E",
+          text: "#E0E0E0",
+          muted: "#8B8B8B",
+          border: "#2A2A2A",
+        },
       },
       keyframes: {
         "accordion-down": {

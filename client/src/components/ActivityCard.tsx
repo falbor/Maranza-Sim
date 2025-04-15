@@ -15,19 +15,19 @@ const ActivityCard = ({ activity, className = "" }: ActivityCardProps) => {
     setShowActivityModal(true);
   };
 
-  // Determine colors based on activity.color
+  // Determine colors based on activity.color for dark theme
   const getColors = () => {
     switch (activity.color) {
       case "primary":
-        return "from-primary/30 to-primary/10 text-primary-foreground";
+        return "from-primary/40 to-primary/10 text-primary-foreground border-primary/30";
       case "secondary":
-        return "from-secondary/30 to-secondary/10 text-secondary-foreground";
+        return "from-secondary/40 to-secondary/10 text-secondary-foreground border-secondary/30";
       case "accent":
-        return "from-amber-400/30 to-amber-400/10 text-amber-700";
+        return "from-amber-500/40 to-amber-500/10 text-amber-100 border-amber-500/30";
       case "info":
-        return "from-blue-500/30 to-blue-500/10 text-blue-700";
+        return "from-blue-500/40 to-blue-500/10 text-blue-100 border-blue-500/30";
       default:
-        return "from-primary/30 to-primary/10 text-primary-foreground";
+        return "from-primary/40 to-primary/10 text-primary-foreground border-primary/30";
     }
   };
 
@@ -50,18 +50,17 @@ const ActivityCard = ({ activity, className = "" }: ActivityCardProps) => {
 
   return (
     <Card 
-      className={`border-none bg-gradient-to-b ${getColors()} cursor-pointer backdrop-blur-sm 
-      rounded-3xl transition-all duration-300 hover:scale-105 w-full aspect-square flex flex-col 
-      shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] 
-      active:scale-95 active:shadow-inner ${className}`}
+      className={`border border-border bg-gradient-to-b ${getColors()} cursor-pointer backdrop-blur-sm 
+      rounded-lg transition-all duration-200 hover:scale-105 w-full 
+      shadow-md hover:shadow-lg active:scale-95 active:shadow-inner ${className}`}
       onClick={handleSelectActivity}
     >
-      <div className="p-2 flex flex-col items-center justify-center h-full text-center">
-        <div className="text-3xl mb-2 filter drop-shadow-sm">
+      <div className="p-1.5 flex flex-col items-center justify-center h-full w-full">
+        <div className="text-2xl filter drop-shadow-md mb-1">
           {getActivityIcon()}
         </div>
-        <div>
-          <h4 className="font-medium text-xs leading-tight truncate w-full">{activity.title}</h4>
+        <div className="text-center w-full px-1">
+          <h4 className="font-medium text-xs leading-tight truncate w-full overflow-hidden">{activity.title}</h4>
         </div>
       </div>
     </Card>
