@@ -49,7 +49,24 @@
       }
     ]
   ],
-  "characters": [],
+  "characters": [
+    [
+      1,
+      {
+        "name": "Hicham",
+        "look": "sportivo",
+        "personality": "carismatico",
+        "avatarId": 4,
+        "money": 250,
+        "reputation": 50,
+        "energy": 100,
+        "respect": 30,
+        "style": 60,
+        "userId": 1,
+        "id": 1
+      }
+    ]
+  ],
   "items": [
     [
       1,
@@ -189,9 +206,160 @@
         "description": "Capacità di farsi nuovi amici e influenzare gli altri",
         "id": 5
       }
+    ],
+    [
+      6,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 6
+      }
+    ],
+    [
+      7,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 7
+      }
+    ],
+    [
+      8,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 8
+      }
+    ],
+    [
+      9,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 9
+      }
+    ],
+    [
+      10,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 10
+      }
     ]
   ],
-  "characterSkills": [],
+  "characterSkills": [
+    [
+      1,
+      {
+        "characterId": 1,
+        "skillId": 1,
+        "level": 1,
+        "progress": 37,
+        "maxLevel": 100,
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "characterId": 1,
+        "skillId": 2,
+        "level": 1,
+        "progress": 20,
+        "maxLevel": 100,
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "characterId": 1,
+        "skillId": 3,
+        "level": 2,
+        "progress": 39,
+        "maxLevel": 100,
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "characterId": 1,
+        "skillId": 4,
+        "level": 1,
+        "progress": 42,
+        "maxLevel": 100,
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "characterId": 1,
+        "skillId": 5,
+        "level": 2,
+        "progress": 11,
+        "maxLevel": 100,
+        "id": 5
+      }
+    ],
+    [
+      6,
+      {
+        "characterId": 1,
+        "skillId": 6,
+        "level": 2,
+        "progress": 40,
+        "maxLevel": 100,
+        "id": 6
+      }
+    ],
+    [
+      7,
+      {
+        "characterId": 1,
+        "skillId": 7,
+        "level": 3,
+        "progress": 48,
+        "maxLevel": 100,
+        "id": 7
+      }
+    ],
+    [
+      8,
+      {
+        "characterId": 1,
+        "skillId": 8,
+        "level": 2,
+        "progress": 39,
+        "maxLevel": 100,
+        "id": 8
+      }
+    ],
+    [
+      9,
+      {
+        "characterId": 1,
+        "skillId": 9,
+        "level": 1,
+        "progress": 23,
+        "maxLevel": 100,
+        "id": 9
+      }
+    ],
+    [
+      10,
+      {
+        "characterId": 1,
+        "skillId": 10,
+        "level": 1,
+        "progress": 15,
+        "maxLevel": 100,
+        "id": 10
+      }
+    ]
+  ],
   "contacts": [],
   "activities": [
     [
@@ -430,10 +598,10 @@
         "userId": 1,
         "day": 1,
         "time": "08:00",
-        "gameStarted": false,
+        "gameStarted": true,
         "hoursLeft": 16,
         "id": 1,
-        "characterId": null
+        "characterId": 1
       }
     ],
     [
@@ -522,11 +690,11 @@
     ]
   ],
   "userId": 1,
-  "characterId": 1,
+  "characterId": 2,
   "itemId": 7,
   "characterItemId": 1,
-  "skillId": 6,
-  "characterSkillId": 1,
+  "skillId": 11,
+  "characterSkillId": 11,
   "contactId": 1,
   "activityId": 11,
   "gameStateId": 1

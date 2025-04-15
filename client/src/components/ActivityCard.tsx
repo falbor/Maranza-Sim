@@ -19,15 +19,15 @@ const ActivityCard = ({ activity, className = "" }: ActivityCardProps) => {
   const getColors = () => {
     switch (activity.color) {
       case "primary":
-        return "border-primary bg-primary/10 hover:bg-primary/20";
+        return "from-primary/30 to-primary/10 text-primary-foreground";
       case "secondary":
-        return "border-secondary bg-secondary/10 hover:bg-secondary/20";
+        return "from-secondary/30 to-secondary/10 text-secondary-foreground";
       case "accent":
-        return "border-amber-400 bg-amber-400/10 hover:bg-amber-400/20";
+        return "from-amber-400/30 to-amber-400/10 text-amber-700";
       case "info":
-        return "border-blue-500 bg-blue-500/10 hover:bg-blue-500/20";
+        return "from-blue-500/30 to-blue-500/10 text-blue-700";
       default:
-        return "border-primary bg-primary/10 hover:bg-primary/20";
+        return "from-primary/30 to-primary/10 text-primary-foreground";
     }
   };
 
@@ -50,15 +50,18 @@ const ActivityCard = ({ activity, className = "" }: ActivityCardProps) => {
 
   return (
     <Card 
-      className={`border ${getColors()} cursor-pointer shadow-sm rounded-2xl transition-all duration-200 hover:shadow-md w-full aspect-square flex flex-col ${className}`}
+      className={`border-none bg-gradient-to-b ${getColors()} cursor-pointer backdrop-blur-sm 
+      rounded-3xl transition-all duration-300 hover:scale-105 w-full aspect-square flex flex-col 
+      shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] 
+      active:scale-95 active:shadow-inner ${className}`}
       onClick={handleSelectActivity}
     >
       <div className="p-2 flex flex-col items-center justify-center h-full text-center">
-        <div className="text-3xl mb-1">
+        <div className="text-3xl mb-2 filter drop-shadow-sm">
           {getActivityIcon()}
         </div>
         <div>
-          <h4 className="font-semibold text-xs truncate w-full">{activity.title}</h4>
+          <h4 className="font-medium text-xs leading-tight truncate w-full">{activity.title}</h4>
         </div>
       </div>
     </Card>
