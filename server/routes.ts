@@ -302,9 +302,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Character not found" });
       }
       
+      // Check if character has enough resources for the activity
+      const effects = activity.effects as Record<string, number>;
+      for (const [stat, value] of Object.entries(effects)) {
+        if (value < 0 && (character as any)[stat] + value < 0) {
+          // Messaggi personalizzati in base all'attività e alla risorsa mancante
+          let errorMessage = "";
+          
+          if (stat === 'money') {
+            switch (activity.title) {
+              case "Shopping al Centro":
+                errorMessage = "Non hai abbastanza soldi per andare a fare shopping. Prova a fare un lavoretto part-time!";
+                break;
+              case "Serata in Discoteca":
+                errorMessage = "Non puoi permetterti di andare in discoteca. Trovati un lavoretto prima!";
+                break;
+              default:
+                errorMessage = "Non hai abbastanza soldi per questa attività. Devi guadagnare un po' di cash!";
+            }
+          } else if (stat === 'energy') {
+            switch (activity.title) {
+              case "Palestra":
+                errorMessage = "Sei troppo stanco per allenarti. Riposati un po' prima!";
+                break;
+              case "Serata in Discoteca":
+                errorMessage = "Non hai abbastanza energia per una serata in discoteca. Fatti una dormita prima!";
+                break;
+              case "Lavoretto Part-time":
+                errorMessage = "Sei troppo esausto per lavorare. Riposati a casa e riprova dopo!";
+                break;
+              case "Vai a Scuola":
+                errorMessage = "Sei troppo stanco per andare a scuola. Recupera le forze prima!";
+                break;
+              default:
+                errorMessage = "Non hai abbastanza energia per questa attività. Riposati un po'!";
+            }
+          } else if (stat === 'respect') {
+            errorMessage = "Non hai abbastanza rispetto tra i maranza per questa attività. Guadagnati una reputazione!";
+          } else if (stat === 'reputation') {
+            errorMessage = "La tua reputazione è troppo bassa per questa attività. Fatti conoscere di più in giro!";
+          } else {
+            errorMessage = `Non hai abbastanza ${stat} per questa attività.`;
+          }
+          
+          return res.status(400).json({ message: errorMessage });
+        }
+      }
+      
       // Apply activity effects to character
       const updates: Partial<typeof character> = { ...character };
-      const effects = activity.effects as Record<string, number>;
       
       // Track changes for result
       const changes = {
@@ -318,21 +364,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Apply each effect
       for (const [stat, value] of Object.entries(effects)) {
         if (stat in character) {
-          const newValue = Math.max(0, Math.min(100, (character as any)[stat] + value));
-          
-          // Special case for money which can go above 100
           if (stat === 'money') {
-            updates.money = character.money + value;
+            // Ensure money doesn't go below 0
+            updates.money = Math.max(0, character.money + value);
+            changes.moneyChange = value;
           } else {
+            // For other stats, ensure they stay between 0 and 100
+            const newValue = Math.max(0, Math.min(100, (character as any)[stat] + value));
             (updates as any)[stat] = newValue;
+            
+            // Record change
+            if (stat === 'reputation') changes.reputationChange = value;
+            if (stat === 'style') changes.styleChange = value;
+            if (stat === 'energy') changes.energyChange = value;
+            if (stat === 'respect') changes.respectChange = value;
           }
-          
-          // Record change
-          if (stat === 'money') changes.moneyChange = value;
-          if (stat === 'reputation') changes.reputationChange = value;
-          if (stat === 'style') changes.styleChange = value;
-          if (stat === 'energy') changes.energyChange = value;
-          if (stat === 'respect') changes.respectChange = value;
         }
       }
       

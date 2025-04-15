@@ -1,9 +1,28 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import { toast } from "@/hooks/use-toast";
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
-    const text = (await res.text()) || res.statusText;
-    throw new Error(`${res.status}: ${text}`);
+    const text = await res.text();
+    const errorMessage = `${res.status}: ${text}`;
+    
+    // Verifica se l'errore è relativo ai soldi insufficienti
+    if (text.includes("soldi") && res.status === 400) {
+      toast({
+        variant: "destructive",
+        title: "Soldi insufficienti",
+        description: text,
+      });
+    } else {
+      // Mostra l'errore come notifica toast generico
+      toast({
+        variant: "destructive",
+        title: "Errore",
+        description: errorMessage,
+      });
+    }
+    
+    throw new Error(errorMessage);
   }
 }
 
@@ -12,15 +31,27 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
-    method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
-  });
+  try {
+    const res = await fetch(url, {
+      method,
+      headers: data ? { "Content-Type": "application/json" } : {},
+      body: data ? JSON.stringify(data) : undefined,
+      credentials: "include",
+    });
 
-  await throwIfResNotOk(res);
-  return res;
+    await throwIfResNotOk(res);
+    return res;
+  } catch (error) {
+    // Cattura errori di rete non gestiti da throwIfResNotOk
+    if (!error.message.includes(":")) {
+      toast({
+        variant: "destructive",
+        title: "Errore di rete",
+        description: error.message || "Si è verificato un errore di connessione",
+      });
+    }
+    throw error;
+  }
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";

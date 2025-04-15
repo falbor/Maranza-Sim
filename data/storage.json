@@ -53,15 +53,15 @@
     [
       1,
       {
-        "name": "Hicham",
-        "look": "sportivo",
+        "name": "Said",
+        "look": "casual",
         "personality": "carismatico",
-        "avatarId": 4,
-        "money": 250,
-        "reputation": 50,
-        "energy": 100,
+        "avatarId": 2,
+        "money": 0,
+        "reputation": 80,
+        "energy": 40,
         "respect": 30,
-        "style": 60,
+        "style": 100,
         "userId": 1,
         "id": 1
       }
@@ -254,8 +254,8 @@
       {
         "characterId": 1,
         "skillId": 1,
-        "level": 1,
-        "progress": 37,
+        "level": 3,
+        "progress": 55,
         "maxLevel": 100,
         "id": 1
       }
@@ -265,8 +265,8 @@
       {
         "characterId": 1,
         "skillId": 2,
-        "level": 1,
-        "progress": 20,
+        "level": 3,
+        "progress": 26,
         "maxLevel": 100,
         "id": 2
       }
@@ -277,7 +277,7 @@
         "characterId": 1,
         "skillId": 3,
         "level": 2,
-        "progress": 39,
+        "progress": 40,
         "maxLevel": 100,
         "id": 3
       }
@@ -287,8 +287,8 @@
       {
         "characterId": 1,
         "skillId": 4,
-        "level": 1,
-        "progress": 42,
+        "level": 3,
+        "progress": 28,
         "maxLevel": 100,
         "id": 4
       }
@@ -299,64 +299,9 @@
         "characterId": 1,
         "skillId": 5,
         "level": 2,
-        "progress": 11,
+        "progress": 66,
         "maxLevel": 100,
         "id": 5
-      }
-    ],
-    [
-      6,
-      {
-        "characterId": 1,
-        "skillId": 6,
-        "level": 2,
-        "progress": 40,
-        "maxLevel": 100,
-        "id": 6
-      }
-    ],
-    [
-      7,
-      {
-        "characterId": 1,
-        "skillId": 7,
-        "level": 3,
-        "progress": 48,
-        "maxLevel": 100,
-        "id": 7
-      }
-    ],
-    [
-      8,
-      {
-        "characterId": 1,
-        "skillId": 8,
-        "level": 2,
-        "progress": 39,
-        "maxLevel": 100,
-        "id": 8
-      }
-    ],
-    [
-      9,
-      {
-        "characterId": 1,
-        "skillId": 9,
-        "level": 1,
-        "progress": 23,
-        "maxLevel": 100,
-        "id": 9
-      }
-    ],
-    [
-      10,
-      {
-        "characterId": 1,
-        "skillId": 10,
-        "level": 1,
-        "progress": 15,
-        "maxLevel": 100,
-        "id": 10
       }
     ]
   ],
@@ -597,9 +542,9 @@
       {
         "userId": 1,
         "day": 1,
-        "time": "08:00",
+        "time": "17:00",
         "gameStarted": true,
-        "hoursLeft": 16,
+        "hoursLeft": 7,
         "id": 1,
         "characterId": 1
       }
@@ -694,7 +639,7 @@
   "itemId": 7,
   "characterItemId": 1,
   "skillId": 11,
-  "characterSkillId": 11,
+  "characterSkillId": 6,
   "contactId": 1,
   "activityId": 11,
   "gameStateId": 1
