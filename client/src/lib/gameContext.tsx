@@ -1,3 +1,8 @@
+/**
+ * Contesto di gioco per Maranza Simulator
+ * Gestisce lo stato globale del gioco, le query API, e le mutazioni per le azioni di gioco
+ * Fornisce un'interfaccia unificata per l'interazione con il backend
+ */
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -12,29 +17,37 @@ import {
   GameState
 } from "@/lib/types";
 
+/**
+ * Definizione dei tipi per il contesto di gioco
+ * Include tutti i metodi e gli stati necessari all'interfaccia utente
+ */
 interface GameContextType {
-  game: GameState;
-  selectedActivity: Activity | null;
-  activityResult: ActivityResult | null;
-  setSelectedActivity: (activity: Activity | null) => void;
-  setActivityResult: (result: ActivityResult | null) => void;
-  doActivity: (activityId: number) => Promise<void>;
-  advanceTime: (hours: number) => Promise<void>;
-  createCharacter: (character: Partial<Character>) => Promise<void>;
-  isCreatingCharacter: boolean;
-  isPendingActivity: boolean;
-  isLoadingGame: boolean;
-  showCharacterCreation: boolean;
-  setShowCharacterCreation: (show: boolean) => void;
-  showActivityModal: boolean;
-  setShowActivityModal: (show: boolean) => void;
-  showResultModal: boolean;
-  setShowResultModal: (show: boolean) => void;
-  resetGame: () => Promise<void>;
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  game: GameState;                                         // Stato attuale del gioco
+  selectedActivity: Activity | null;                       // Attività selezionata dall'utente
+  activityResult: ActivityResult | null;                   // Risultato dell'ultima attività completata
+  setSelectedActivity: (activity: Activity | null) => void; // Imposta l'attività selezionata
+  setActivityResult: (result: ActivityResult | null) => void; // Imposta il risultato dell'attività
+  doActivity: (activityId: number) => Promise<void>;       // Esegue un'attività
+  advanceTime: (hours: number) => Promise<void>;           // Avanza il tempo di gioco
+  createCharacter: (character: Partial<Character>) => Promise<void>; // Crea un nuovo personaggio
+  isCreatingCharacter: boolean;                            // Flag per creazione personaggio in corso
+  isPendingActivity: boolean;                              // Flag per attività in corso
+  isLoadingGame: boolean;                                  // Flag per caricamento del gioco in corso
+  showCharacterCreation: boolean;                          // Flag per mostrare schermata creazione personaggio
+  setShowCharacterCreation: (show: boolean) => void;       // Imposta visibilità creazione personaggio
+  showActivityModal: boolean;                              // Flag per mostrare modale attività
+  setShowActivityModal: (show: boolean) => void;           // Imposta visibilità modale attività
+  showResultModal: boolean;                                // Flag per mostrare modale risultato
+  setShowResultModal: (show: boolean) => void;             // Imposta visibilità modale risultato
+  resetGame: () => Promise<void>;                          // Reimposta il gioco allo stato iniziale
+  activeTab: string;                                       // Tab attiva nell'interfaccia
+  setActiveTab: (tab: string) => void;                     // Imposta la tab attiva
 }
 
+/**
+ * Stato predefinito del gioco
+ * Usato come valore iniziale prima del caricamento dei dati dal server
+ */
 const defaultGameState: GameState = {
   day: 1,
   time: "08:00",
@@ -47,9 +60,17 @@ const defaultGameState: GameState = {
   hoursLeft: 16
 };
 
+// Creazione del contesto React
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
+/**
+ * Provider del contesto di gioco
+ * Gestisce tutte le interazioni con il backend e mantiene lo stato globale del gioco
+ * 
+ * @param children - Componenti React figli che avranno accesso al contesto
+ */
 export function GameProvider({ children }: { children: ReactNode }) {
+  // Stato locale del gioco
   const [game, setGame] = useState<GameState>(defaultGameState);
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
   const [activityResult, setActivityResult] = useState<ActivityResult | null>(null);
@@ -59,13 +80,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [activeTab, setActiveTab] = useState("activities");
   const { toast } = useToast();
 
-  // Fetch game state
+  /**
+   * Query per recuperare lo stato del gioco dal server
+   * Viene eseguita all'avvio e dopo ogni azione che modifica lo stato
+   */
   const { data: gameData, isLoading: isLoadingGame, refetch } = useQuery({
     queryKey: ['/api/game/state'],
     onSuccess: (data) => {
       setGame(data);
       
-      // If game is not started and character is null, show character creation
+      // Se il gioco non è iniziato e non c'è un personaggio, mostra la creazione personaggio
       if (!data.gameStarted && !data.character) {
         setShowCharacterCreation(true);
       }
@@ -81,7 +105,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   });
 
-  // Create character mutation
+  /**
+   * Mutazione per creare un nuovo personaggio
+   * Invia i dati al backend e aggiorna lo stato locale dopo il successo
+   */
   const { mutate: createCharacterMutate, isPending: isCreatingCharacter } = useMutation({
     mutationFn: async (character: Partial<Character>) => {
       return await apiRequest("POST", "/api/game/character", character);
@@ -106,13 +133,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   });
 
-  // Do activity mutation
+  /**
+   * Mutazione per eseguire un'attività
+   * Invia l'ID dell'attività al backend e gestisce il risultato o gli errori
+   */
   const { mutate: doActivityMutate, isPending: isPendingActivity } = useMutation({
     mutationFn: async (activityId: number) => {
       return await apiRequest("POST", `/api/game/activity/${activityId}`, {});
     },
     onError: (error: any) => {
-      // Verifica i messaggi di errore specifici provenienti dal server
+      // Gestione avanzata degli errori con messaggi personalizzati
       let errorMessage = "Impossibile completare l'attività. Riprova.";
       let errorTitle = "Errore";
       
@@ -195,7 +225,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   });
 
-  // Advance time mutation
+  /**
+   * Mutazione per avanzare il tempo di gioco
+   * Utile per saltare ore durante il riposo o altre attività di tempo libero
+   */
   const { mutate: advanceTimeMutate } = useMutation({
     mutationFn: async (hours: number) => {
       return await apiRequest("POST", `/api/game/advance-time`, { hours });
@@ -214,7 +247,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   });
 
-  // Reset game mutation
+  /**
+   * Mutazione per resettare completamente il gioco
+   * Riporta tutto allo stato iniziale e richiede la creazione di un nuovo personaggio
+   */
   const { mutate: resetGameMutate } = useMutation({
     mutationFn: async () => {
       return await apiRequest("POST", `/api/game/reset`, {});
@@ -238,31 +274,54 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }
   });
 
+  /**
+   * Funzione per eseguire un'attività
+   * Wrapper della mutazione doActivityMutate per semplicità d'uso
+   */
   const doActivity = async (activityId: number) => {
     doActivityMutate(activityId);
   };
 
+  /**
+   * Funzione per avanzare il tempo di gioco
+   * Wrapper della mutazione advanceTimeMutate per semplicità d'uso
+   */
   const advanceTime = async (hours: number) => {
     advanceTimeMutate(hours);
   };
 
+  /**
+   * Funzione per creare un nuovo personaggio
+   * Wrapper della mutazione createCharacterMutate per semplicità d'uso
+   */
   const createCharacter = async (character: Partial<Character>) => {
     createCharacterMutate(character);
   };
 
+  /**
+   * Funzione per resettare il gioco
+   * Wrapper della mutazione resetGameMutate per semplicità d'uso
+   */
   const resetGame = async () => {
     resetGameMutate();
   };
 
-  // Effect to update game state when gameData changes
+  /**
+   * Effect per aggiornare lo stato del gioco quando gameData cambia
+   * Assicura che il componente rifletta sempre i dati più recenti
+   */
   useEffect(() => {
     if (gameData) {
       setGame(gameData);
     }
   }, [gameData]);
 
+  /**
+   * Effect per gestire gli eventi di salvataggio
+   * Mostra un toast all'utente quando il gioco viene salvato automaticamente
+   */
   useEffect(() => {
-    // Add event listener for storage saves
+    // Aggiunge un event listener per i salvataggi automatici
     const handleStorageSave = () => {
       toast({
         title: "Gioco Salvato",
@@ -275,6 +334,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('maranza-save', handleStorageSave);
   }, [toast]);
 
+  // Fornisce tutte le funzioni e gli stati necessari ai componenti figli
   return (
     <GameContext.Provider
       value={{
@@ -305,6 +365,12 @@ export function GameProvider({ children }: { children: ReactNode }) {
   );
 }
 
+/**
+ * Hook personalizzato per accedere al contesto di gioco
+ * Semplifica l'accesso allo stato e alle funzioni del gioco nei componenti
+ * 
+ * @throws Error se usato fuori da un GameProvider
+ */
 export function useGame() {
   const context = useContext(GameContext);
   if (context === undefined) {

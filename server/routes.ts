@@ -1,50 +1,66 @@
+/**
+ * File delle route del server per Maranza Simulator
+ * Definisce tutte le API endpoints e la logica di gioco principale
+ */
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 
-// Helper function to format time
+/**
+ * Formatta l'orario nel formato hh:mm
+ * @param hours - Ore da formattare
+ * @param minutes - Minuti da formattare
+ * @returns Stringa formattata dell'orario
+ */
 function formatTime(hours: number, minutes: number): string {
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 }
 
-// Helper function to advance time
+/**
+ * Fa avanzare il tempo di gioco di un numero specificato di ore
+ * - Aggiorna l'orario e il giorno quando necessario
+ * - Ripristina l'energia del personaggio all'inizio di un nuovo giorno
+ * 
+ * @param userId - ID dell'utente di cui avanzare il tempo di gioco
+ * @param hoursToAdvance - Numero di ore da avanzare
+ */
 async function advanceTime(userId: number, hoursToAdvance: number): Promise<void> {
   const gameState = await storage.getGameState(userId);
   if (!gameState) {
     throw new Error("Game state not found");
   }
   
-  // Parse current time
+  // Analizza il tempo corrente
   const [hourStr, minuteStr] = gameState.time.split(':');
   let hours = parseInt(hourStr);
   let minutes = parseInt(minuteStr);
   
-  // Add hours
+  // Aggiunge le ore
   hours += hoursToAdvance;
   
-  // Handle day change if hours > 24
+  // Gestisce il cambio del giorno se le ore > 24
   let newDay = gameState.day;
   if (hours >= 24) {
     hours -= 24;
     newDay += 1;
   }
   
-  // Format new time
+  // Formatta il nuovo orario
   const newTime = formatTime(hours, minutes);
   
-  // Calculate hours left in the day
+  // Calcola le ore rimanenti nella giornata
   const hoursLeft = Math.max(0, 24 - hours - (minutes > 0 ? 1 : 0));
   
-  // Update game state
+  // Aggiorna lo stato del gioco
   await storage.updateGameState(userId, {
     time: newTime,
     day: newDay,
     hoursLeft
   });
   
-  // If it's a new day, refill energy for the character
+  // Se è un nuovo giorno, ripristina l'energia del personaggio
   if (newDay > gameState.day && gameState.characterId) {
     const character = await storage.getCharacter(gameState.characterId);
     if (character) {
@@ -55,7 +71,10 @@ async function advanceTime(userId: number, hoursToAdvance: number): Promise<void
   }
 }
 
-// Character schema for validation
+/**
+ * Schema di validazione per la creazione/modifica di un personaggio
+ * Utilizza Zod per tipizzare e validare i dati
+ */
 const characterSchema = z.object({
   name: z.string().min(1, "Name is required"),
   look: z.enum(["casual", "sportivo", "firmato"]),
@@ -68,7 +87,11 @@ const characterSchema = z.object({
   style: z.number().int().default(60)
 });
 
-// Generate result text based on activity
+/**
+ * Genera un testo di risultato personalizzato in base all'attività completata
+ * @param activityTitle - Titolo dell'attività
+ * @returns Testo risultato casuale dall'array di possibili risultati
+ */
 function generateResultText(activityTitle: string): string {
   const possibleResults: Record<string, string[]> = {
     "Giro in Piazza": [
@@ -123,14 +146,19 @@ function generateResultText(activityTitle: string): string {
     ]
   };
   
-  // Get random result for the activity or use a default
+  // Seleziona un risultato casuale per l'attività o usa un default
   const results = possibleResults[activityTitle] || ["Hai completato l'attività con successo!"];
   return results[Math.floor(Math.random() * results.length)];
 }
 
-// Generate random contacts
+/**
+ * Genera un contatto casuale per il personaggio
+ * @param characterId - ID del personaggio
+ * @param day - Giorno corrente del gioco
+ * @returns Un nuovo contatto o null (50% di probabilità)
+ */
 function generateRandomContact(characterId: number, day: number): { contact: any, name: string } | null {
-  // 50% chance of getting a contact
+  // 50% di probabilità di ottenere un contatto
   if (Math.random() < 0.5) return null;
   
   const firstNames = ["Marco", "Luca", "Sara", "Giulia", "Alessandro", "Matteo", "Federico", "Simone", "Manuel", "Lorenzo"];
@@ -139,6 +167,7 @@ function generateRandomContact(characterId: number, day: number): { contact: any
   const respects = ["basso", "medio", "alto"];
   const colors = ["primary", "secondary", "info", "amber-400", "green-500"];
   
+  // Generazione casuale dei dettagli del contatto
   const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
   const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
   const fullName = `${randomFirstName} ${randomLastName}`;
@@ -157,14 +186,22 @@ function generateRandomContact(characterId: number, day: number): { contact: any
   return { contact, name: fullName };
 }
 
+/**
+ * Registra tutte le route dell'API e crea un server HTTP
+ * @param app - Istanza di Express
+ * @returns Server HTTP
+ */
 export async function registerRoutes(app: Express): Promise<Server> {
-  // prefixing all routes with /api
+  // Prefisso per tutte le route API
   const apiRouter = '/api';
   
-  // Check or create current game state
+  /**
+   * GET /api/game/state
+   * Ottiene o crea lo stato di gioco corrente
+   */
   app.get(`${apiRouter}/game/state`, async (req: Request, res: Response) => {
     try {
-      // Get or create default user (for demo purposes we always use ID 1)
+      // Ottiene o crea l'utente predefinito (per demo usiamo sempre ID 1)
       const userId = 1;
       let user = await storage.getUser(userId);
       if (!user) {
@@ -174,7 +211,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
-      // Get game state
+      // Ottiene lo stato del gioco
       let gameState = await storage.getGameState(userId);
       if (!gameState) {
         gameState = await storage.createGameState({
@@ -186,23 +223,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
-      // Get character if exists
+      // Ottiene il personaggio se esiste
       const character = gameState.characterId 
         ? await storage.getCharacter(gameState.characterId)
         : null;
       
-      // Get available activities
+      // Ottiene le attività disponibili
       const availableActivities = await storage.getAvailableActivities(gameState.day);
       
-      // Get inventory
+      // Ottiene l'inventario
       const inventory = character ? await storage.getCharacterItems(character.id) : [];
       
-      // Get skills
+      // Ottiene le abilità
       const skills = character ? await storage.getCharacterSkills(character.id) : [];
       
-      // Get contacts
+      // Ottiene i contatti
       const contacts = character ? await storage.getContacts(character.id) : [];
       
+      // Invia la risposta completa con tutti i dati di gioco
       res.json({
         day: gameState.day,
         time: gameState.time,
@@ -220,26 +258,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Create character
+  /**
+   * POST /api/game/character
+   * Crea un nuovo personaggio
+   */
   app.post(`${apiRouter}/game/character`, async (req: Request, res: Response) => {
     try {
-      // Validate request
+      // Valida i dati della richiesta
       const validatedData = characterSchema.parse(req.body);
       
-      // Get user (for demo we always use ID 1)
+      // Ottiene l'utente (per demo usiamo sempre ID 1)
       const userId = 1;
       const user = await storage.getUser(userId);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
       
-      // Create character
+      // Crea il personaggio
       const character = await storage.createCharacter({
         ...validatedData,
         userId: user.id
       });
       
-      // Update game state
+      // Aggiorna lo stato del gioco
       const gameState = await storage.getGameState(userId);
       if (gameState) {
         await storage.updateGameState(userId, {
@@ -248,7 +289,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
       
-      // Add default skills to character
+      // Aggiunge abilità predefinite al personaggio
       const skills = await storage.getSkills();
       for (const skill of skills) {
         await storage.addSkillToCharacter({
@@ -270,7 +311,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Do activity
+  /**
+   * POST /api/game/activity/:id
+   * Esegue un'attività selezionata dal giocatore
+   */
   app.post(`${apiRouter}/game/activity/:id`, async (req: Request, res: Response) => {
     try {
       const activityId = parseInt(req.params.id);
@@ -278,31 +322,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid activity ID" });
       }
       
-      // Get activity
+      // Ottiene l'attività
       const activity = await storage.getActivity(activityId);
       if (!activity) {
         return res.status(404).json({ message: "Activity not found" });
       }
       
-      // Get user and game state
+      // Ottiene l'utente e lo stato del gioco
       const userId = 1;
       const gameState = await storage.getGameState(userId);
       if (!gameState || !gameState.characterId) {
         return res.status(400).json({ message: "Game not started or character not created" });
       }
       
-      // Check if enough hours left
+      // Controlla se ci sono abbastanza ore rimaste
       if (gameState.hoursLeft < activity.duration) {
         return res.status(400).json({ message: "Not enough hours left in the day" });
       }
       
-      // Get character
+      // Ottiene il personaggio
       const character = await storage.getCharacter(gameState.characterId);
       if (!character) {
         return res.status(404).json({ message: "Character not found" });
       }
       
-      // Check if character has enough resources for the activity
+      // Controlla se il personaggio ha risorse sufficienti per l'attività
       const effects = activity.effects as Record<string, number>;
       for (const [stat, value] of Object.entries(effects)) {
         if (value < 0 && (character as any)[stat] + value < 0) {
@@ -349,10 +393,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
       
-      // Apply activity effects to character
+      // Applica gli effetti dell'attività al personaggio
       const updates: Partial<typeof character> = { ...character };
       
-      // Track changes for result
+      // Tiene traccia dei cambiamenti per il risultato
       const changes = {
         moneyChange: 0,
         reputationChange: 0,
@@ -361,19 +405,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         respectChange: 0
       };
       
-      // Apply each effect
+      // Applica ogni effetto
       for (const [stat, value] of Object.entries(effects)) {
         if (stat in character) {
           if (stat === 'money') {
-            // Ensure money doesn't go below 0
+            // Assicura che i soldi non vadano sotto 0
             updates.money = Math.max(0, character.money + value);
             changes.moneyChange = value;
           } else {
-            // For other stats, ensure they stay between 0 and 100
+            // Per gli altri stat, assicura che rimangano tra 0 e 100
             const newValue = Math.max(0, Math.min(100, (character as any)[stat] + value));
             (updates as any)[stat] = newValue;
             
-            // Record change
+            // Registra il cambiamento
             if (stat === 'reputation') changes.reputationChange = value;
             if (stat === 'style') changes.styleChange = value;
             if (stat === 'energy') changes.energyChange = value;
@@ -382,27 +426,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
       
-      // Update character
+      // Aggiorna il personaggio
       await storage.updateCharacter(character.id, updates);
       
-      // Advance time
+      // Avanza il tempo
       await advanceTime(userId, activity.duration);
       
-      // Generate random chance for new contact
+      // Genera una possibilità casuale per un nuovo contatto
       const contactResult = generateRandomContact(character.id, gameState.day);
       let newContact = null;
       if (contactResult) {
         newContact = await storage.createContact(contactResult.contact);
       }
       
-      // Generate result text
+      // Genera il testo del risultato
       const resultText = generateResultText(activity.title);
       
-      // Update skill progress
+      // Aggiorna il progresso delle abilità
       let skillProgress = null;
       const skills = await storage.getCharacterSkills(character.id);
       
-      // Skills that might improve based on activity
+      // Abilità che potrebbero migliorare in base all'attività
       const skillMap: Record<string, string[]> = {
         "Shopping al Centro": ["Stile nel Vestire", "Contrattazione"],
         "Palestra": ["Ballo"],
@@ -416,17 +460,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const relevantSkills = skillMap[activity.title] || [];
       if (relevantSkills.length > 0 && Math.random() < 0.7) {
-        // Pick a random relevant skill
+        // Scegli un'abilità rilevante casuale
         const skillName = relevantSkills[Math.floor(Math.random() * relevantSkills.length)];
         const skill = skills.find(s => s.name === skillName);
         
         if (skill) {
-          // Improve the skill
+          // Migliora l'abilità
           const progressGain = Math.floor(Math.random() * 15) + 5;
           let newProgress = skill.progress + progressGain;
           let newLevel = skill.level;
           
-          // Level up if progress exceeds maxLevel
+          // Aumenta il livello se il progresso supera il maxLevel
           if (newProgress >= skill.maxLevel && skill.level < 5) {
             newProgress = newProgress - skill.maxLevel;
             newLevel = skill.level + 1;
@@ -444,7 +488,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       }
       
-      // Send activity result
+      // Invia il risultato dell'attività
       res.json({
         text: resultText,
         ...changes,
@@ -457,7 +501,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Advance time manually (e.g., sleep)
+  /**
+   * POST /api/game/advance-time
+   * Avanza manualmente il tempo (es. dormire)
+   */
   app.post(`${apiRouter}/game/advance-time`, async (req: Request, res: Response) => {
     try {
       const hoursSchema = z.object({
@@ -479,7 +526,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Reset game
+  /**
+   * POST /api/game/reset
+   * Reimposta il gioco allo stato iniziale
+   */
   app.post(`${apiRouter}/game/reset`, async (req: Request, res: Response) => {
     try {
       const userId = 1;

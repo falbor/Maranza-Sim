@@ -1,11 +1,16 @@
+/**
+ * File di gestione dello storage per Maranza Simulator
+ * Implementa la persistenza dei dati e le funzionalità CRUD per tutte le entità del gioco
+ */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Get current file's directory in ESM
+// Ottiene la directory del file corrente in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Importazione dei tipi dal modello dati condiviso
 import {
   User,
   InsertUser,
@@ -27,27 +32,30 @@ import {
   InsertGameState
 } from "../shared/schema";
 
-// Define the storage interface
+/**
+ * Interfaccia che definisce tutti i metodi di storage necessari per l'applicazione
+ * Funziona come contratto per l'implementazione delle classi concrete
+ */
 export interface IStorage {
-  // User methods
+  // Metodi per gli utenti
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
 
-  // Character methods
+  // Metodi per i personaggi
   getCharacter(id: number): Promise<Character | undefined>;
   getCharacterByUserId(userId: number): Promise<Character | undefined>;
   createCharacter(character: InsertCharacter): Promise<Character>;
   updateCharacter(id: number, updates: Partial<Character>): Promise<Character>;
 
-  // Item methods
+  // Metodi per gli oggetti
   getItems(): Promise<Item[]>;
   getItem(id: number): Promise<Item | undefined>;
   createItem(item: InsertItem): Promise<Item>;
   getCharacterItems(characterId: number): Promise<Item[]>;
   addItemToCharacter(characterItem: InsertCharacterItem): Promise<CharacterItem>;
 
-  // Skill methods
+  // Metodi per le abilità
   getSkills(): Promise<Skill[]>;
   getSkill(id: number): Promise<Skill | undefined>;
   createSkill(skill: InsertSkill): Promise<Skill>;
@@ -55,27 +63,32 @@ export interface IStorage {
   updateCharacterSkill(characterId: number, skillId: number, updates: Partial<CharacterSkill>): Promise<CharacterSkill>;
   addSkillToCharacter(characterSkill: InsertCharacterSkill): Promise<CharacterSkill>;
 
-  // Contact methods
+  // Metodi per i contatti
   getContacts(characterId: number): Promise<Contact[]>;
   createContact(contact: InsertContact): Promise<Contact>;
 
-  // Activity methods
+  // Metodi per le attività
   getActivities(): Promise<Activity[]>;
   getActivity(id: number): Promise<Activity | undefined>;
   createActivity(activity: InsertActivity): Promise<Activity>;
   getAvailableActivities(day: number): Promise<Activity[]>;
 
-  // Game state methods
+  // Metodi per lo stato del gioco
   getGameState(userId: number): Promise<GameState | undefined>;
   createGameState(gameState: InsertGameState): Promise<GameState>;
   updateGameState(userId: number, updates: Partial<GameState>): Promise<GameState>;
   resetGameState(userId: number): Promise<void>;
 
-  // Utility methods
+  // Metodi di utilità
   initializeDefaultData(): Promise<void>;
 }
 
+/**
+ * Implementazione di base dello storage in memoria
+ * Memorizza tutti i dati in mappe in-memory per un accesso rapido
+ */
 export class MemStorage implements IStorage {
+  // Mappe per memorizzare le diverse entità del gioco
   protected users: Map<number, User>;
   protected characters: Map<number, Character>;
   protected items: Map<number, Item>;
@@ -86,6 +99,7 @@ export class MemStorage implements IStorage {
   protected activities: Map<number, Activity>;
   protected gameStates: Map<number, GameState>;
   
+  // Contatori per gli ID auto-incrementali
   protected userId: number;
   protected characterId: number;
   protected itemId: number;
@@ -96,7 +110,11 @@ export class MemStorage implements IStorage {
   protected activityId: number;
   protected gameStateId: number;
 
+  /**
+   * Costruttore che inizializza tutte le mappe di dati e i contatori ID
+   */
   constructor() {
+    // Inizializza le mappe per memorizzare le entità
     this.users = new Map();
     this.characters = new Map();
     this.items = new Map();
@@ -107,6 +125,7 @@ export class MemStorage implements IStorage {
     this.activities = new Map();
     this.gameStates = new Map();
     
+    // Inizializza i contatori degli ID auto-incrementali
     this.userId = 1;
     this.characterId = 1;
     this.itemId = 1;
@@ -117,11 +136,13 @@ export class MemStorage implements IStorage {
     this.activityId = 1;
     this.gameStateId = 1;
     
-    // Initialize default data
+    // Inizializza i dati predefiniti
     this.initializeDefaultData();
   }
 
-  // User methods
+  /**
+   * Metodi per la gestione degli utenti
+   */
   async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
   }
@@ -139,7 +160,9 @@ export class MemStorage implements IStorage {
     return user;
   }
 
-  // Character methods
+  /**
+   * Metodi per la gestione dei personaggi
+   */
   async getCharacter(id: number): Promise<Character | undefined> {
     return this.characters.get(id);
   }
@@ -163,6 +186,26 @@ export class MemStorage implements IStorage {
       avatarId: insertCharacter.avatarId ?? 1
     };
     this.characters.set(id, character);
+    
+    // Aggiunge automaticamente alcuni oggetti di base all'inventario del personaggio
+    if (character.id) {
+      // Aggiunge un cappellino come oggetto iniziale
+      await this.addItemToCharacter({
+        characterId: character.id,
+        itemId: 3, // Cappellino con Visiera
+        acquired: true,
+        acquiredDay: 1
+      });
+      
+      // Aggiunge energy drink iniziale
+      await this.addItemToCharacter({
+        characterId: character.id,
+        itemId: 6, // Energy Drink
+        acquired: true,
+        acquiredDay: 1
+      });
+    }
+    
     return character;
   }
 
@@ -177,7 +220,9 @@ export class MemStorage implements IStorage {
     return updatedCharacter;
   }
 
-  // Item methods
+  /**
+   * Metodi per la gestione degli oggetti
+   */
   async getItems(): Promise<Item[]> {
     return Array.from(this.items.values());
   }
@@ -198,9 +243,11 @@ export class MemStorage implements IStorage {
   }
 
   async getCharacterItems(characterId: number): Promise<Item[]> {
+    // Trova tutti gli elementi di characterItems che appartengono al personaggio
     const characterItemsArray = Array.from(this.characterItems.values())
       .filter(ci => ci.characterId === characterId && ci.acquired);
     
+    // Ottiene i dettagli completi degli oggetti
     const items: Item[] = [];
     for (const ci of characterItemsArray) {
       const item = await this.getItem(ci.itemId);
@@ -224,7 +271,9 @@ export class MemStorage implements IStorage {
     return characterItem;
   }
 
-  // Skill methods
+  /**
+   * Metodi per la gestione delle abilità
+   */
   async getSkills(): Promise<Skill[]> {
     return Array.from(this.skills.values());
   }
@@ -241,9 +290,11 @@ export class MemStorage implements IStorage {
   }
 
   async getCharacterSkills(characterId: number): Promise<(Skill & { level: number, progress: number, maxLevel: number })[]> {
+    // Trova tutte le abilità del personaggio
     const characterSkillsArray = Array.from(this.characterSkills.values())
       .filter(cs => cs.characterId === characterId);
     
+    // Arricchisce i dati delle abilità con informazioni sul progresso
     const enrichedSkills: (Skill & { level: number, progress: number, maxLevel: number })[] = [];
     
     for (const cs of characterSkillsArray) {
@@ -287,7 +338,9 @@ export class MemStorage implements IStorage {
     return characterSkill;
   }
 
-  // Contact methods
+  /**
+   * Metodi per la gestione dei contatti
+   */
   async getContacts(characterId: number): Promise<Contact[]> {
     return Array.from(this.contacts.values())
       .filter(contact => contact.characterId === characterId);
@@ -300,7 +353,9 @@ export class MemStorage implements IStorage {
     return contact;
   }
 
-  // Activity methods
+  /**
+   * Metodi per la gestione delle attività
+   */
   async getActivities(): Promise<Activity[]> {
     return Array.from(this.activities.values());
   }
@@ -322,11 +377,14 @@ export class MemStorage implements IStorage {
   }
 
   async getAvailableActivities(day: number): Promise<Activity[]> {
+    // Restituisce solo le attività disponibili in base al giorno corrente
     return Array.from(this.activities.values())
       .filter(activity => !activity.unlockDay || activity.unlockDay <= day);
   }
 
-  // Game state methods
+  /**
+   * Metodi per la gestione dello stato del gioco
+   */
   async getGameState(userId: number): Promise<GameState | undefined> {
     return Array.from(this.gameStates.values())
       .find(gs => gs.userId === userId);
@@ -358,49 +416,54 @@ export class MemStorage implements IStorage {
     return updatedGameState;
   }
 
+  /**
+   * Reimposta completamente lo stato del gioco
+   * - Elimina tutti i dati relativi al personaggio corrente
+   * - Ricrea i dati predefiniti (abilità, oggetti, attività)
+   */
   async resetGameState(userId: number): Promise<void> {
     const gameState = await this.getGameState(userId);
     if (gameState) {
-      // 1. Delete all character-related data
+      // 1. Elimina tutti i dati relativi al personaggio
       if (gameState.characterId) {
-        // Delete character skills
+        // Elimina le abilità del personaggio
         for (const [id, characterSkill] of this.characterSkills.entries()) {
           if (characterSkill.characterId === gameState.characterId) {
             this.characterSkills.delete(id);
           }
         }
         
-        // Delete character items
+        // Elimina gli oggetti del personaggio
         for (const [id, characterItem] of this.characterItems.entries()) {
           if (characterItem.characterId === gameState.characterId) {
             this.characterItems.delete(id);
           }
         }
         
-        // Delete contacts
+        // Elimina i contatti
         for (const [id, contact] of this.contacts.entries()) {
           if (contact.characterId === gameState.characterId) {
             this.contacts.delete(id);
           }
         }
         
-        // Delete character
+        // Elimina il personaggio
         this.characters.delete(gameState.characterId);
       }
 
-      // 2. Clear collections fully
+      // 2. Pulisce completamente le collezioni
       this.items.clear();
       this.skills.clear();  
       this.activities.clear();
       
-      // 3. Clean up game states for this user (except current one)
+      // 3. Pulisce gli stati di gioco per questo utente (tranne quello corrente)
       for (const [id, state] of this.gameStates.entries()) {
         if (state.userId === userId && id !== gameState.id) {
           this.gameStates.delete(id);
         }
       }
       
-      // 4. Reset ID counters but maintain current gameState ID
+      // 4. Reimposta i contatori ID mantenendo l'ID dello stato del gioco corrente
       this.characterId = 1;
       this.itemId = 1;
       this.characterItemId = 1;
@@ -409,7 +472,7 @@ export class MemStorage implements IStorage {
       this.contactId = 1;
       this.activityId = 1;
       
-      // 5. Reset game state to initial values
+      // 5. Reimposta lo stato del gioco ai valori iniziali
       this.gameStates.set(gameState.id, {
         ...gameState,
         characterId: null,
@@ -419,24 +482,27 @@ export class MemStorage implements IStorage {
         hoursLeft: 16
       });
 
-      // 6. Reinitialize default data (skills, items, activities)
+      // 6. Reinizializza i dati predefiniti (abilità, oggetti, attività)
       await this.initializeDefaultData();
     }
   }
 
-  // Initialize default data
+  /**
+   * Inizializza i dati predefiniti del gioco (abilità, oggetti, attività)
+   * Viene chiamato al primo avvio o dopo un reset del gioco
+   */
   async initializeDefaultData(): Promise<void> {
-    // Get existing data
+    // Ottiene i dati esistenti
     const skills = await this.getSkills();
     const activities = await this.getActivities();
     const items = await this.getItems();
     
-    // If all data exists, skip initialization
-    if (skills.length > 0 && activities.length > 0 && items.length > 0) {
-      return;
-    }
-
-    // Create default user only if no users exist
+    // Verifica più rigorosa dei dati esistenti, usando una combinazione di lunghezza e verifica della presenza di elementi specifici
+    const hasSkills = skills.length > 0 && skills.some(s => s.name === "Stile nel Vestire");
+    const hasActivities = activities.length > 0 && activities.some(a => a.title === "Giro in Piazza");
+    const hasItems = items.length > 0 && items.some(i => i.name === "Felpa Firmata");
+    
+    // Crea l'utente predefinito solo se non esistono utenti
     const existingUsers = Array.from(this.users.values());
     if (existingUsers.length === 0) {
       const user = await this.createUser({
@@ -453,8 +519,16 @@ export class MemStorage implements IStorage {
       });
     }
 
-    // Create default skills if none exist
-    if (skills.length === 0) {
+    // Crea le abilità predefinite se non esistono
+    if (!hasSkills) {
+      // Prima elimina eventuali abilità esistenti per evitare duplicati
+      for (const [id, _] of this.skills.entries()) {
+        this.skills.delete(id);
+      }
+      // Azzera il contatore degli ID
+      this.skillId = 1;
+      
+      // Crea le abilità di base
       await this.createSkill({
         name: "Stile nel Vestire",
         description: "Capacità di abbinare capi firmati e creare outfit da vero maranza"
@@ -481,8 +555,16 @@ export class MemStorage implements IStorage {
       });
     }
 
-    // Create default items if none exist
-    if (items.length === 0) {
+    // Crea gli oggetti predefiniti se non esistono
+    if (!hasItems) {
+      // Prima elimina eventuali oggetti esistenti per evitare duplicati
+      for (const [id, _] of this.items.entries()) {
+        this.items.delete(id);
+      }
+      // Azzera il contatore degli ID
+      this.itemId = 1;
+      
+      // Crea gli oggetti di base
       await this.createItem({
         name: "Felpa Firmata",
         description: "Una felpa di marca perfetta per il tuo stile maranza",
@@ -540,8 +622,15 @@ export class MemStorage implements IStorage {
       });
     }
 
-    // Create default activities if none exist
-    if (activities.length === 0) {
+    // Crea le attività predefinite se non esistono
+    if (!hasActivities) {
+      // Prima elimina eventuali attività esistenti per evitare duplicati
+      for (const [id, _] of this.activities.entries()) {
+        this.activities.delete(id);
+      }
+      // Azzera il contatore degli ID
+      this.activityId = 1;
+      
       await this.createActivity({
         title: "Giro in Piazza",
         description: "Fai un giro nella piazza principale per mostrare il tuo stile e incontrare altri maranza.",
@@ -725,6 +814,10 @@ export class MemStorage implements IStorage {
   }
 }
 
+/**
+ * Estensione dello storage in memoria che salva i dati su file
+ * Garantisce la persistenza dei dati tra i riavvii dell'applicazione
+ */
 export class FileStorage extends MemStorage {
   private dataPath: string;
 
@@ -732,14 +825,23 @@ export class FileStorage extends MemStorage {
     super();
     this.dataPath = path.resolve(__dirname, '..', 'data', 'storage.json');
     
+    // Assicura che la directory dei dati esista
     const dataDir = path.dirname(this.dataPath);
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
+    
+    // Carica i dati dal file all'avvio
     this.loadFromFile();
+    
+    // Avvolge i metodi con la funzionalità di salvataggio automatico
     this.wrapMethodsWithSave();
   }
 
+  /**
+   * Avvolge i metodi originali con una funzione che salva automaticamente 
+   * i dati dopo ogni operazione di modifica
+   */
   private wrapMethodsWithSave() {
     const methodsToWrap = [
       'createUser',
@@ -767,11 +869,15 @@ export class FileStorage extends MemStorage {
     });
   }
 
+  /**
+   * Carica i dati dal file di storage
+   */
   private loadFromFile() {
     try {
       if (fs.existsSync(this.dataPath)) {
         const savedData = JSON.parse(fs.readFileSync(this.dataPath, 'utf-8'));
         if (savedData) {
+          // Ripristina tutte le mappe di dati
           this.users = new Map(savedData.users);
           this.characters = new Map(savedData.characters);
           this.items = new Map(savedData.items);
@@ -782,6 +888,7 @@ export class FileStorage extends MemStorage {
           this.activities = new Map(savedData.activities);
           this.gameStates = new Map(savedData.gameStates);
           
+          // Ripristina i contatori degli ID
           this.userId = savedData.userId;
           this.characterId = savedData.characterId;
           this.itemId = savedData.itemId;
@@ -795,16 +902,20 @@ export class FileStorage extends MemStorage {
       }
     } catch (error) {
       console.error('Error loading saved data:', error);
-      // If there's an error loading the file, we'll keep using the default initialized data
+      // In caso di errore nel caricamento del file, continueremo a usare i dati predefiniti inizializzati
     }
   }
 
+  /**
+   * Salva i dati nel file di storage
+   */
   private saveToFile() {
     try {
       if (!this.dataPath) {
         throw new Error('Data path is not initialized');
       }
 
+      // Prepara i dati da salvare
       const data = {
         users: Array.from(this.users.entries()),
         characters: Array.from(this.characters.entries()),
@@ -826,12 +937,13 @@ export class FileStorage extends MemStorage {
         gameStateId: this.gameStateId
       };
       
-      // Ensure the directory exists before writing
+      // Assicura che la directory esista prima di scrivere
       const dataDir = path.dirname(this.dataPath);
       if (!fs.existsSync(dataDir)) {
         fs.mkdirSync(dataDir, { recursive: true });
       }
 
+      // Scrive i dati formattati nel file
       fs.writeFileSync(this.dataPath, JSON.stringify(data, null, 2));
     } catch (error) {
       console.error('Error saving data:', error);
@@ -839,5 +951,5 @@ export class FileStorage extends MemStorage {
   }
 }
 
-// Export an instance of FileStorage instead of LocalStorage
+// Esporta un'istanza di FileStorage per l'utilizzo nell'applicazione
 export const storage = new FileStorage();
