@@ -82,7 +82,15 @@ const Game = () => {
     <div className="h-screen overflow-hidden bg-game-background bg-fixed bg-cover bg-center flex flex-col">
       <header className="bg-primary/90 backdrop-blur-sm text-white shadow-lg">
         <div className="container mx-auto px-3 py-2 flex justify-between items-center">
-          <img src={logoImage} alt="Maranza Simulator Logo" className="h-8" />
+          <div className="flex items-center gap-2">
+            <img src={logoImage} alt="Maranza Simulator Logo" className="h-8" />
+            {game.character && (
+              <div className="flex items-center bg-amber-400/20 text-amber-300 text-xs font-medium px-2 py-1 rounded-lg ml-2">
+                <span className="mr-1">💰</span>
+                €{game.character.money}
+              </div>
+            )}
+          </div>
           <div className="flex items-center gap-2">
             <div className="clock-container flex items-center drop-shadow-md">
               <span className="font-bold bg-gradient-to-r from-primary/40 to-primary/50 backdrop-blur-sm px-1.5 sm:px-2 py-1 rounded-l-lg border-l-2 border-y-2 border-secondary/80 flex items-center text-xs sm:text-sm">

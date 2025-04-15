@@ -33,12 +33,12 @@ export default function CharacterSection() {
     ? profilePics[character.avatarId - 1] 
     : ProfilePic1;
 
+  // Definizione delle statistiche esclusi i soldi (mostrati nell'header)
   const statItems = [
-    { label: "Soldi", value: `€${character.money}`, percentage: character.money / 1000 * 100, color: "bg-amber-400", icon: "💰" },
-    { label: "Reputazione", value: `${character.reputation}/100`, percentage: character.reputation, color: "bg-primary", icon: "⭐" },
-    { label: "Stile", value: `${character.style}/100`, percentage: character.style, color: "bg-secondary", icon: "👔" },
-    { label: "Energia", value: `${character.energy}/100`, percentage: character.energy, color: "bg-green-500", icon: "⚡" },
-    { label: "Rispetto", value: `${character.respect}/100`, percentage: character.respect, color: "bg-red-500", icon: "💪" }
+    { label: "Rep", value: character.reputation, percentage: character.reputation, color: "bg-primary", icon: "⭐" },
+    { label: "Stile", value: character.style, percentage: character.style, color: "bg-secondary", icon: "👔" },
+    { label: "Energia", value: character.energy, percentage: character.energy, color: "bg-green-500", icon: "⚡" },
+    { label: "Rispetto", value: character.respect, percentage: character.respect, color: "bg-red-500", icon: "💪" }
   ];
 
   return (
@@ -53,10 +53,34 @@ export default function CharacterSection() {
           </div>
           <div>
             <h2 className="font-bold text-base leading-tight">{character.name}</h2>
-            <p className="text-sm text-gray-500 leading-tight">{character.personality}</p>
+            <p className="text-xs text-gray-500 leading-tight">{character.personality}</p>
           </div>
         </div>
-        <ChevronUp className={`w-5 h-5 text-gray-500 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        
+        <div className="flex-grow mx-6">
+          <div className="stats-container grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-1 px-1">
+            {statItems.map((stat) => (
+              <div key={stat.label} className="stat-item">
+                <div className="relative h-2.5 bg-gray-200 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full ${stat.color}`} 
+                    style={{ width: `${stat.percentage}%` }}
+                  ></div>
+                  <div className="absolute top-0 left-0 w-full h-full flex items-center">
+                    <span className="text-[9px] ml-1.5 text-white drop-shadow-sm font-medium flex items-center">
+                      {stat.icon} {stat.label}
+                    </span>
+                    <span className="absolute right-0 text-[9px] mr-1.5 text-white drop-shadow-sm font-medium">
+                      {stat.value}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <ChevronUp className={`ml-1 w-5 h-5 text-gray-500 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </div>
 
       <div 
@@ -68,18 +92,6 @@ export default function CharacterSection() {
         }}
       >
         <div className="p-4 sm:p-6">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-4">
-            {statItems.map((stat) => (
-              <div key={stat.label} className="bg-gray-50 rounded-lg p-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <span>{stat.icon}</span>
-                  <span className="text-sm font-medium">{stat.label}</span>
-                </div>
-                <Progress value={stat.percentage} className={`h-2 ${stat.color}`} />
-                <span className="text-xs text-gray-600 mt-2 block">{stat.value}</span>
-              </div>
-            ))}
-          </div>
           {/* Tabs per Inventory, Social, Skills */}
           <div className="w-full">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">

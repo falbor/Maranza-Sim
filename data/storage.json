@@ -57,9 +57,9 @@
         "look": "casual",
         "personality": "carismatico",
         "avatarId": 2,
-        "money": 0,
-        "reputation": 80,
-        "energy": 40,
+        "money": 60,
+        "reputation": 85,
+        "energy": 75,
         "respect": 30,
         "style": 100,
         "userId": 1,
@@ -246,6 +246,246 @@
         "description": "Capacità di farsi nuovi amici e influenzare gli altri",
         "id": 10
       }
+    ],
+    [
+      11,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 11
+      }
+    ],
+    [
+      12,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 12
+      }
+    ],
+    [
+      13,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 13
+      }
+    ],
+    [
+      14,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 14
+      }
+    ],
+    [
+      15,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 15
+      }
+    ],
+    [
+      16,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 16
+      }
+    ],
+    [
+      17,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 17
+      }
+    ],
+    [
+      18,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 18
+      }
+    ],
+    [
+      19,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 19
+      }
+    ],
+    [
+      20,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 20
+      }
+    ],
+    [
+      21,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 21
+      }
+    ],
+    [
+      22,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 22
+      }
+    ],
+    [
+      23,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 23
+      }
+    ],
+    [
+      24,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 24
+      }
+    ],
+    [
+      25,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 25
+      }
+    ],
+    [
+      26,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 26
+      }
+    ],
+    [
+      27,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 27
+      }
+    ],
+    [
+      28,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 28
+      }
+    ],
+    [
+      29,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 29
+      }
+    ],
+    [
+      30,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 30
+      }
+    ],
+    [
+      31,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 31
+      }
+    ],
+    [
+      32,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 32
+      }
+    ],
+    [
+      33,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 33
+      }
+    ],
+    [
+      34,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 34
+      }
+    ],
+    [
+      35,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 35
+      }
+    ],
+    [
+      36,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 36
+      }
+    ],
+    [
+      37,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 37
+      }
+    ],
+    [
+      38,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 38
+      }
+    ],
+    [
+      39,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 39
+      }
+    ],
+    [
+      40,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 40
+      }
     ]
   ],
   "characterSkills": [
@@ -255,7 +495,7 @@
         "characterId": 1,
         "skillId": 1,
         "level": 3,
-        "progress": 55,
+        "progress": 73,
         "maxLevel": 100,
         "id": 1
       }
@@ -266,7 +506,7 @@
         "characterId": 1,
         "skillId": 2,
         "level": 3,
-        "progress": 26,
+        "progress": 35,
         "maxLevel": 100,
         "id": 2
       }
@@ -305,7 +545,47 @@
       }
     ]
   ],
-  "contacts": [],
+  "contacts": [
+    [
+      1,
+      {
+        "characterId": 1,
+        "name": "Sara Bomber",
+        "type": "Amico d'infanzia",
+        "respect": "alto",
+        "meetDay": 1,
+        "avatarInitials": "SB",
+        "avatarColor": "info",
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "characterId": 1,
+        "name": "Matteo Diva",
+        "type": "Amico d'infanzia",
+        "respect": "alto",
+        "meetDay": 1,
+        "avatarInitials": "MD",
+        "avatarColor": "primary",
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "characterId": 1,
+        "name": "Matteo Diva",
+        "type": "Compagno di palestra",
+        "respect": "medio",
+        "meetDay": 2,
+        "avatarInitials": "MD",
+        "avatarColor": "amber-400",
+        "id": 3
+      }
+    ]
+  ],
   "activities": [
     [
       1,
@@ -541,10 +821,10 @@
       1,
       {
         "userId": 1,
-        "day": 1,
-        "time": "17:00",
+        "day": 2,
+        "time": "06:00",
         "gameStarted": true,
-        "hoursLeft": 7,
+        "hoursLeft": 18,
         "id": 1,
         "characterId": 1
       }
@@ -638,9 +918,9 @@
   "characterId": 2,
   "itemId": 7,
   "characterItemId": 1,
-  "skillId": 11,
+  "skillId": 41,
   "characterSkillId": 6,
-  "contactId": 1,
+  "contactId": 4,
   "activityId": 11,
   "gameStateId": 1
 }
