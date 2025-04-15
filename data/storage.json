@@ -406,6 +406,126 @@
         "description": "Capacità di farsi nuovi amici e influenzare gli altri",
         "id": 30
       }
+    ],
+    [
+      31,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 31
+      }
+    ],
+    [
+      32,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 32
+      }
+    ],
+    [
+      33,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 33
+      }
+    ],
+    [
+      34,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 34
+      }
+    ],
+    [
+      35,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 35
+      }
+    ],
+    [
+      36,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 36
+      }
+    ],
+    [
+      37,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 37
+      }
+    ],
+    [
+      38,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 38
+      }
+    ],
+    [
+      39,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 39
+      }
+    ],
+    [
+      40,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 40
+      }
+    ],
+    [
+      41,
+      {
+        "name": "Stile nel Vestire",
+        "description": "Capacità di abbinare capi firmati e creare outfit da vero maranza",
+        "id": 41
+      }
+    ],
+    [
+      42,
+      {
+        "name": "Parlata Slang",
+        "description": "Abilità nel parlare usando il gergo maranza e abbreviazioni",
+        "id": 42
+      }
+    ],
+    [
+      43,
+      {
+        "name": "Contrattazione",
+        "description": "Capacità di ottenere sconti e affari vantaggiosi",
+        "id": 43
+      }
+    ],
+    [
+      44,
+      {
+        "name": "Ballo",
+        "description": "Abilità nelle mosse di danza tipiche del maranza",
+        "id": 44
+      }
+    ],
+    [
+      45,
+      {
+        "name": "Carisma Sociale",
+        "description": "Capacità di farsi nuovi amici e influenzare gli altri",
+        "id": 45
+      }
     ]
   ],
   "characterSkills": [
@@ -851,7 +971,7 @@
   "characterId": 2,
   "itemId": 7,
   "characterItemId": 1,
-  "skillId": 31,
+  "skillId": 46,
   "characterSkillId": 6,
   "contactId": 5,
   "activityId": 11,

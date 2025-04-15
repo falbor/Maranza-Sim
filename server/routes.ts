@@ -122,7 +122,7 @@ function generateResultText(activityTitle: string): string {
       "Hai socializzato con i compagni di classe durante le pause. Non tutto è perduto!"
     ]
   };
-
+  
   // Get random result for the activity or use a default
   const results = possibleResults[activityTitle] || ["Hai completato l'attività con successo!"];
   return results[Math.floor(Math.random() * results.length)];

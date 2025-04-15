@@ -111,13 +111,6 @@ export function GameProvider({ children }: { children: ReactNode }) {
     mutationFn: async (activityId: number) => {
       return await apiRequest("POST", `/api/game/activity/${activityId}`, {});
     },
-    onSuccess: async (response) => {
-      const result = await response.json() as ActivityResult;
-      setActivityResult(result);
-      setShowActivityModal(false);
-      setShowResultModal(true);
-      refetch();
-    },
     onError: (error: any) => {
       // Verifica i messaggi di errore specifici provenienti dal server
       let errorMessage = "Impossibile completare l'attività. Riprova.";
@@ -127,13 +120,31 @@ export function GameProvider({ children }: { children: ReactNode }) {
         // Estrai il messaggio pulito rimuovendo il codice di stato e formattandolo correttamente
         let cleanMessage = "";
         
-        // Verifica se il messaggio è nel formato "codice: messaggio"
+        // Verifica se il messaggio è nel formato "codice: messaggio" o contiene JSON
         if (error.message.includes(": ")) {
           // Prendi solo la parte dopo i due punti e spazio
           cleanMessage = error.message.split(": ").slice(1).join(": ").trim();
         } else {
           cleanMessage = error.message;
         }
+
+        // Prova a estrarre il messaggio da un possibile formato JSON
+        try {
+          // Verifica se il messaggio è in formato JSON
+          const jsonMatch = cleanMessage.match(/{.*}/);
+          if (jsonMatch) {
+            const jsonObj = JSON.parse(jsonMatch[0]);
+            if (jsonObj.message) {
+              cleanMessage = jsonObj.message;
+            }
+          }
+        } catch (e) {
+          // Non è un JSON valido, continuiamo con il messaggio estratto
+        }
+        
+        // Rimuovi numeri di status o prefissi tecnici
+        cleanMessage = cleanMessage.replace(/^\d+\s*:\s*/, '');
+        cleanMessage = cleanMessage.replace(/^Error:\s*/i, '');
         
         // Controllo dei messaggi relativi ai soldi
         if (cleanMessage.includes("soldi") || cleanMessage.includes("money") || cleanMessage.includes("cash")) {
@@ -174,6 +185,13 @@ export function GameProvider({ children }: { children: ReactNode }) {
       });
       
       console.error("Failed to complete activity:", error);
+    },
+    onSuccess: async (response) => {
+      const result = await response.json() as ActivityResult;
+      setActivityResult(result);
+      setShowActivityModal(false);
+      setShowResultModal(true);
+      refetch();
     }
   });
 

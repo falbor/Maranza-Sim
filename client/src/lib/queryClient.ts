@@ -4,32 +4,50 @@ import { toast } from "@/hooks/use-toast";
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = await res.text();
+    // Rimuovi qualsiasi formato di errore grezzo dal testo
+    let cleanedText = text;
+    
+    // Rimuovi eventuali formati JSON non necessari
+    try {
+      const jsonObj = JSON.parse(text);
+      if (jsonObj.message) {
+        cleanedText = jsonObj.message;
+      }
+    } catch (e) {
+      // Non è JSON, usiamo il testo originale
+    }
+    
+    // Rimuovi numeri di status o prefissi tecnici
+    cleanedText = cleanedText.replace(/^\d+\s*:\s*/, '');
+    cleanedText = cleanedText.replace(/^Error:\s*/i, '');
+    
+    // Formatta il messaggio originale per gli sviluppatori
     const errorMessage = `${res.status}: ${text}`;
     
     // Gestione più dettagliata dei messaggi di errore relativi ai soldi
     if (res.status === 400) {
       // Shopping e attività che richiedono soldi
-      if (text.includes("shopping") || text.includes("Shopping")) {
+      if (cleanedText.includes("shopping") || cleanedText.includes("Shopping")) {
         toast({
           variant: "destructive",
           title: "Soldi insufficienti per lo shopping",
-          description: text,
+          description: cleanedText,
         });
       }
       // Discoteca
-      else if (text.includes("discoteca") || text.includes("Discoteca")) {
+      else if (cleanedText.includes("discoteca") || cleanedText.includes("Discoteca")) {
         toast({
           variant: "destructive",
           title: "Soldi insufficienti per la discoteca",
-          description: text,
+          description: cleanedText,
         });
       }
       // Altri messaggi relativi ai soldi
-      else if (text.includes("soldi") || text.includes("money") || text.includes("cash")) {
+      else if (cleanedText.includes("soldi") || cleanedText.includes("money") || cleanedText.includes("cash")) {
         toast({
           variant: "destructive",
           title: "Soldi insufficienti",
-          description: text,
+          description: cleanedText,
         });
       }
       // Altri errori 400
@@ -37,7 +55,7 @@ async function throwIfResNotOk(res: Response) {
         toast({
           variant: "destructive",
           title: "Errore",
-          description: text,
+          description: cleanedText,
         });
       }
     } else {
@@ -45,7 +63,7 @@ async function throwIfResNotOk(res: Response) {
       toast({
         variant: "destructive",
         title: "Errore",
-        description: errorMessage,
+        description: cleanedText,
       });
     }
     
