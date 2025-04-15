@@ -9,7 +9,24 @@
       }
     ]
   ],
-  "characters": [],
+  "characters": [
+    [
+      1,
+      {
+        "name": "Ali",
+        "look": "sportivo",
+        "personality": "ribelle",
+        "avatarId": 3,
+        "money": 250,
+        "reputation": 50,
+        "energy": 100,
+        "respect": 30,
+        "style": 60,
+        "userId": 1,
+        "id": 1
+      }
+    ]
+  ],
   "items": [
     [
       1,
@@ -108,7 +125,28 @@
       }
     ]
   ],
-  "characterItems": [],
+  "characterItems": [
+    [
+      1,
+      {
+        "characterId": 1,
+        "itemId": 3,
+        "acquired": true,
+        "acquiredDay": 1,
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "characterId": 1,
+        "itemId": 6,
+        "acquired": true,
+        "acquiredDay": 1,
+        "id": 2
+      }
+    ]
+  ],
   "skills": [
     [
       1,
@@ -151,7 +189,63 @@
       }
     ]
   ],
-  "characterSkills": [],
+  "characterSkills": [
+    [
+      1,
+      {
+        "characterId": 1,
+        "skillId": 1,
+        "level": 3,
+        "progress": 26,
+        "maxLevel": 100,
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "characterId": 1,
+        "skillId": 2,
+        "level": 1,
+        "progress": 46,
+        "maxLevel": 100,
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "characterId": 1,
+        "skillId": 3,
+        "level": 1,
+        "progress": 26,
+        "maxLevel": 100,
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "characterId": 1,
+        "skillId": 4,
+        "level": 3,
+        "progress": 14,
+        "maxLevel": 100,
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "characterId": 1,
+        "skillId": 5,
+        "level": 2,
+        "progress": 34,
+        "maxLevel": 100,
+        "id": 5
+      }
+    ]
+  ],
   "contacts": [],
   "activities": [
     [
@@ -390,19 +484,19 @@
         "userId": 1,
         "day": 1,
         "time": "08:00",
-        "gameStarted": false,
+        "gameStarted": true,
         "hoursLeft": 16,
         "id": 1,
-        "characterId": null
+        "characterId": 1
       }
     ]
   ],
   "userId": 1,
-  "characterId": 1,
+  "characterId": 2,
   "itemId": 7,
-  "characterItemId": 1,
+  "characterItemId": 3,
   "skillId": 6,
-  "characterSkillId": 1,
+  "characterSkillId": 6,
   "contactId": 1,
   "activityId": 11,
   "gameStateId": 1

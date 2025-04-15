@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useGame } from "@/lib/gameContext";
 import { Button } from "@/components/ui/button";
 import CharacterCreationModal from "@/components/CharacterCreationModal";
+import { logo1, parkbg1 } from "@/assets";
 
 const Home = () => {
   const { game, isLoadingGame, setShowCharacterCreation, resetGame } = useGame();
@@ -27,13 +28,26 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-black text-white flex flex-col">
-      <header className="container mx-auto px-4 py-6">
+    <div className="min-h-screen text-white flex flex-col relative">
+      {/* Background image */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <img 
+          src={parkbg1} 
+          alt="Park Background" 
+          className="w-full h-full object-cover opacity-70" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/70 to-black/80"></div>
+      </div>
+
+      <header className="container mx-auto px-4 py-6 relative z-10">
+        <div className="flex justify-center mb-4">
+          <img src={logo1} alt="Maranza Simulator Logo" className="max-h-28" />
+        </div>
         <h1 className="text-4xl md:text-6xl font-bold text-center mb-2">Maranza Simulator</h1>
         <p className="text-center text-lg opacity-90">La vita di un vero maranza</p>
       </header>
 
-      <main className="flex-grow flex items-center justify-center p-4">
+      <main className="flex-grow flex items-center justify-center p-4 relative z-10">
         <div className="max-w-lg w-full bg-black/70 text-white rounded-xl shadow-2xl p-4 sm:p-8 backdrop-blur-lg border border-primary/20">
           <h2 className="text-2xl font-bold text-primary mb-4 text-center">Benvenuto nel Simulatore</h2>
           
@@ -85,8 +99,7 @@ const Home = () => {
         </div>
       </main>
       
-      <footer className="container mx-auto px-4 py-6 text-center text-white/70 text-sm">
-        <p>Un simulatore di vita ispirato a Tabboz Simulator</p>
+      <footer>
       </footer>
       
       <CharacterCreationModal />

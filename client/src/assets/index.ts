@@ -1,9 +1,10 @@
 // Icons
-
+export { default as logo1 } from './icons/logo.png'
 // Backgrounds
 export { default as stylebg } from './backgrounds/maranza.png';
-export { default as parkbg } from './backgrounds/background_park_1.png';
-export { default as citybg } from './backgrounds/background_park_1.png';
+export { default as parkbg1 } from './backgrounds/background_park_1.png';
+export { default as parkbg2 } from './backgrounds/background_park_2.png';
+export { default as school1 } from './backgrounds/background_school_1.png';
 
 // Images
 export { default as ProfilePic1 } from './images/icon_0_0.png';

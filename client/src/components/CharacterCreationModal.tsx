@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useGame } from "@/lib/gameContext";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Shuffle } from "lucide-react";
 import { ProfilePic1, ProfilePic2, ProfilePic3, ProfilePic4, ProfilePic5 } from "@/assets";
 
 const avatarList = [ProfilePic1, ProfilePic2, ProfilePic3, ProfilePic4, ProfilePic5];
@@ -78,22 +77,22 @@ const CharacterCreationModal = () => {
   };
 
   return (
-    <Dialog open={showCharacterCreation} onOpenChange={setShowCharacterCreation}>
-      <DialogContent className="w-[90vw] max-w-xl mx-auto bg-black/80 border-primary/20 text-white">
-        <DialogHeader>
-          <DialogTitle className="text-xl md:text-2xl text-primary font-bold">
+    <div className={`fixed inset-0 z-50 bg-black/95 ${showCharacterCreation ? 'flex' : 'hidden'} items-center justify-center`}>
+      <div className="w-full h-full flex flex-col p-6 md:p-10">
+        <div className="text-center mb-6 md:mb-10">
+          <h2 className="text-3xl md:text-4xl text-primary font-bold">
             Crea il Tuo Maranza
-          </DialogTitle>
-          <p className="text-sm md:text-base text-gray-300">
+          </h2>
+          <p className="text-base md:text-lg text-gray-300 mt-2">
             Personalizza il tuo personaggio
           </p>
-        </DialogHeader>
+        </div>
         
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            <div>
-              <div className="mb-4">
-                <Label className="text-white text-sm font-bold mb-2" htmlFor="name">
+        <div className="flex-grow flex flex-col justify-center max-w-5xl mx-auto w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <div className="space-y-8">
+              <div>
+                <Label className="text-white text-lg font-bold block mb-3" htmlFor="name">
                   Nome
                 </Label>
                 <Input 
@@ -102,32 +101,32 @@ const CharacterCreationModal = () => {
                   placeholder="Inserisci un nome" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="border border-primary/20 bg-black/40 text-white"
+                  className="border border-primary/40 bg-black/60 text-white text-xl py-7 px-4 rounded-lg w-full"
                 />
               </div>
               
-              <div className="mb-4">
-                <Label className="block text-white text-sm font-bold mb-2">
+              <div>
+                <Label className="block text-white text-lg font-bold mb-3">
                   Stile
                 </Label>
-                <div className="flex space-x-2">
+                <div className="grid grid-cols-3 gap-3">
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${style === "casual" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
+                    className={`py-4 rounded-lg text-lg ${style === "casual" ? "bg-primary text-white" : "bg-black/70 text-white border border-white/30 hover:bg-white/10"}`}
                     onClick={() => setStyle("casual")}
                   >
                     Casual
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${style === "sportivo" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
+                    className={`py-4 rounded-lg text-lg ${style === "sportivo" ? "bg-primary text-white" : "bg-black/70 text-white border border-white/30 hover:bg-white/10"}`}
                     onClick={() => setStyle("sportivo")}
                   >
                     Sportivo
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${style === "firmato" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
+                    className={`py-4 rounded-lg text-lg ${style === "firmato" ? "bg-primary text-white" : "bg-black/70 text-white border border-white/30 hover:bg-white/10"}`}
                     onClick={() => setStyle("firmato")}
                   >
                     Firmato
@@ -135,28 +134,28 @@ const CharacterCreationModal = () => {
                 </div>
               </div>
               
-              <div className="mb-4">
-                <Label className="block text-white text-sm font-bold mb-2">
+              <div>
+                <Label className="block text-white text-lg font-bold mb-3">
                   Personalità
                 </Label>
-                <div className="flex space-x-2">
+                <div className="grid grid-cols-3 gap-3">
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${personality === "audace" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
+                    className={`py-4 rounded-lg text-lg ${personality === "audace" ? "bg-primary text-white" : "bg-black/70 text-white border border-white/30 hover:bg-white/10"}`}
                     onClick={() => setPersonality("audace")}
                   >
                     Audace
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${personality === "ribelle" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
+                    className={`py-4 rounded-lg text-lg ${personality === "ribelle" ? "bg-primary text-white" : "bg-black/70 text-white border border-white/30 hover:bg-white/10"}`}
                     onClick={() => setPersonality("ribelle")}
                   >
                     Ribelle
                   </Button>
                   <Button 
                     type="button"
-                    className={`px-3 py-2 rounded-lg text-sm ${personality === "carismatico" ? "bg-primary text-white" : "bg-black/50 text-white border border-white/20 hover:bg-white/10"}`}
+                    className={`py-4 rounded-lg text-lg ${personality === "carismatico" ? "bg-primary text-white" : "bg-black/70 text-white border border-white/30 hover:bg-white/10"}`}
                     onClick={() => setPersonality("carismatico")}
                   >
                     Carismatico
@@ -166,50 +165,61 @@ const CharacterCreationModal = () => {
             </div>
             
             <div className="flex flex-col items-center justify-center">
-              <div className="relative w-32 h-32 mb-4">
+              <div className="relative w-48 h-48 md:w-64 md:h-64 mb-8">
                 <div className="w-full h-full rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border-4 border-primary">
                   <img src={avatarList[avatarId - 1]} alt="Profile" className="w-full h-full object-cover" />
                 </div>
               </div>
               
-              <div className="flex space-x-2">
+              <div className="flex space-x-6 items-center">
                 <Button 
                   variant="outline"
-                  className="p-2 bg-black/50 text-white border border-white/20 rounded-full hover:bg-white/10"
+                  className="p-4 bg-black/60 text-white border border-white/30 rounded-full hover:bg-white/10"
                   onClick={handlePrevAvatar}
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-8 h-8" />
                 </Button>
+                
                 <Button 
                   variant="outline"
-                  className="p-2 bg-black/50 text-white border border-white/20 rounded-full hover:bg-white/10"
+                  className="p-4 bg-black/60 text-white border border-white/30 rounded-full hover:bg-white/10"
+                  onClick={handleRandomize}
+                  title="Randomizza personaggio"
+                >
+                  <Shuffle className="w-8 h-8" />
+                </Button>
+                
+                <Button 
+                  variant="outline"
+                  className="p-4 bg-black/60 text-white border border-white/30 rounded-full hover:bg-white/10"
                   onClick={handleNextAvatar}
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-8 h-8" />
                 </Button>
               </div>
             </div>
           </div>
         </div>
         
-        <DialogFooter className="flex justify-between mt-6 gap-2 sm:justify-between">
-          <Button
-            variant="outline"
-            onClick={handleRandomize}
-            className="px-4 py-2 bg-black/50 text-white border border-white/20 hover:bg-white/10"
-          >
-            Randomizza
-          </Button>
-          <Button
-            onClick={handleCreateCharacter}
-            className="px-6 py-2 bg-primary hover:bg-primary/90 text-white"
-            disabled={!name || isCreatingCharacter}
-          >
-            {isCreatingCharacter ? "Creazione..." : "Inizia il Gioco"}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        <div className="flex flex-col items-center justify-center mt-10 gap-6 max-w-5xl mx-auto w-full">
+          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+            <Button
+              onClick={() => setShowCharacterCreation(false)}
+              className="px-10 py-5 bg-black/60 text-white border border-white/30 hover:bg-white/10 text-lg rounded-xl w-full sm:max-w-xs"
+            >
+              Annulla
+            </Button>
+            <Button
+              onClick={handleCreateCharacter}
+              className="px-10 py-5 bg-primary hover:bg-primary/90 text-white text-lg rounded-xl w-full sm:max-w-xs"
+              disabled={!name || isCreatingCharacter}
+            >
+              {isCreatingCharacter ? "Creazione..." : "Inizia il Gioco"}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

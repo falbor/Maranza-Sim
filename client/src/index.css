@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -47,6 +49,14 @@
     color: hsl(var(--foreground));
   }
 
+  h1, h2, h3, .title {
+    @apply font-maranza tracking-wide;
+  }
+
+  .dialog-title, .card-title {
+    @apply font-maranza;
+  }
+
   input, button {
     @apply min-h-[44px] sm:min-h-[36px];
   }
@@ -85,5 +95,9 @@
   
   .dark-border {
     @apply border-border;
+  }
+
+  .font-maranza-title {
+    @apply font-maranza uppercase tracking-wider;
   }
 }

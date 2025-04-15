@@ -17,7 +17,8 @@ import { Settings, Sun, Moon, Clock } from "lucide-react";
 
 // Importa immagine del logo
 import logoImage from "@/assets/icons/logo.png";
-import { citybg } from "@/assets";
+// Importa le immagini di sfondo e l'immagine maranza
+import { citybg, stylebg, school1, parkbg1, parkbg2 } from "@/assets";
 
 /**
  * Componente principale della pagina di gioco
@@ -88,7 +89,7 @@ const Game = () => {
     <div 
       className="min-h-screen flex flex-col text-foreground relative" 
       style={{
-        backgroundImage: `url(${citybg})`,
+        backgroundImage: `url(${school1})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
@@ -153,6 +154,16 @@ const Game = () => {
       {/* Contenuto principale */}
       <main className="container z-10 relative flex flex-col flex-grow">
         <div className="flex-grow"></div>
+        
+        {/* Immagine maranza centrata orizzontalmente */}
+        <div className="flex justify-center items-center mb-4" style={{ minHeight: "40vh" }}>
+          <img 
+            src={stylebg} 
+            alt="Maranza" 
+            className="object-contain max-h-[60vh] w-auto"
+            style={{ maxWidth: "200%" }}
+          />
+        </div>
         
         {/* Griglia delle attività - posizionata nella parte inferiore della pagina */}
         <div className="mb-20">

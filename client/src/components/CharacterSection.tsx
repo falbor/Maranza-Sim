@@ -86,7 +86,7 @@ export default function CharacterSection() {
       <div 
         className="overflow-y-auto transition-all duration-300 bg-black/90"
         style={{ 
-          height: isOpen ? 'calc(100vh - 4.5rem)' : '0',
+          height: isOpen ? 'calc(100vh - 4.5rem - 3.5rem)' : '0',
           opacity: isOpen ? 1 : 0,
           visibility: isOpen ? 'visible' : 'hidden'
         }}
@@ -106,7 +106,7 @@ export default function CharacterSection() {
                   {game.inventory.length === 0 ? (
                     <p className="text-gray-400 text-center py-8">Non hai ancora nessun oggetto. Fai shopping!</p>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4">
                       {game.inventory.map((item) => (
                         <div key={item.id} className="flex items-center p-3 border border-white/10 rounded-lg bg-black/30">
                           <div className="w-12 h-12 bg-black/50 rounded-md flex items-center justify-center mr-3">
