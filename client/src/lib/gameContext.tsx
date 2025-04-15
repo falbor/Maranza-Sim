@@ -74,7 +74,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
       toast({
         title: "Errore",
         description: "Impossibile caricare il gioco. Riprova più tardi.",
-        variant: "destructive"
+        variant: "destructive",
+        duration: 3000
       });
       console.error("Failed to load game:", error);
     }
@@ -90,14 +91,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
       setShowCharacterCreation(false);
       toast({
         title: "Personaggio creato!",
-        description: "Il tuo maranza è pronto per iniziare la sua avventura."
+        description: "Il tuo maranza è pronto per iniziare la sua avventura.",
+        duration: 3000
       });
     },
     onError: (error) => {
       toast({
         title: "Errore",
         description: "Impossibile creare il personaggio. Riprova.",
-        variant: "destructive"
+        variant: "destructive",
+        duration: 3000
       });
       console.error("Failed to create character:", error);
     }
@@ -115,12 +118,23 @@ export function GameProvider({ children }: { children: ReactNode }) {
       setShowResultModal(true);
       refetch();
     },
-    onError: (error) => {
-      toast({
-        title: "Errore",
-        description: "Impossibile completare l'attività. Riprova.",
-        variant: "destructive"
-      });
+    onError: (error: any) => {
+      // Check for specific error messages
+      if (error.message && error.message.includes("Not enough hours left in the day")) {
+        toast({
+          title: "Tempo Insufficiente",
+          description: "Non hai abbastanza ore rimaste in questo giorno per completare questa attività. Riposati o passa al giorno successivo.",
+          variant: "destructive",
+          duration: 3000
+        });
+      } else {
+        toast({
+          title: "Errore",
+          description: "Impossibile completare l'attività. Riprova.",
+          variant: "destructive",
+          duration: 3000
+        });
+      }
       console.error("Failed to complete activity:", error);
     }
   });
@@ -137,7 +151,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
       toast({
         title: "Errore",
         description: "Impossibile avanzare il tempo. Riprova.",
-        variant: "destructive"
+        variant: "destructive",
+        duration: 3000
       });
       console.error("Failed to advance time:", error);
     }
@@ -153,7 +168,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
       setShowCharacterCreation(true);
       toast({
         title: "Gioco resettato",
-        description: "Il gioco è stato resettato con successo."
+        description: "Il gioco è stato resettato con successo.",
+        duration: 3000
       });
     },
     onError: (error) => {
