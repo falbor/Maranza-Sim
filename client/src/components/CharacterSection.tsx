@@ -1,19 +1,37 @@
 import { useGame } from "@/lib/gameContext";
 import { Progress } from "@/components/ui/progress";
 import { ChevronUp } from "lucide-react";
-import { useState } from "react";
-import { ProfilePic1 } from "@/assets";
+import { useState, useEffect } from "react";
+import { ProfilePic1, ProfilePic2, ProfilePic3, ProfilePic4, ProfilePic5, ProfilePic6, ProfilePic7, ProfilePic8, ProfilePic9, ProfilePic10 } from "@/assets";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 
+// Array delle immagini di profilo
+const profilePics = [
+  ProfilePic1, ProfilePic2, ProfilePic3, ProfilePic4, ProfilePic5,
+  ProfilePic6, ProfilePic7, ProfilePic8, ProfilePic9, ProfilePic10
+];
+
 export default function CharacterSection() {
-  const { game } = useGame();
+  const { game, activeTab, setActiveTab } = useGame();
   const { character } = game;
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Imposta il tab "inventory" come default se non è stato impostato
+  useEffect(() => {
+    if (activeTab !== "inventory") {
+      setActiveTab("inventory");
+    }
+  }, []);
 
   if (!character) {
     return null;
   }
+
+  // Seleziona l'immagine di profilo in base all'avatarId
+  const profileImage = character.avatarId && character.avatarId > 0 && character.avatarId <= profilePics.length 
+    ? profilePics[character.avatarId - 1] 
+    : ProfilePic1;
 
   const statItems = [
     { label: "Soldi", value: `€${character.money}`, percentage: character.money / 1000 * 100, color: "bg-amber-400", icon: "💰" },
@@ -31,7 +49,7 @@ export default function CharacterSection() {
       >
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 overflow-hidden">
-            <img src={ProfilePic1} alt="Profile" className="w-full h-full object-cover" />
+            <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
           </div>
           <div>
             <h2 className="font-bold text-base leading-tight">{character.name}</h2>
@@ -44,7 +62,7 @@ export default function CharacterSection() {
       <div 
         className="overflow-y-auto transition-all duration-300"
         style={{ 
-          maxHeight: isOpen ? 'calc(100vh - 4.5rem)' : '0',
+          height: isOpen ? 'calc(100vh - 4.5rem)' : '0',
           opacity: isOpen ? 1 : 0,
           visibility: isOpen ? 'visible' : 'hidden'
         }}
@@ -64,7 +82,7 @@ export default function CharacterSection() {
           </div>
           {/* Tabs per Inventory, Social, Skills */}
           <div className="w-full">
-            <Tabs value={game.activeTab} onValueChange={game.setActiveTab} className="w-full">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="w-full">
                 <TabsTrigger value="inventory" className="flex-1">Inventario</TabsTrigger>
                 <TabsTrigger value="social" className="flex-1">Sociale</TabsTrigger>
