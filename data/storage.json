@@ -13,15 +13,15 @@
     [
       1,
       {
-        "name": "Carlo",
+        "name": "Vincenzo",
         "look": "sportivo",
         "personality": "audace",
-        "avatarId": 2,
-        "money": 100,
+        "avatarId": 3,
+        "money": 205,
         "reputation": 50,
-        "energy": 100,
-        "respect": 33,
-        "style": 82,
+        "energy": 95,
+        "respect": 41,
+        "style": 68,
         "userId": 1,
         "id": 1
       }
@@ -367,20 +367,10 @@
       1,
       {
         "characterId": 1,
-        "itemId": 7,
+        "itemId": 8,
         "acquired": true,
         "acquiredDay": 1,
         "id": 1
-      }
-    ],
-    [
-      2,
-      {
-        "characterId": 1,
-        "itemId": 4,
-        "acquired": true,
-        "acquiredDay": 1,
-        "id": 2
       }
     ]
   ],
@@ -433,7 +423,7 @@
         "characterId": 1,
         "skillId": 1,
         "level": 3,
-        "progress": 34,
+        "progress": 44,
         "maxLevel": 100,
         "id": 1
       }
@@ -444,7 +434,7 @@
         "characterId": 1,
         "skillId": 2,
         "level": 1,
-        "progress": 37,
+        "progress": 45,
         "maxLevel": 100,
         "id": 2
       }
@@ -454,8 +444,8 @@
       {
         "characterId": 1,
         "skillId": 3,
-        "level": 3,
-        "progress": 46,
+        "level": 2,
+        "progress": 16,
         "maxLevel": 100,
         "id": 3
       }
@@ -465,8 +455,8 @@
       {
         "characterId": 1,
         "skillId": 4,
-        "level": 3,
-        "progress": 33,
+        "level": 2,
+        "progress": 43,
         "maxLevel": 100,
         "id": 4
       }
@@ -476,8 +466,8 @@
       {
         "characterId": 1,
         "skillId": 5,
-        "level": 1,
-        "progress": 31,
+        "level": 3,
+        "progress": 35,
         "maxLevel": 100,
         "id": 5
       }
@@ -790,9 +780,9 @@
       {
         "userId": 1,
         "day": 1,
-        "time": "08:00",
+        "time": "8.5:00",
         "gameStarted": true,
-        "hoursLeft": 16,
+        "hoursLeft": 15.5,
         "id": 1,
         "characterId": 1
       }
@@ -801,7 +791,7 @@
   "userId": 1,
   "characterId": 2,
   "itemId": 15,
-  "characterItemId": 3,
+  "characterItemId": 2,
   "skillId": 6,
   "characterSkillId": 6,
   "contactId": 1,

@@ -364,6 +364,9 @@ const ActivityModal = () => {
   // Effetto per generare sotto-attività quando l'attività selezionata cambia
   useEffect(() => {
     if (selectedActivity) {
+      // Resetta la sotto-attività selezionata quando cambia l'attività principale
+      setSelectedSubActivity(null);
+      
       if (selectedActivity.title === "Shopping al Centro") {
         // Per lo shopping, carica oggetti reali dal negozio
         const fetchShopItems = async () => {
@@ -433,7 +436,15 @@ const ActivityModal = () => {
    * Altrimenti esegue la sotto-attività come un'attività normale
    */
   const handleConfirm = async () => {
-    if (!selectedSubActivity) return;
+    if (!selectedSubActivity) {
+      toast({
+        title: "Nessuna sotto-attività selezionata",
+        description: "Devi selezionare un'attività da svolgere prima di procedere.",
+        variant: "destructive",
+        duration: 3000
+      });
+      return;
+    }
 
     if (selectedActivity.title === "Shopping al Centro") {
       const subActivity = subActivities.find(sa => sa.id === selectedSubActivity);
@@ -637,18 +648,15 @@ const ActivityModal = () => {
           </div>
         </div>
         
-        {/* Footer con pulsanti di azione */}
-        <DialogFooter className="flex items-center justify-between gap-2 sm:justify-between">
-          <Button
-            variant="outline"
-            onClick={handleClose}
-            className="px-4 py-2 text-white border-white/30 hover:bg-white/10"
-          >
-            Annulla
-          </Button>
+        {/* Footer con pulsante di azione */}
+        <DialogFooter className="flex items-center justify-center gap-2 sm:justify-center">
           <Button
             onClick={handleConfirm}
-            className="px-4 py-2 bg-primary hover:bg-primary/90 text-white"
+            className={`px-4 py-2 ${
+              selectedSubActivity === null
+                ? 'bg-gray-600 cursor-not-allowed opacity-60'
+                : 'bg-primary hover:bg-primary/90'
+            } text-white`}
             disabled={isPendingActivity || selectedSubActivity === null}
           >
             {isPendingActivity 

@@ -33,7 +33,7 @@ export function Toaster() {
           </Toast>
         )
       })}
-      <ToastViewport />
+      <ToastViewport className="top-14 sm:top-14" />
     </ToastProvider>
   )
 }
