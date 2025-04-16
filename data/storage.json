@@ -9,24 +9,7 @@
       }
     ]
   ],
-  "characters": [
-    [
-      1,
-      {
-        "name": "Vincenzo",
-        "look": "sportivo",
-        "personality": "audace",
-        "avatarId": 3,
-        "money": 205,
-        "reputation": 50,
-        "energy": 95,
-        "respect": 41,
-        "style": 68,
-        "userId": 1,
-        "id": 1
-      }
-    ]
-  ],
+  "characters": [],
   "items": [
     [
       1,
@@ -362,18 +345,7 @@
       }
     ]
   ],
-  "characterItems": [
-    [
-      1,
-      {
-        "characterId": 1,
-        "itemId": 8,
-        "acquired": true,
-        "acquiredDay": 1,
-        "id": 1
-      }
-    ]
-  ],
+  "characterItems": [],
   "skills": [
     [
       1,
@@ -416,63 +388,7 @@
       }
     ]
   ],
-  "characterSkills": [
-    [
-      1,
-      {
-        "characterId": 1,
-        "skillId": 1,
-        "level": 3,
-        "progress": 44,
-        "maxLevel": 100,
-        "id": 1
-      }
-    ],
-    [
-      2,
-      {
-        "characterId": 1,
-        "skillId": 2,
-        "level": 1,
-        "progress": 45,
-        "maxLevel": 100,
-        "id": 2
-      }
-    ],
-    [
-      3,
-      {
-        "characterId": 1,
-        "skillId": 3,
-        "level": 2,
-        "progress": 16,
-        "maxLevel": 100,
-        "id": 3
-      }
-    ],
-    [
-      4,
-      {
-        "characterId": 1,
-        "skillId": 4,
-        "level": 2,
-        "progress": 43,
-        "maxLevel": 100,
-        "id": 4
-      }
-    ],
-    [
-      5,
-      {
-        "characterId": 1,
-        "skillId": 5,
-        "level": 3,
-        "progress": 35,
-        "maxLevel": 100,
-        "id": 5
-      }
-    ]
-  ],
+  "characterSkills": [],
   "contacts": [],
   "activities": [
     [
@@ -780,20 +696,20 @@
       {
         "userId": 1,
         "day": 1,
-        "time": "8.5:00",
-        "gameStarted": true,
-        "hoursLeft": 15.5,
+        "time": "08:00",
+        "gameStarted": false,
+        "hoursLeft": 16,
         "id": 1,
-        "characterId": 1
+        "characterId": null
       }
     ]
   ],
   "userId": 1,
-  "characterId": 2,
+  "characterId": 1,
   "itemId": 15,
-  "characterItemId": 2,
+  "characterItemId": 1,
   "skillId": 6,
-  "characterSkillId": 6,
+  "characterSkillId": 1,
   "contactId": 1,
   "activityId": 14,
   "gameStateId": 1
