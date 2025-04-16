@@ -580,14 +580,6 @@ const ActivityModal = () => {
     <Dialog open={showActivityModal} onOpenChange={setShowActivityModal}>
       <DialogContent 
         className="w-[90vw] max-w-md mx-auto max-h-[65vh] overflow-y-auto bg-black/90 border-primary/30 text-white"
-        style={{
-          position: "fixed",
-          left: "50%",
-          top: "calc(50% + 2rem)",
-          transform: "translate(-50%, -50%)",
-          margin: "0 auto",
-          zIndex: 100,
-        }}
       >
         <DialogHeader>
           <DialogTitle className="text-xl md:text-2xl text-primary font-bold">
