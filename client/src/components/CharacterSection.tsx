@@ -13,13 +13,13 @@ const profilePics = [
 ];
 
 export default function CharacterSection() {
-  const { game, activeTab, setActiveTab } = useGame();
+  const { game, activeTab, setActiveTab, refetchGame } = useGame();
   const { character } = game;
   const [isOpen, setIsOpen] = useState(false);
   
-  // Imposta il tab "inventory" come default se non è stato impostato
+  // Imposta il tab "inventory" come default se non è stato impostato o se era "shop"
   useEffect(() => {
-    if (activeTab !== "inventory") {
+    if (!["inventory", "social", "skills"].includes(activeTab)) {
       setActiveTab("inventory");
     }
   }, []);
@@ -92,7 +92,7 @@ export default function CharacterSection() {
         }}
       >
         <div className="p-4 sm:p-6">
-          {/* Tabs per Inventory, Social, Skills */}
+          {/* Tabs per Inventory, Social, Skills - rimossa la tab Shop */}
           <div className="w-full">
             <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
               <TabsList className="w-full bg-black/50 border border-white/10">
@@ -117,7 +117,16 @@ export default function CharacterSection() {
                           <div>
                             <h4 className="font-bold text-white">{item.name}</h4>
                             <p className="text-xs text-gray-400">
-                              {item.effect.value > 0 ? '+' : ''}{item.effect.value} {item.effect.type.charAt(0).toUpperCase() + item.effect.type.slice(1)}
+                              {item.effects && item.effects.length > 0 ? (
+                                <>
+                                  {item.effects[0].value > 0 ? '+' : ''}{item.effects[0].value} {item.effects[0].type.charAt(0).toUpperCase() + item.effects[0].type.slice(1)}
+                                  {item.effects.length > 1 && ` (+ ${item.effects.length - 1} altri effetti)`}
+                                </>
+                              ) : item.effect && item.effect.value ? (
+                                <>
+                                  {item.effect.value > 0 ? '+' : ''}{item.effect.value} {item.effect.type.charAt(0).toUpperCase() + item.effect.type.slice(1)}
+                                </>
+                              ) : "Nessun effetto"}
                               {item.unlockDay && `, Sbloccato Giorno ${item.unlockDay}`}
                             </p>
                           </div>

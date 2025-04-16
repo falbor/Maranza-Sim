@@ -52,7 +52,7 @@ const ActivityCard = ({ activity, className = "" }: ActivityCardProps) => {
     <Card 
       className={`border border-border bg-gradient-to-b ${getColors()} cursor-pointer backdrop-blur-sm 
       rounded-lg transition-all duration-200 hover:scale-105 w-full 
-      shadow-md hover:shadow-lg active:scale-95 active:shadow-inner ${className}`}
+      shadow-md hover:shadow-lg active:shadow-inner ${className}`}
       onClick={handleSelectActivity}
     >
       <div className="p-1.5 flex flex-col items-center justify-center h-full w-full">

@@ -164,3 +164,225 @@ export type InsertActivity = z.infer<typeof insertActivitySchema>;
 
 export type GameState = typeof gameStates.$inferSelect;
 export type InsertGameState = z.infer<typeof insertGameStateSchema>;
+
+export interface User {
+  id: number;
+  username: string;
+  password: string;
+}
+
+export interface InsertUser {
+  username: string;
+  password: string;
+}
+
+export interface Character {
+  id: number;
+  userId: number;
+  name: string;
+  style: number;
+  personality: "audace" | "ribelle" | "carismatico";
+  look: "casual" | "sportivo" | "firmato";
+  money: number;
+  reputation: number;
+  energy: number;
+  respect: number;
+  avatarId: number;
+}
+
+export interface InsertCharacter {
+  userId: number;
+  name: string;
+  personality: "audace" | "ribelle" | "carismatico";
+  look: "casual" | "sportivo" | "firmato";
+  style?: number;
+  money?: number;
+  reputation?: number;
+  energy?: number;
+  respect?: number;
+  avatarId?: number;
+}
+
+export interface ItemEffect {
+  type: "style" | "money" | "reputation" | "energy" | "respect";
+  value: number;
+  isDebuff?: boolean;
+}
+
+export interface Item {
+  id: number;
+  name: string;
+  description: string;
+  effects: ItemEffect[];
+  price: number;
+  image: string;
+  unlockDay?: number | null;
+  category: "clothing" | "accessory" | "consumable" | "special";
+  isInShop?: boolean;
+  isBuyable?: boolean;
+}
+
+export interface InsertItem {
+  name: string;
+  description: string;
+  effects: ItemEffect[];
+  price: number;
+  image: string;
+  unlockDay?: number | null;
+  category: "clothing" | "accessory" | "consumable" | "special";
+  isInShop?: boolean;
+  isBuyable?: boolean;
+}
+
+export interface CharacterItem {
+  id: number;
+  characterId: number;
+  itemId: number;
+  acquired: boolean;
+  acquiredDay?: number | null;
+}
+
+export interface InsertCharacterItem {
+  characterId: number;
+  itemId: number;
+  acquired?: boolean;
+  acquiredDay?: number | null;
+}
+
+export interface Skill {
+  id: number;
+  name: string;
+  description: string;
+}
+
+export interface InsertSkill {
+  name: string;
+  description: string;
+}
+
+export interface CharacterSkill {
+  id: number;
+  characterId: number;
+  skillId: number;
+  level: number;
+  progress: number;
+  maxLevel: number;
+}
+
+export interface InsertCharacterSkill {
+  characterId: number;
+  skillId: number;
+  level?: number;
+  progress?: number;
+  maxLevel?: number;
+}
+
+export interface Contact {
+  id: number;
+  characterId: number;
+  name: string;
+  type: string;
+  respect: "basso" | "medio" | "alto";
+  meetDay: number;
+  avatarInitials: string;
+  avatarColor: string;
+}
+
+export interface InsertContact {
+  characterId: number;
+  name: string;
+  type: string;
+  respect: "basso" | "medio" | "alto";
+  meetDay: number;
+  avatarInitials: string;
+  avatarColor: string;
+}
+
+export interface Activity {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  duration: number;
+  effects: {
+    reputation?: number;
+    money?: number;
+    energy?: number;
+    respect?: number;
+    style?: number;
+  };
+  requirements?: {
+    money?: number;
+    energy?: number;
+    reputation?: number;
+    respect?: number;
+    style?: number;
+    items?: number[];
+    skills?: { id: number; level: number }[];
+  } | null;
+  possibleOutcomes: string[];
+  unlockDay?: number | null;
+  category: string;
+  color: string;
+}
+
+export interface InsertActivity {
+  title: string;
+  description: string;
+  image: string;
+  duration: number;
+  effects: {
+    reputation?: number;
+    money?: number;
+    energy?: number;
+    respect?: number;
+    style?: number;
+  };
+  requirements?: {
+    money?: number;
+    energy?: number;
+    reputation?: number;
+    respect?: number;
+    style?: number;
+    items?: number[];
+    skills?: { id: number; level: number }[];
+  } | null;
+  possibleOutcomes: string[];
+  unlockDay?: number | null;
+  category: string;
+  color: string;
+}
+
+export interface GameState {
+  id: number;
+  userId: number;
+  characterId?: number | null;
+  day: number;
+  time: string;
+  gameStarted: boolean;
+  hoursLeft: number;
+}
+
+export interface InsertGameState {
+  userId: number;
+  characterId?: number | null;
+  day?: number;
+  time?: string;
+  gameStarted?: boolean;
+  hoursLeft?: number;
+}
+
+export interface ShopItem extends Item {
+  isOwned: boolean;
+}
+
+export interface PurchaseItemRequest {
+  itemId: number;
+}
+
+export interface PurchaseItemResponse {
+  success: boolean;
+  message: string;
+  newMoney?: number;
+  item?: Item;
+}

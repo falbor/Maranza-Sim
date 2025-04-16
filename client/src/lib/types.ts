@@ -12,18 +12,23 @@ export interface Character {
   avatarId: number;
 }
 
+export interface ItemEffect {
+  type: "style" | "money" | "reputation" | "energy" | "respect";
+  value: number;
+  isDebuff?: boolean;
+}
+
 export interface Item {
   id: number;
   name: string;
   description: string;
-  effect: {
-    type: "style" | "money" | "reputation" | "energy" | "respect";
-    value: number;
-  };
+  effects: ItemEffect[];
   price: number;
   image: string;
   unlockDay?: number;
-  category: "clothing" | "accessory" | "consumable";
+  category: "clothing" | "accessory" | "consumable" | "special";
+  isInShop?: boolean;
+  isBuyable?: boolean;
 }
 
 export interface Skill {
@@ -88,12 +93,17 @@ export interface Activity {
   color: string;
 }
 
+export interface ShopItem extends Item {
+  isOwned: boolean;
+}
+
 export interface GameState {
   day: number;
   time: string;
   gameStarted: boolean;
   availableActivities: Activity[];
   inventory: Item[];
+  shopItems?: ShopItem[];
   skills: Skill[];
   contacts: Contact[];
   character: Character | null;

@@ -42,6 +42,7 @@ interface GameContextType {
   resetGame: () => Promise<void>;                          // Reimposta il gioco allo stato iniziale
   activeTab: string;                                       // Tab attiva nell'interfaccia
   setActiveTab: (tab: string) => void;                     // Imposta la tab attiva
+  refetchGame: () => Promise<void>;                        // Aggiorna i dati di gioco
 }
 
 /**
@@ -307,6 +308,14 @@ export function GameProvider({ children }: { children: ReactNode }) {
   };
 
   /**
+   * Funzione per aggiornare i dati di gioco
+   * Wrapper della funzione refetch per semplicità d'uso
+   */
+  const refetchGame = async () => {
+    await refetch();
+  };
+
+  /**
    * Effect per aggiornare lo stato del gioco quando gameData cambia
    * Assicura che il componente rifletta sempre i dati più recenti
    */
@@ -357,7 +366,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
         setShowResultModal,
         resetGame,
         activeTab,
-        setActiveTab
+        setActiveTab,
+        refetchGame
       }}
     >
       {children}

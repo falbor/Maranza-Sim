@@ -13,15 +13,15 @@
     [
       1,
       {
-        "name": "Ali",
+        "name": "Carlo",
         "look": "sportivo",
-        "personality": "ribelle",
-        "avatarId": 3,
-        "money": 250,
+        "personality": "audace",
+        "avatarId": 2,
+        "money": 100,
         "reputation": 50,
         "energy": 100,
-        "respect": 30,
-        "style": 60,
+        "respect": 33,
+        "style": 82,
         "userId": 1,
         "id": 1
       }
@@ -33,14 +33,17 @@
       {
         "name": "Felpa Firmata",
         "description": "Una felpa di marca perfetta per il tuo stile maranza",
-        "effect": {
-          "type": "style",
-          "value": 15
-        },
-        "price": 150,
+        "effects": [
+          {
+            "type": "style",
+            "value": 15
+          }
+        ],
+        "price": 120,
         "image": "hoodie",
-        "unlockDay": 2,
         "category": "clothing",
+        "isInShop": true,
+        "unlockDay": 2,
         "id": 1
       }
     ],
@@ -49,13 +52,20 @@
       {
         "name": "Marsupio Griffato",
         "description": "Un marsupio di marca da portare a tracolla",
-        "effect": {
-          "type": "style",
-          "value": 10
-        },
-        "price": 80,
+        "effects": [
+          {
+            "type": "style",
+            "value": 8
+          },
+          {
+            "type": "respect",
+            "value": 3
+          }
+        ],
+        "price": 70,
         "image": "bag",
         "category": "accessory",
+        "isInShop": true,
         "id": 2,
         "unlockDay": null
       }
@@ -65,13 +75,20 @@
       {
         "name": "Cappellino con Visiera",
         "description": "Un cappellino con logo ben visibile, indispensabile per un maranza",
-        "effect": {
-          "type": "style",
-          "value": 8
-        },
-        "price": 40,
+        "effects": [
+          {
+            "type": "style",
+            "value": 6
+          },
+          {
+            "type": "reputation",
+            "value": 4
+          }
+        ],
+        "price": 35,
         "image": "cap",
         "category": "accessory",
+        "isInShop": true,
         "id": 3,
         "unlockDay": null
       }
@@ -81,13 +98,20 @@
       {
         "name": "Tuta Sportiva",
         "description": "Una tuta sportiva di marca, comoda e alla moda",
-        "effect": {
-          "type": "style",
-          "value": 12
-        },
-        "price": 120,
+        "effects": [
+          {
+            "type": "style",
+            "value": 12
+          },
+          {
+            "type": "energy",
+            "value": 5
+          }
+        ],
+        "price": 95,
         "image": "tracksuit",
         "category": "clothing",
+        "isInShop": true,
         "id": 4,
         "unlockDay": null
       }
@@ -97,14 +121,21 @@
       {
         "name": "Scarpe Costose",
         "description": "Scarpe sportive estremamente costose con design vistoso",
-        "effect": {
-          "type": "style",
-          "value": 20
-        },
-        "price": 250,
+        "effects": [
+          {
+            "type": "style",
+            "value": 18
+          },
+          {
+            "type": "reputation",
+            "value": 5
+          }
+        ],
+        "price": 200,
         "image": "shoes",
         "unlockDay": 4,
         "category": "clothing",
+        "isInShop": true,
         "id": 5
       }
     ],
@@ -113,15 +144,221 @@
       {
         "name": "Energy Drink",
         "description": "Una bevanda energetica per ricaricarti",
-        "effect": {
-          "type": "energy",
-          "value": 25
-        },
+        "effects": [
+          {
+            "type": "energy",
+            "value": 25
+          }
+        ],
         "price": 3,
         "image": "drink",
         "category": "consumable",
+        "isInShop": true,
         "id": 6,
         "unlockDay": null
+      }
+    ],
+    [
+      7,
+      {
+        "name": "Occhiali da Sole Tamarri",
+        "description": "Occhiali da sole appariscenti che ti fanno sembrare un vero maranza, ma sono scomodi",
+        "effects": [
+          {
+            "type": "style",
+            "value": 10
+          },
+          {
+            "type": "respect",
+            "value": 3
+          },
+          {
+            "type": "energy",
+            "value": -5,
+            "isDebuff": true
+          }
+        ],
+        "price": 55,
+        "image": "glasses",
+        "category": "accessory",
+        "isInShop": true,
+        "id": 7,
+        "unlockDay": null
+      }
+    ],
+    [
+      8,
+      {
+        "name": "Orecchino XXL",
+        "description": "Un orecchino enorme che attira l'attenzione ma può essere fastidioso",
+        "effects": [
+          {
+            "type": "style",
+            "value": 8
+          },
+          {
+            "type": "respect",
+            "value": 5
+          },
+          {
+            "type": "energy",
+            "value": -3,
+            "isDebuff": true
+          }
+        ],
+        "price": 45,
+        "image": "earring",
+        "category": "accessory",
+        "isInShop": true,
+        "id": 8,
+        "unlockDay": null
+      }
+    ],
+    [
+      9,
+      {
+        "name": "Collana d'Oro Pesante",
+        "description": "Una grossa catena d'oro che migliora il tuo stile ma è pesantissima",
+        "effects": [
+          {
+            "type": "style",
+            "value": 20
+          },
+          {
+            "type": "respect",
+            "value": 12
+          },
+          {
+            "type": "energy",
+            "value": -8,
+            "isDebuff": true
+          }
+        ],
+        "price": 250,
+        "image": "necklace",
+        "category": "accessory",
+        "isInShop": true,
+        "unlockDay": 3,
+        "id": 9
+      }
+    ],
+    [
+      10,
+      {
+        "name": "Air Force Taroccate",
+        "description": "Sembrano originali, ma non lo sono. Costa poco ma se ti beccano perdi reputazione",
+        "effects": [
+          {
+            "type": "style",
+            "value": 8
+          },
+          {
+            "type": "reputation",
+            "value": -5,
+            "isDebuff": true
+          }
+        ],
+        "price": 30,
+        "image": "fakeShoes",
+        "category": "clothing",
+        "isInShop": true,
+        "id": 10,
+        "unlockDay": null
+      }
+    ],
+    [
+      11,
+      {
+        "name": "Berretto Aderente",
+        "description": "Un berretto strettissimo che stringe la testa, ma fa molto stile",
+        "effects": [
+          {
+            "type": "style",
+            "value": 7
+          },
+          {
+            "type": "energy",
+            "value": -2,
+            "isDebuff": true
+          }
+        ],
+        "price": 20,
+        "image": "beanie",
+        "category": "accessory",
+        "isInShop": true,
+        "id": 11,
+        "unlockDay": null
+      }
+    ],
+    [
+      12,
+      {
+        "name": "Energy Drink Potenziato",
+        "description": "Tripla caffeina, per una carica immediata ma un crash garantito dopo",
+        "effects": [
+          {
+            "type": "energy",
+            "value": 40
+          },
+          {
+            "type": "energy",
+            "value": -15,
+            "isDebuff": true,
+            "delay": 2
+          }
+        ],
+        "price": 8,
+        "image": "energyDrink",
+        "category": "consumable",
+        "isInShop": true,
+        "id": 12,
+        "unlockDay": null
+      }
+    ],
+    [
+      13,
+      {
+        "name": "Cintura Borchiata",
+        "description": "Una cintura vistosa con borchie, molto appariscente",
+        "effects": [
+          {
+            "type": "style",
+            "value": 7
+          },
+          {
+            "type": "respect",
+            "value": 3
+          }
+        ],
+        "price": 25,
+        "image": "belt",
+        "category": "accessory",
+        "isInShop": true,
+        "id": 13,
+        "unlockDay": null
+      }
+    ],
+    [
+      14,
+      {
+        "name": "Smartphone Ultimo Modello",
+        "description": "Costa un occhio della testa ma aumenta drasticamente il tuo stile e reputazione",
+        "effects": [
+          {
+            "type": "style",
+            "value": 15
+          },
+          {
+            "type": "reputation",
+            "value": 12
+          }
+        ],
+        "price": 350,
+        "image": "phone",
+        "category": "accessory",
+        "isInShop": true,
+        "unlockDay": 5,
+        "id": 14
       }
     ]
   ],
@@ -130,7 +367,7 @@
       1,
       {
         "characterId": 1,
-        "itemId": 3,
+        "itemId": 7,
         "acquired": true,
         "acquiredDay": 1,
         "id": 1
@@ -140,7 +377,7 @@
       2,
       {
         "characterId": 1,
-        "itemId": 6,
+        "itemId": 4,
         "acquired": true,
         "acquiredDay": 1,
         "id": 2
@@ -196,7 +433,7 @@
         "characterId": 1,
         "skillId": 1,
         "level": 3,
-        "progress": 26,
+        "progress": 34,
         "maxLevel": 100,
         "id": 1
       }
@@ -207,7 +444,7 @@
         "characterId": 1,
         "skillId": 2,
         "level": 1,
-        "progress": 46,
+        "progress": 37,
         "maxLevel": 100,
         "id": 2
       }
@@ -217,8 +454,8 @@
       {
         "characterId": 1,
         "skillId": 3,
-        "level": 1,
-        "progress": 26,
+        "level": 3,
+        "progress": 46,
         "maxLevel": 100,
         "id": 3
       }
@@ -229,7 +466,7 @@
         "characterId": 1,
         "skillId": 4,
         "level": 3,
-        "progress": 14,
+        "progress": 33,
         "maxLevel": 100,
         "id": 4
       }
@@ -239,8 +476,8 @@
       {
         "characterId": 1,
         "skillId": 5,
-        "level": 2,
-        "progress": 34,
+        "level": 1,
+        "progress": 31,
         "maxLevel": 100,
         "id": 5
       }
@@ -252,19 +489,19 @@
       1,
       {
         "title": "Giro in Piazza",
-        "description": "Fai un giro nella piazza principale per mostrare il tuo stile e incontrare altri maranza.",
-        "image": "plaza",
+        "description": "Fai un giro in piazza per farti notare e incontrare altri maranza",
+        "image": "piazza",
         "duration": 1,
         "effects": {
-          "reputation": 15,
-          "energy": -10
+          "reputation": 5,
+          "energy": -8
         },
         "possibleOutcomes": [
-          "Possibile incontro con altri maranza",
-          "Potresti incontrare qualcuno di importante"
+          "Hai fatto un giro in piazza e hai incontrato alcuni amici maranza.",
+          "Mentre camminavi in piazza, hai ricevuto molti apprezzamenti per il tuo stile."
         ],
-        "category": "social",
-        "color": "primary",
+        "category": "sociale",
+        "color": "bg-primary",
         "id": 1,
         "unlockDay": null,
         "requirements": null
@@ -274,20 +511,20 @@
       2,
       {
         "title": "Shopping al Centro",
-        "description": "Vai al centro commerciale per acquistare nuovi vestiti di marca e accessori. Aumenta il tuo stile!",
-        "image": "mall",
+        "description": "Vai a fare shopping per trovare vestiti alla moda",
+        "image": "shopping",
         "duration": 2,
         "effects": {
-          "style": 20,
-          "money": -100,
-          "energy": -5
+          "money": -40,
+          "style": 6,
+          "energy": -12
         },
         "possibleOutcomes": [
-          "Potresti trovare capi in saldo",
-          "Potrebbe esserci una nuova collezione"
+          "Hai fatto shopping e hai trovato capi perfetti per il tuo stile maranza.",
+          "Il commesso ti ha fatto uno sconto speciale perché hai un'aria da vero maranza."
         ],
-        "category": "shopping",
-        "color": "secondary",
+        "category": "acquisti",
+        "color": "bg-pink-500",
         "id": 2,
         "unlockDay": null,
         "requirements": null
@@ -297,19 +534,19 @@
       3,
       {
         "title": "Palestra",
-        "description": "Allenati in palestra per aumentare la tua forma fisica e guadagnare rispetto dagli altri maranza.",
+        "description": "Vai in palestra per migliorare il tuo fisico e incontrare altri maranza",
         "image": "gym",
-        "duration": 3,
+        "duration": 2,
         "effects": {
-          "respect": 25,
-          "energy": -30
+          "respect": 8,
+          "energy": -25
         },
         "possibleOutcomes": [
-          "Potresti incontrare un personal trainer",
-          "Potresti impressionare qualcuno"
+          "Hai completato un allenamento intenso. I tuoi muscoli sono stanchi, ma hai guadagnato rispetto!",
+          "Durante l'allenamento, molti ti hanno osservato con ammirazione."
         ],
         "category": "fitness",
-        "color": "accent",
+        "color": "bg-orange-500",
         "id": 3,
         "unlockDay": null,
         "requirements": null
@@ -319,20 +556,20 @@
       4,
       {
         "title": "Serata in Discoteca",
-        "description": "Vai in discoteca per ballare, incontrare gente e mostrare le tue mosse migliori.",
-        "image": "club",
-        "duration": 5,
+        "description": "Vai a ballare in discoteca e mostra il tuo stile maranza",
+        "image": "disco",
+        "duration": 4,
         "effects": {
-          "reputation": 30,
-          "energy": -50,
-          "money": -50
+          "money": -70,
+          "reputation": 12,
+          "energy": -35
         },
         "possibleOutcomes": [
-          "Potresti conoscere nuove persone",
-          "Potresti metterti in mostra con le tue mosse di ballo"
+          "La tua serata in discoteca è stata un successo! Tutti hanno notato le tue mosse di ballo!",
+          "Hai fatto colpo su molte persone in discoteca."
         ],
-        "category": "nightlife",
-        "color": "info",
+        "category": "divertimento",
+        "color": "bg-purple-500",
         "id": 4,
         "unlockDay": null,
         "requirements": null
@@ -342,20 +579,20 @@
       5,
       {
         "title": "Lavoretto Part-time",
-        "description": "Fai un piccolo lavoro per guadagnare un po' di soldi. Non molto maranza, ma necessario.",
+        "description": "Fai un lavoretto per guadagnare soldi da spendere",
         "image": "work",
-        "duration": 4,
+        "duration": 3,
         "effects": {
-          "money": 80,
+          "money": 120,
           "energy": -20,
-          "reputation": -5
+          "reputation": -2
         },
         "possibleOutcomes": [
-          "Potresti ricevere una mancia extra",
-          "Potresti incontrare un collega interessante"
+          "Hai guadagnato qualche soldo, anche se non è stato molto divertente.",
+          "Il lavoro è stato noioso, ma il tuo portafoglio ringrazia."
         ],
-        "category": "work",
-        "color": "primary",
+        "category": "lavoro",
+        "color": "bg-green-500",
         "id": 5,
         "unlockDay": null,
         "requirements": null
@@ -365,18 +602,18 @@
       6,
       {
         "title": "Riposo a Casa",
-        "description": "Resta a casa per recuperare energia. Un vero maranza sa quando ricaricarsi.",
+        "description": "Riposati a casa per recuperare energia",
         "image": "home",
         "duration": 2,
         "effects": {
           "energy": 40
         },
         "possibleOutcomes": [
-          "Recuperi completamente le forze",
-          "Potresti avere idee per nuovi outfit"
+          "Ti sei riposato bene e hai recuperato energia.",
+          "Un buon sonno ti ha rigenerato."
         ],
-        "category": "rest",
-        "color": "secondary",
+        "category": "riposo",
+        "color": "bg-blue-500",
         "id": 6,
         "unlockDay": null,
         "requirements": null
@@ -386,19 +623,19 @@
       7,
       {
         "title": "Social Media",
-        "description": "Pubblica foto e video sui social media per aumentare la tua presenza online e reputazione.",
+        "description": "Condividi i tuoi outfit e le tue attività sui social",
         "image": "social",
         "duration": 1,
         "effects": {
-          "reputation": 10,
-          "energy": -5
+          "reputation": 8,
+          "energy": -4
         },
         "possibleOutcomes": [
-          "Potresti diventare virale",
-          "Potresti ricevere molti like"
+          "I tuoi post hanno ricevuto molti like!",
+          "Le tue foto hanno fatto il pieno di commenti positivi."
         ],
-        "category": "social",
-        "color": "info",
+        "category": "sociale",
+        "color": "bg-cyan-500",
         "id": 7,
         "unlockDay": null,
         "requirements": null
@@ -408,21 +645,21 @@
       8,
       {
         "title": "Raduno di Auto Tuning",
-        "description": "Partecipa a un raduno di auto modificate. Un classico appuntamento per i maranza.",
+        "description": "Partecipa a un raduno di auto modificate",
         "image": "cars",
         "duration": 3,
         "effects": {
-          "respect": 20,
-          "reputation": 15,
-          "energy": -15
+          "respect": 10,
+          "energy": -18,
+          "money": -25
         },
         "unlockDay": 3,
         "possibleOutcomes": [
-          "Potresti conoscere altri appassionati",
-          "Potresti vedere auto impressionanti"
+          "Il raduno è stato fantastico! Hai visto auto incredibili!",
+          "Al raduno tutti hanno apprezzato la tua conoscenza delle auto."
         ],
-        "category": "entertainment",
-        "color": "accent",
+        "category": "evento",
+        "color": "bg-amber-500",
         "id": 8,
         "requirements": null
       }
@@ -431,49 +668,119 @@
       9,
       {
         "title": "Sfida di Stile",
-        "description": "Partecipa a una sfida di stile con altri maranza. Mostra chi è il più alla moda!",
-        "image": "style",
+        "description": "Partecipa a una sfida tra maranza per determinare chi ha lo stile migliore",
+        "image": "fashion",
         "duration": 2,
         "effects": {
-          "style": 30,
-          "reputation": 20,
-          "respect": 15,
-          "energy": -10
+          "style": 10,
+          "energy": -15,
+          "reputation": 8
         },
-        "unlockDay": 5,
+        "unlockDay": 4,
+        "requirements": {
+          "style": 60
+        },
         "possibleOutcomes": [
-          "Potresti vincere un premio",
-          "Potresti impressionare tutti con il tuo look"
+          "Hai partecipato alla sfida di stile e tutti hanno ammirato il tuo look da vero maranza!",
+          "La tua combinazione di vestiti ha impressionato anche i più esigenti."
         ],
-        "category": "competition",
-        "color": "primary",
-        "id": 9,
-        "requirements": null
+        "category": "evento",
+        "color": "bg-rose-500",
+        "id": 9
       }
     ],
     [
       10,
       {
         "title": "Vai a Scuola",
-        "description": "Frequenta le lezioni a scuola. Non è molto maranza, ma i tuoi ci tengono e potrebbe tornarti utile.",
+        "description": "Frequenta la scuola (solo per mantenere le apparenze)",
         "image": "school",
-        "duration": 6,
+        "duration": 5,
         "effects": {
-          "energy": -40,
-          "reputation": 5,
-          "respect": -5,
-          "money": -5
+          "energy": -20,
+          "respect": -3,
+          "style": -2
         },
         "possibleOutcomes": [
-          "Potresti imparare qualcosa di utile",
-          "Potresti conoscere nuovi compagni di classe",
-          "Potresti avere problemi con i professori"
+          "La giornata a scuola è stata lunga ma hai imparato qualcosa di utile.",
+          "I professori ti hanno dato del filo da torcere, ma hai mantenuto il tuo stile maranza anche in classe!"
         ],
-        "category": "education",
-        "color": "info",
+        "category": "obbligo",
+        "color": "bg-gray-500",
         "id": 10,
         "unlockDay": null,
         "requirements": null
+      }
+    ],
+    [
+      11,
+      {
+        "title": "Meet-up Maranza",
+        "description": "Partecipa a un ritrovo organizzato di maranza della zona",
+        "image": "meetup",
+        "duration": 3,
+        "effects": {
+          "reputation": 10,
+          "respect": 5,
+          "energy": -15
+        },
+        "unlockDay": 5,
+        "possibleOutcomes": [
+          "Il meet-up è stato un successo! Hai conosciuto molti altri maranza come te.",
+          "Ti sei fatto notare al ritrovo e hai guadagnato rispetto e reputazione."
+        ],
+        "category": "evento",
+        "color": "bg-indigo-500",
+        "id": 11,
+        "requirements": null
+      }
+    ],
+    [
+      12,
+      {
+        "title": "Allenamento Freestyle",
+        "description": "Impara nuove mosse di ballo freestyle in un corso improvvisato",
+        "image": "dance",
+        "duration": 2,
+        "effects": {
+          "respect": 6,
+          "energy": -20,
+          "style": 4
+        },
+        "unlockDay": 2,
+        "possibleOutcomes": [
+          "Hai imparato nuove mosse che ti faranno fare bella figura in discoteca!",
+          "Il tuo allenamento di freestyle ha attirato l'attenzione di altri ballerini."
+        ],
+        "category": "fitness",
+        "color": "bg-yellow-500",
+        "id": 12,
+        "requirements": null
+      }
+    ],
+    [
+      13,
+      {
+        "title": "Progetto Musicale",
+        "description": "Crea una base trap o registra un pezzo con altri maranza musicisti",
+        "image": "music",
+        "duration": 4,
+        "effects": {
+          "reputation": 15,
+          "energy": -20,
+          "money": -40
+        },
+        "unlockDay": 6,
+        "requirements": {
+          "reputation": 65
+        },
+        "possibleOutcomes": [
+          "La tua traccia sta iniziando a circolare tra i maranza della città!",
+          "Il tuo pezzo musicale ha ricevuto apprezzamenti sui social."
+        ],
+        "category": "creativo",
+        "color": "bg-green-600",
+        "id": 13
       }
     ]
   ],
@@ -493,11 +800,11 @@
   ],
   "userId": 1,
   "characterId": 2,
-  "itemId": 7,
+  "itemId": 15,
   "characterItemId": 3,
   "skillId": 6,
   "characterSkillId": 6,
   "contactId": 1,
-  "activityId": 11,
+  "activityId": 14,
   "gameStateId": 1
 }

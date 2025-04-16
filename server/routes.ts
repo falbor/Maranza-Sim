@@ -314,6 +314,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   /**
    * POST /api/game/activity/:id
    * Esegue un'attività selezionata dal giocatore
+   * Supporta anche l'esecuzione di sotto-attività con ID specifici
    */
   app.post(`${apiRouter}/game/activity/:id`, async (req: Request, res: Response) => {
     try {
@@ -322,11 +323,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid activity ID" });
       }
       
-      // Ottiene l'attività
-      const activity = await storage.getActivity(activityId);
-      if (!activity) {
-        return res.status(404).json({ message: "Activity not found" });
-      }
+      // Ottiene il flag per le sotto-attività (se presente)
+      const { isSubActivity = false } = req.body;
       
       // Ottiene l'utente e lo stato del gioco
       const userId = 1;
@@ -335,19 +333,126 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Game not started or character not created" });
       }
       
-      // Controlla se ci sono abbastanza ore rimaste
-      if (gameState.hoursLeft < activity.duration) {
-        return res.status(400).json({ message: "Not enough hours left in the day" });
-      }
-      
       // Ottiene il personaggio
       const character = await storage.getCharacter(gameState.characterId);
       if (!character) {
         return res.status(404).json({ message: "Character not found" });
       }
       
+      // Comportamento diverso per attività e sotto-attività
+      let activity;
+      let effects;
+      let activityDuration;
+      
+      if (isSubActivity) {
+        // Gestione delle sotto-attività (basata sugli ID predefiniti nel client)
+        const subActivityEffects: Record<number, { effects: Record<string, number>, duration: number }> = {
+          // Attività sociale
+          2001: { effects: { energy: -10, reputation: 8 }, duration: 1 },
+          2002: { effects: { energy: -5, respect: 5 }, duration: 0.5 },
+          2003: { effects: { energy: -5, reputation: 4 }, duration: 0.5 },
+          
+          // Attività acquisti
+          2004: { effects: { energy: -10, style: 5 }, duration: 0.5 },
+          2005: { effects: { energy: -10, money: 15 }, duration: 0.5 },
+          2006: { effects: { energy: -5, respect: 4 }, duration: 0.5 },
+          
+          // Attività fitness
+          2007: { effects: { energy: -20, respect: 10 }, duration: 1 },
+          2008: { effects: { energy: -5, reputation: 7 }, duration: 0.5 },
+          2009: { effects: { energy: -5, respect: 6 }, duration: 0.5 },
+          
+          // Attività divertimento
+          2010: { effects: { energy: -15, reputation: 12 }, duration: 1 },
+          2011: { effects: { money: -20, reputation: 8 }, duration: 0.5 },
+          2012: { effects: { energy: -5, respect: 8 }, duration: 0.5 },
+          
+          // Attività lavoro
+          2013: { effects: { energy: -15, money: 40 }, duration: 1 },
+          2014: { effects: { energy: 5, money: 10 }, duration: 0.5 },
+          2015: { effects: { energy: -5, money: 25 }, duration: 0.5 },
+          
+          // Attività riposo
+          2016: { effects: { energy: 15 }, duration: 0.5 },
+          2017: { effects: { energy: 10 }, duration: 1 },
+          2018: { effects: { energy: 8 }, duration: 0.5 },
+          
+          // Attività evento
+          2019: { effects: { energy: -5, respect: 7 }, duration: 0.5 },
+          2020: { effects: { energy: -5, reputation: 5 }, duration: 0.5 },
+          2021: { effects: { energy: -5, respect: 4 }, duration: 0.5 },
+          
+          // Attività obbligo
+          2022: { effects: { energy: -10, respect: -2 }, duration: 1 },
+          2023: { effects: { energy: -5, reputation: 3 }, duration: 0.5 },
+          2024: { effects: { energy: -5, respect: -1 }, duration: 0.5 },
+          
+          // Sotto-attività specifiche per Giro in Piazza
+          3001: { effects: { energy: -5, reputation: 7 }, duration: 0.5 },
+          3002: { effects: { energy: -5, style: 6 }, duration: 0.5 },
+          3003: { effects: { energy: -5, reputation: 8 }, duration: 0.5 },
+          
+          // Sotto-attività specifiche per Shopping al Centro
+          3004: { effects: { energy: -5, money: 20 }, duration: 0.5 },
+          3005: { effects: { energy: -10, style: 8 }, duration: 0.5 },
+          3006: { effects: { money: -30, style: 10 }, duration: 0.5 },
+          
+          // Sotto-attività specifiche per Palestra
+          3007: { effects: { energy: -25, respect: 12 }, duration: 1 },
+          3008: { effects: { energy: -5, reputation: 5 }, duration: 0.5 },
+          3009: { effects: { energy: -10, respect: 7 }, duration: 0.5 },
+          
+          // Sotto-attività specifiche per Serata in Discoteca
+          3010: { effects: { energy: -15, reputation: 15 }, duration: 0.5 },
+          3011: { effects: { energy: -5, respect: 6 }, duration: 0.5 },
+          3012: { effects: { money: -100, reputation: 20 }, duration: 0.5 }
+        };
+        
+        // Verifica che la sotto-attività esista
+        if (!subActivityEffects[activityId]) {
+          return res.status(404).json({ message: "Sub-activity not found" });
+        }
+        
+        // Ottiene gli effetti e la durata della sotto-attività
+        effects = subActivityEffects[activityId].effects;
+        activityDuration = subActivityEffects[activityId].duration;
+        
+        // Ottiene l'attività principale (per il risultato)
+        const mainActivityCategories: Record<number, string> = {
+          2001: "Giro in Piazza", 2002: "Giro in Piazza", 2003: "Giro in Piazza",
+          2004: "Shopping al Centro", 2005: "Shopping al Centro", 2006: "Shopping al Centro",
+          2007: "Palestra", 2008: "Palestra", 2009: "Palestra",
+          2010: "Serata in Discoteca", 2011: "Serata in Discoteca", 2012: "Serata in Discoteca",
+          2013: "Lavoretto Part-time", 2014: "Lavoretto Part-time", 2015: "Lavoretto Part-time",
+          2016: "Riposo a Casa", 2017: "Riposo a Casa", 2018: "Riposo a Casa",
+          2019: "Raduno di Auto Tuning", 2020: "Raduno di Auto Tuning", 2021: "Raduno di Auto Tuning",
+          2022: "Vai a Scuola", 2023: "Vai a Scuola", 2024: "Vai a Scuola",
+          3001: "Giro in Piazza", 3002: "Giro in Piazza", 3003: "Giro in Piazza",
+          3004: "Shopping al Centro", 3005: "Shopping al Centro", 3006: "Shopping al Centro",
+          3007: "Palestra", 3008: "Palestra", 3009: "Palestra",
+          3010: "Serata in Discoteca", 3011: "Serata in Discoteca", 3012: "Serata in Discoteca"
+        };
+        
+        // Imposta il titolo dell'attività principale per generare il testo del risultato
+        const mainActivityTitle = mainActivityCategories[activityId] || "Attività Generica";
+        activity = { title: mainActivityTitle };
+      } else {
+        // Normale gestione delle attività
+        activity = await storage.getActivity(activityId);
+        if (!activity) {
+          return res.status(404).json({ message: "Activity not found" });
+        }
+        
+        effects = activity.effects as Record<string, number>;
+        activityDuration = activity.duration;
+      }
+      
+      // Controlla se ci sono abbastanza ore rimaste
+      if (gameState.hoursLeft < activityDuration) {
+        return res.status(400).json({ message: "Not enough hours left in the day" });
+      }
+      
       // Controlla se il personaggio ha risorse sufficienti per l'attività
-      const effects = activity.effects as Record<string, number>;
       for (const [stat, value] of Object.entries(effects)) {
         if (value < 0 && (character as any)[stat] + value < 0) {
           // Messaggi personalizzati in base all'attività e alla risorsa mancante
@@ -430,13 +535,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.updateCharacter(character.id, updates);
       
       // Avanza il tempo
-      await advanceTime(userId, activity.duration);
+      await advanceTime(userId, activityDuration);
       
-      // Genera una possibilità casuale per un nuovo contatto
-      const contactResult = generateRandomContact(character.id, gameState.day);
+      // Genera una possibilità casuale per un nuovo contatto (solo per le attività complete, non le sotto-attività)
       let newContact = null;
-      if (contactResult) {
-        newContact = await storage.createContact(contactResult.contact);
+      if (!isSubActivity && Math.random() < 0.5) {
+        const contactResult = generateRandomContact(character.id, gameState.day);
+        if (contactResult) {
+          newContact = await storage.createContact(contactResult.contact);
+        }
       }
       
       // Genera il testo del risultato
@@ -540,6 +647,147 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Failed to reset game:", error);
       res.status(500).json({ message: "Failed to reset game" });
+    }
+  });
+
+  /**
+   * POST /api/game/shop/purchase
+   * Acquista un oggetto dal negozio
+   */
+  app.post(`${apiRouter}/game/shop/purchase`, async (req: Request, res: Response) => {
+    try {
+      const { itemId } = req.body;
+      if (!itemId || isNaN(parseInt(itemId))) {
+        return res.status(400).json({ message: "ID oggetto non valido" });
+      }
+      
+      // Ottiene l'utente (per demo usiamo sempre ID 1)
+      const userId = 1;
+      const gameState = await storage.getGameState(userId);
+      if (!gameState || !gameState.characterId) {
+        return res.status(400).json({ message: "Devi prima creare un personaggio" });
+      }
+      
+      // Ottiene il personaggio e l'oggetto
+      const character = await storage.getCharacter(gameState.characterId);
+      const item = await storage.getItem(parseInt(itemId));
+      
+      if (!character) {
+        return res.status(404).json({ message: "Personaggio non trovato" });
+      }
+      
+      if (!item) {
+        return res.status(404).json({ message: "Oggetto non trovato" });
+      }
+      
+      // Controlla se l'oggetto è acquistabile
+      if (!item.isInShop) {
+        return res.status(400).json({ message: "Questo oggetto non è disponibile per l'acquisto" });
+      }
+      
+      // Controlla se l'oggetto è già posseduto
+      const characterItems = await storage.getCharacterItems(character.id);
+      const alreadyOwned = characterItems.some(i => i.id === item.id);
+      if (alreadyOwned) {
+        return res.status(400).json({ message: "Possiedi già questo oggetto" });
+      }
+      
+      // Controlla se il personaggio ha abbastanza soldi
+      if (character.money < item.price) {
+        return res.status(400).json({ message: `Non hai abbastanza soldi. Ti servono ${item.price - character.money}€ in più.` });
+      }
+      
+      // Controlla eventuali requisiti di giorno
+      if (item.unlockDay && gameState.day < item.unlockDay) {
+        return res.status(400).json({ message: `Questo oggetto sarà disponibile dal giorno ${item.unlockDay}` });
+      }
+      
+      // Acquista l'oggetto
+      await storage.updateCharacter(character.id, {
+        money: character.money - item.price
+      });
+      
+      // Aggiunge l'oggetto all'inventario
+      await storage.addItemToCharacter({
+        characterId: character.id,
+        itemId: item.id,
+        acquired: true,
+        acquiredDay: gameState.day
+      });
+      
+      // Applica immediatamente gli effetti permanenti dell'oggetto
+      // In un'implementazione più complessa, gli effetti verrebbero applicati quando l'oggetto è equipaggiato
+      const updates: Partial<Character> = {};
+      let applyEffects = false;
+      
+      // Per ora, consideriamo che tutti gli oggetti hanno effetti permanenti una volta acquistati
+      for (const effect of item.effects) {
+        if (!effect.isDebuff && effect.type !== 'money') { // Skippa gli effetti monetari
+          applyEffects = true;
+          if (effect.type === 'style') {
+            updates.style = Math.min(100, (character.style + effect.value));
+          } else if (effect.type === 'respect') {
+            updates.respect = Math.min(100, (character.respect + effect.value));
+          } else if (effect.type === 'reputation') {
+            updates.reputation = Math.min(100, (character.reputation + effect.value));
+          } else if (effect.type === 'energy') {
+            updates.energy = Math.min(100, (character.energy + effect.value));
+          }
+        }
+      }
+      
+      // Applica gli effetti se necessario
+      if (applyEffects) {
+        await storage.updateCharacter(character.id, updates);
+      }
+      
+      res.json({
+        success: true, 
+        message: `Hai acquistato ${item.name}!`, 
+        newMoney: character.money - item.price,
+        item
+      });
+    } catch (error) {
+      console.error("Failed to purchase item:", error);
+      res.status(500).json({ message: "Impossibile completare l'acquisto" });
+    }
+  });
+  
+  /**
+   * GET /api/game/shop
+   * Ottiene la lista di oggetti disponibili nel negozio
+   */
+  app.get(`${apiRouter}/game/shop`, async (req: Request, res: Response) => {
+    try {
+      // Ottiene l'utente (per demo usiamo sempre ID 1)
+      const userId = 1;
+      const gameState = await storage.getGameState(userId);
+      if (!gameState || !gameState.characterId) {
+        return res.status(400).json({ message: "Devi prima creare un personaggio" });
+      }
+      
+      // Ottiene tutti gli oggetti
+      const allItems = await storage.getItems();
+      
+      // Filtra solo gli oggetti disponibili nel negozio e adatti al giorno attuale
+      const shopItems = allItems.filter(item => 
+        item.isInShop && (!item.unlockDay || item.unlockDay <= gameState.day)
+      );
+      
+      // Ottiene gli oggetti già posseduti per marcarli come tali
+      const characterItems = await storage.getCharacterItems(gameState.characterId);
+      const characterItemIds = characterItems.map(item => item.id);
+      
+      // Arricchisce gli oggetti del negozio con informazioni sul possesso
+      const enrichedShopItems = shopItems.map(item => ({
+        ...item,
+        isOwned: characterItemIds.includes(item.id)
+      }));
+      
+      res.json(enrichedShopItems);
+    } catch (error) {
+      console.error("Failed to get shop items:", error);
+      res.status(500).json({ message: "Impossibile ottenere gli oggetti del negozio" });
     }
   });
 
