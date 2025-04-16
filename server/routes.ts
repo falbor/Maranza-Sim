@@ -37,8 +37,19 @@ async function advanceTime(userId: number, hoursToAdvance: number): Promise<void
   let hours = parseInt(hourStr);
   let minutes = parseInt(minuteStr);
   
-  // Aggiunge le ore
-  hours += hoursToAdvance;
+  // Converte hoursToAdvance in ore e minuti (supporta frazioni di ora)
+  const fullHours = Math.floor(hoursToAdvance);
+  const remainingMinutes = Math.round((hoursToAdvance - fullHours) * 60);
+  
+  // Aggiorna ore e minuti
+  hours += fullHours;
+  minutes += remainingMinutes;
+  
+  // Gestisce l'overflow dei minuti
+  if (minutes >= 60) {
+    hours += Math.floor(minutes / 60);
+    minutes = minutes % 60;
+  }
   
   // Gestisce il cambio del giorno se le ore > 24
   let newDay = gameState.day;
@@ -51,7 +62,9 @@ async function advanceTime(userId: number, hoursToAdvance: number): Promise<void
   const newTime = formatTime(hours, minutes);
   
   // Calcola le ore rimanenti nella giornata
-  const hoursLeft = Math.max(0, 24 - hours - (minutes > 0 ? 1 : 0));
+  const hoursRemaining = 23 - hours;
+  const minutesRemaining = 60 - minutes;
+  const hoursLeft = hoursRemaining + (minutesRemaining / 60);
   
   // Aggiorna lo stato del gioco
   await storage.updateGameState(userId, {

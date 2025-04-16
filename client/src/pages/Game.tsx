@@ -112,18 +112,17 @@ const Game = () => {
                   <Clock className="w-4 h-4 text-primary ml-2 mr-1" />
                   <span className="font-bold text-primary">{game.time}</span>
                   {(() => {
-                    // Estrae l'ora e determina se è giorno o notte
-                    // per mostrare l'icona appropriata (sole o luna)
+                    // Estrae l'ora dall'orario in formato 24 ore (hh:mm)
                     const timeStr = game.time;
-                    const hourStr = timeStr.split(':')[0];
-                    const hour = parseInt(hourStr);
-                    const isPM = timeStr.includes('PM');
+                    const timeParts = timeStr.split(':');
+                    const hour = parseInt(timeParts[0]);
+                    const minute = parseInt(timeParts[1]);
                     
-                    // Converte in orario a 24 ore per facilitare il confronto
-                    const hour24 = isPM && hour !== 12 ? hour + 12 : (hour === 12 && !isPM ? 0 : hour);
+                    // Calcola il tempo in minuti dalla mezzanotte
+                    const timeInMinutes = hour * 60 + minute;
                     
-                    // Giorno: dalle 6:00 alle 19:59 (6 AM alle 7:59 PM)
-                    return (hour24 >= 6 && hour24 < 20) ? (
+                    // Giorno: dalle 6:00 (360 minuti) alle 19:59 (1199 minuti)
+                    return (timeInMinutes >= 360 && timeInMinutes < 1200) ? (
                       <Sun className="h-4 w-4 text-yellow-400 ml-2" />
                     ) : (
                       <Moon className="h-4 w-4 text-blue-300 ml-2" />
