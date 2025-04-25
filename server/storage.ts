@@ -480,7 +480,7 @@ export class MemStorage implements IStorage {
     
     // Verifica più rigorosa dei dati esistenti, usando una combinazione di lunghezza e verifica della presenza di elementi specifici
     const hasSkills = skills.length > 0 && skills.some(s => s.name === "Stile nel Vestire");
-    const hasActivities = activities.length > 0 && activities.some(a => a.title === "Giro in Piazza");
+    const hasActivities = activities.length > 0 && activities.some(a => a.title === "Garage");
     const hasItems = items.length > 0 && items.some(i => i.name === "Felpa Firmata");
 
     // Crea le abilità predefinite se non esistono
@@ -728,60 +728,97 @@ export class MemStorage implements IStorage {
       
       // Crea le attività di base - bilanciamento migliorato
       await this.createActivity({
-        title: "Giro in Piazza",
-        description: "Fai un giro in piazza per farti notare e incontrare altri maranza",
-        image: "piazza",
-        duration: 1,
+        title: "Garage",
+        description: "Modifica e personalizza la tua auto per impressionare",
+        image: "cars",
+        duration: 2,
         effects: {
-          reputation: 5,
-          energy: -8
+          money: -30,
+          respect: 8,
+          energy: -15
         },
         possibleOutcomes: [
-          "Hai fatto un giro in piazza e hai incontrato alcuni amici maranza.",
-          "Mentre camminavi in piazza, hai ricevuto molti apprezzamenti per il tuo stile."
+          "Hai modificato la tua auto, ora si fa notare a chilometri di distanza!",
+          "I tuoi amici sono rimasti impressionati dalle migliorie alla tua auto."
+        ],
+        category: "auto",
+        color: "bg-amber-500"
+      });
+      
+      await this.createActivity({
+        title: "Lavoro",
+        description: "Guadagna soldi per poter mantenere il tuo stile maranza",
+        image: "work",
+        duration: 3,
+        effects: {
+          money: 120,
+          energy: -20
+        },
+        possibleOutcomes: [
+          "Hai guadagnato un bel po' di soldi che potrai spendere per il tuo look!",
+          "Il lavoro è stato faticoso, ma il tuo portafoglio ringrazia."
+        ],
+        category: "lavoro",
+        color: "bg-green-500"
+      });
+      
+      await this.createActivity({
+        title: "Scuola",
+        description: "Frequenta la scuola ma mantieni il tuo stile da vero maranza",
+        image: "school",
+        duration: 4,
+        effects: {
+          energy: -20,
+          respect: -3,
+          reputation: 2
+        },
+        possibleOutcomes: [
+          "La giornata a scuola è stata lunga ma ti sei fatto notare dai compagni.",
+          "I professori si sono lamentati del tuo stile, ma i compagni ti ammirano!"
+        ],
+        category: "educazione",
+        color: "bg-gray-500"
+      });
+      
+      await this.createActivity({
+        title: "Crew",
+        description: "Passa del tempo con la tua crew e aumenta la tua reputazione",
+        image: "social",
+        duration: 2,
+        effects: {
+          reputation: 12,
+          respect: 6,
+          energy: -10
+        },
+        possibleOutcomes: [
+          "La giornata con la tua crew è stata indimenticabile, tutti parlano di voi!",
+          "Avete fatto un video di gruppo che sta diventando virale online."
         ],
         category: "sociale",
-        color: "bg-primary"
+        color: "bg-cyan-500"
       });
       
       await this.createActivity({
-        title: "Shopping al Centro",
-        description: "Vai a fare shopping per trovare vestiti alla moda",
-        image: "shopping",
+        title: "Famiglia",
+        description: "Passa del tempo con la famiglia, anche se non è molto maranza",
+        image: "home",
         duration: 2,
         effects: {
-          money: -40,
-          style: 6,
-          energy: -12
+          energy: 20,
+          money: 15,
+          reputation: -2
         },
         possibleOutcomes: [
-          "Hai fatto shopping e hai trovato capi perfetti per il tuo stile maranza.",
-          "Il commesso ti ha fatto uno sconto speciale perché hai un'aria da vero maranza."
+          "Hai trascorso del tempo con la famiglia e ti sei riposato.",
+          "I tuoi genitori ti hanno dato qualche soldo per le tue spese."
         ],
-        category: "acquisti",
-        color: "bg-pink-500"
+        category: "famiglia",
+        color: "bg-blue-500"
       });
       
       await this.createActivity({
-        title: "Palestra",
-        description: "Vai in palestra per migliorare il tuo fisico e incontrare altri maranza",
-        image: "gym",
-        duration: 2,
-        effects: {
-          respect: 8,
-          energy: -25
-        },
-        possibleOutcomes: [
-          "Hai completato un allenamento intenso. I tuoi muscoli sono stanchi, ma hai guadagnato rispetto!",
-          "Durante l'allenamento, molti ti hanno osservato con ammirazione."
-        ],
-        category: "fitness",
-        color: "bg-orange-500"
-      });
-      
-      await this.createActivity({
-        title: "Serata in Discoteca",
-        description: "Vai a ballare in discoteca e mostra il tuo stile maranza",
+        title: "Serata",
+        description: "Vai a ballare e mostra il tuo stile maranza in discoteca",
         image: "disco",
         duration: 4,
         effects: {
@@ -790,182 +827,47 @@ export class MemStorage implements IStorage {
           energy: -35
         },
         possibleOutcomes: [
-          "La tua serata in discoteca è stata un successo! Tutti hanno notato le tue mosse di ballo!",
-          "Hai fatto colpo su molte persone in discoteca."
+          "La tua serata in discoteca è stata un successo! Tutti ti hanno notato!",
+          "Hai fatto colpo su molte persone in pista da ballo."
         ],
         category: "divertimento",
         color: "bg-purple-500"
       });
       
       await this.createActivity({
-        title: "Lavoretto Part-time",
-        description: "Fai un lavoretto per guadagnare soldi da spendere",
-        image: "work",
-        duration: 3,
-        effects: {
-          money: 120,
-          energy: -20,
-          reputation: -2
-        },
-        possibleOutcomes: [
-          "Hai guadagnato qualche soldo, anche se non è stato molto divertente.",
-          "Il lavoro è stato noioso, ma il tuo portafoglio ringrazia."
-        ],
-        category: "lavoro",
-        color: "bg-green-500"
-      });
-      
-      await this.createActivity({
-        title: "Riposo a Casa",
-        description: "Riposati a casa per recuperare energia",
-        image: "home",
+        title: "Shop",
+        description: "Vai a fare shopping per trovare vestiti alla moda da vero maranza",
+        image: "shopping",
         duration: 2,
         effects: {
-          energy: 40
+          money: -60,
+          style: 8,
+          energy: -12
         },
         possibleOutcomes: [
-          "Ti sei riposato bene e hai recuperato energia.",
-          "Un buon sonno ti ha rigenerato."
+          "Hai trovato capi perfetti per il tuo stile da vero maranza!",
+          "Il commesso ti ha fatto uno sconto speciale perché hai un'aria da vero maranza."
         ],
-        category: "riposo",
-        color: "bg-blue-500"
+        category: "acquisti",
+        color: "bg-pink-500"
       });
       
       await this.createActivity({
-        title: "Social Media",
-        description: "Condividi i tuoi outfit e le tue attività sui social",
-        image: "social",
-        duration: 1,
-        effects: {
-          reputation: 8,
-          energy: -4
-        },
-        possibleOutcomes: [
-          "I tuoi post hanno ricevuto molti like!",
-          "Le tue foto hanno fatto il pieno di commenti positivi."
-        ],
-        category: "sociale",
-        color: "bg-cyan-500"
-      });
-      
-      await this.createActivity({
-        title: "Raduno di Auto Tuning",
-        description: "Partecipa a un raduno di auto modificate",
-        image: "cars",
-        duration: 3,
-        effects: {
-          respect: 10,
-          energy: -18,
-          money: -25
-        },
-        unlockDay: 3,
-        possibleOutcomes: [
-          "Il raduno è stato fantastico! Hai visto auto incredibili!",
-          "Al raduno tutti hanno apprezzato la tua conoscenza delle auto."
-        ],
-        category: "evento",
-        color: "bg-amber-500"
-      });
-      
-      await this.createActivity({
-        title: "Sfida di Stile",
-        description: "Partecipa a una sfida tra maranza per determinare chi ha lo stile migliore",
-        image: "fashion",
-        duration: 2,
-        effects: {
-          style: 10,
-          energy: -15,
-          reputation: 8
-        },
-        unlockDay: 4,
-        requirements: {
-          style: 60
-        },
-        possibleOutcomes: [
-          "Hai partecipato alla sfida di stile e tutti hanno ammirato il tuo look da vero maranza!",
-          "La tua combinazione di vestiti ha impressionato anche i più esigenti."
-        ],
-        category: "evento",
-        color: "bg-rose-500"
-      });
-      
-      await this.createActivity({
-        title: "Vai a Scuola",
-        description: "Frequenta la scuola (solo per mantenere le apparenze)",
-        image: "school",
-        duration: 5,
-        effects: {
-          energy: -20,
-          respect: -3,
-          style: -2
-        },
-        possibleOutcomes: [
-          "La giornata a scuola è stata lunga ma hai imparato qualcosa di utile.",
-          "I professori ti hanno dato del filo da torcere, ma hai mantenuto il tuo stile maranza anche in classe!"
-        ],
-        category: "obbligo",
-        color: "bg-gray-500"
-      });
-      
-      // Aggiungi nuove attività bilanciate
-      await this.createActivity({
-        title: "Meet-up Maranza",
-        description: "Partecipa a un ritrovo organizzato di maranza della zona",
+        title: "Crush",
+        description: "Incontra e impressiona il tuo crush con il tuo stile maranza",
         image: "meetup",
         duration: 3,
         effects: {
-          reputation: 10,
-          respect: 5,
-          energy: -15
-        },
-        unlockDay: 5,
-        possibleOutcomes: [
-          "Il meet-up è stato un successo! Hai conosciuto molti altri maranza come te.",
-          "Ti sei fatto notare al ritrovo e hai guadagnato rispetto e reputazione."
-        ],
-        category: "evento",
-        color: "bg-indigo-500"
-      });
-      
-      await this.createActivity({
-        title: "Allenamento Freestyle",
-        description: "Impara nuove mosse di ballo freestyle in un corso improvvisato",
-        image: "dance",
-        duration: 2,
-        effects: {
-          respect: 6,
-          energy: -20,
-          style: 4
-        },
-        unlockDay: 2,
-        possibleOutcomes: [
-          "Hai imparato nuove mosse che ti faranno fare bella figura in discoteca!",
-          "Il tuo allenamento di freestyle ha attirato l'attenzione di altri ballerini."
-        ],
-        category: "fitness",
-        color: "bg-yellow-500"
-      });
-      
-      await this.createActivity({
-        title: "Progetto Musicale",
-        description: "Crea una base trap o registra un pezzo con altri maranza musicisti",
-        image: "music",
-        duration: 4,
-        effects: {
-          reputation: 15,
-          energy: -20,
-          money: -40
-        },
-        unlockDay: 6,
-        requirements: {
-          reputation: 65
+          reputation: 8,
+          energy: -15,
+          money: -20
         },
         possibleOutcomes: [
-          "La tua traccia sta iniziando a circolare tra i maranza della città!",
-          "Il tuo pezzo musicale ha ricevuto apprezzamenti sui social."
+          "Il tuo appuntamento è andato alla grande! Il tuo crush è rimasto impressionato!",
+          "Il tuo stile maranza ha fatto colpo sul tuo crush."
         ],
-        category: "creativo",
-        color: "bg-green-600"
+        category: "romantico",
+        color: "bg-rose-500"
       });
     }
   }

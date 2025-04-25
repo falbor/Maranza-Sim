@@ -9,7 +9,24 @@
       }
     ]
   ],
-  "characters": [],
+  "characters": [
+    [
+      1,
+      {
+        "name": "Idris",
+        "look": "casual",
+        "personality": "ribelle",
+        "avatarId": 5,
+        "money": 250,
+        "reputation": 50,
+        "energy": 100,
+        "respect": 30,
+        "style": 60,
+        "userId": 1,
+        "id": 1
+      }
+    ]
+  ],
   "items": [
     [
       1,
@@ -388,26 +405,83 @@
       }
     ]
   ],
-  "characterSkills": [],
+  "characterSkills": [
+    [
+      1,
+      {
+        "characterId": 1,
+        "skillId": 1,
+        "level": 1,
+        "progress": 39,
+        "maxLevel": 100,
+        "id": 1
+      }
+    ],
+    [
+      2,
+      {
+        "characterId": 1,
+        "skillId": 2,
+        "level": 1,
+        "progress": 42,
+        "maxLevel": 100,
+        "id": 2
+      }
+    ],
+    [
+      3,
+      {
+        "characterId": 1,
+        "skillId": 3,
+        "level": 2,
+        "progress": 15,
+        "maxLevel": 100,
+        "id": 3
+      }
+    ],
+    [
+      4,
+      {
+        "characterId": 1,
+        "skillId": 4,
+        "level": 2,
+        "progress": 37,
+        "maxLevel": 100,
+        "id": 4
+      }
+    ],
+    [
+      5,
+      {
+        "characterId": 1,
+        "skillId": 5,
+        "level": 3,
+        "progress": 15,
+        "maxLevel": 100,
+        "id": 5
+      }
+    ]
+  ],
   "contacts": [],
   "activities": [
     [
       1,
       {
-        "title": "Giro in Piazza",
-        "description": "Fai un giro in piazza per farti notare e incontrare altri maranza",
-        "image": "piazza",
-        "duration": 1,
+        "title": "Garage",
+        "description": "Modifica e personalizza la tua auto per impressionare",
+        "image": "cars",
+        "duration": 2,
         "effects": {
-          "reputation": 5,
-          "energy": -8
+          "money": -30,
+          "respect": 8,
+          "energy": -15
         },
         "possibleOutcomes": [
-          "Hai fatto un giro in piazza e hai incontrato alcuni amici maranza.",
-          "Mentre camminavi in piazza, hai ricevuto molti apprezzamenti per il tuo stile."
+          "Hai modificato la tua auto, ora si fa notare a chilometri di distanza!",
+          "I tuoi amici sono rimasti impressionati dalle migliorie alla tua auto."
         ],
-        "category": "sociale",
-        "color": "bg-primary",
+        "category": "auto",
+        "color": "bg-amber-500",
         "id": 1,
         "unlockDay": null,
         "requirements": null
@@ -416,21 +490,20 @@
     [
       2,
       {
-        "title": "Shopping al Centro",
-        "description": "Vai a fare shopping per trovare vestiti alla moda",
-        "image": "shopping",
-        "duration": 2,
+        "title": "Lavoro",
+        "description": "Guadagna soldi per poter mantenere il tuo stile maranza",
+        "image": "work",
+        "duration": 3,
         "effects": {
-          "money": -40,
-          "style": 6,
-          "energy": -12
+          "money": 120,
+          "energy": -20
         },
         "possibleOutcomes": [
-          "Hai fatto shopping e hai trovato capi perfetti per il tuo stile maranza.",
-          "Il commesso ti ha fatto uno sconto speciale perché hai un'aria da vero maranza."
+          "Hai guadagnato un bel po' di soldi che potrai spendere per il tuo look!",
+          "Il lavoro è stato faticoso, ma il tuo portafoglio ringrazia."
         ],
-        "category": "acquisti",
-        "color": "bg-pink-500",
+        "category": "lavoro",
+        "color": "bg-green-500",
         "id": 2,
         "unlockDay": null,
         "requirements": null
@@ -439,20 +512,21 @@
     [
       3,
       {
-        "title": "Palestra",
-        "description": "Vai in palestra per migliorare il tuo fisico e incontrare altri maranza",
-        "image": "gym",
-        "duration": 2,
+        "title": "Scuola",
+        "description": "Frequenta la scuola ma mantieni il tuo stile da vero maranza",
+        "image": "school",
+        "duration": 4,
         "effects": {
-          "respect": 8,
-          "energy": -25
+          "energy": -20,
+          "respect": -3,
+          "reputation": 2
         },
         "possibleOutcomes": [
-          "Hai completato un allenamento intenso. I tuoi muscoli sono stanchi, ma hai guadagnato rispetto!",
-          "Durante l'allenamento, molti ti hanno osservato con ammirazione."
+          "La giornata a scuola è stata lunga ma ti sei fatto notare dai compagni.",
+          "I professori si sono lamentati del tuo stile, ma i compagni ti ammirano!"
         ],
-        "category": "fitness",
-        "color": "bg-orange-500",
+        "category": "educazione",
+        "color": "bg-gray-500",
         "id": 3,
         "unlockDay": null,
         "requirements": null
@@ -461,21 +535,21 @@
     [
       4,
       {
-        "title": "Serata in Discoteca",
-        "description": "Vai a ballare in discoteca e mostra il tuo stile maranza",
-        "image": "disco",
-        "duration": 4,
+        "title": "Crew",
+        "description": "Passa del tempo con la tua crew e aumenta la tua reputazione",
+        "image": "social",
+        "duration": 2,
         "effects": {
-          "money": -70,
           "reputation": 12,
-          "energy": -35
+          "respect": 6,
+          "energy": -10
         },
         "possibleOutcomes": [
-          "La tua serata in discoteca è stata un successo! Tutti hanno notato le tue mosse di ballo!",
-          "Hai fatto colpo su molte persone in discoteca."
+          "La giornata con la tua crew è stata indimenticabile, tutti parlano di voi!",
+          "Avete fatto un video di gruppo che sta diventando virale online."
         ],
-        "category": "divertimento",
-        "color": "bg-purple-500",
+        "category": "sociale",
+        "color": "bg-cyan-500",
         "id": 4,
         "unlockDay": null,
         "requirements": null
@@ -484,21 +558,21 @@
     [
       5,
       {
-        "title": "Lavoretto Part-time",
-        "description": "Fai un lavoretto per guadagnare soldi da spendere",
-        "image": "work",
-        "duration": 3,
+        "title": "Famiglia",
+        "description": "Passa del tempo con la famiglia, anche se non è molto maranza",
+        "image": "home",
+        "duration": 2,
         "effects": {
-          "money": 120,
-          "energy": -20,
+          "energy": 20,
+          "money": 15,
           "reputation": -2
         },
         "possibleOutcomes": [
-          "Hai guadagnato qualche soldo, anche se non è stato molto divertente.",
-          "Il lavoro è stato noioso, ma il tuo portafoglio ringrazia."
+          "Hai trascorso del tempo con la famiglia e ti sei riposato.",
+          "I tuoi genitori ti hanno dato qualche soldo per le tue spese."
         ],
-        "category": "lavoro",
-        "color": "bg-green-500",
+        "category": "famiglia",
+        "color": "bg-blue-500",
         "id": 5,
         "unlockDay": null,
         "requirements": null
@@ -507,19 +581,21 @@
     [
       6,
       {
-        "title": "Riposo a Casa",
-        "description": "Riposati a casa per recuperare energia",
-        "image": "home",
-        "duration": 2,
+        "title": "Serata",
+        "description": "Vai a ballare e mostra il tuo stile maranza in discoteca",
+        "image": "disco",
+        "duration": 4,
         "effects": {
-          "energy": 40
+          "money": -70,
+          "reputation": 12,
+          "energy": -35
         },
         "possibleOutcomes": [
-          "Ti sei riposato bene e hai recuperato energia.",
-          "Un buon sonno ti ha rigenerato."
+          "La tua serata in discoteca è stata un successo! Tutti ti hanno notato!",
+          "Hai fatto colpo su molte persone in pista da ballo."
         ],
-        "category": "riposo",
-        "color": "bg-blue-500",
+        "category": "divertimento",
+        "color": "bg-purple-500",
         "id": 6,
         "unlockDay": null,
         "requirements": null
@@ -528,20 +604,21 @@
     [
       7,
       {
-        "title": "Social Media",
-        "description": "Condividi i tuoi outfit e le tue attività sui social",
-        "image": "social",
-        "duration": 1,
+        "title": "Shop",
+        "description": "Vai a fare shopping per trovare vestiti alla moda da vero maranza",
+        "image": "shopping",
+        "duration": 2,
         "effects": {
-          "reputation": 8,
-          "energy": -4
+          "money": -60,
+          "style": 8,
+          "energy": -12
         },
         "possibleOutcomes": [
-          "I tuoi post hanno ricevuto molti like!",
-          "Le tue foto hanno fatto il pieno di commenti positivi."
+          "Hai trovato capi perfetti per il tuo stile da vero maranza!",
+          "Il commesso ti ha fatto uno sconto speciale perché hai un'aria da vero maranza."
         ],
-        "category": "sociale",
-        "color": "bg-cyan-500",
+        "category": "acquisti",
+        "color": "bg-pink-500",
         "id": 7,
         "unlockDay": null,
         "requirements": null
@@ -550,143 +627,24 @@
     [
       8,
       {
-        "title": "Raduno di Auto Tuning",
-        "description": "Partecipa a un raduno di auto modificate",
-        "image": "cars",
-        "duration": 3,
-        "effects": {
-          "respect": 10,
-          "energy": -18,
-          "money": -25
-        },
-        "unlockDay": 3,
-        "possibleOutcomes": [
-          "Il raduno è stato fantastico! Hai visto auto incredibili!",
-          "Al raduno tutti hanno apprezzato la tua conoscenza delle auto."
-        ],
-        "category": "evento",
-        "color": "bg-amber-500",
-        "id": 8,
-        "requirements": null
-      }
-    ],
-    [
-      9,
-      {
-        "title": "Sfida di Stile",
-        "description": "Partecipa a una sfida tra maranza per determinare chi ha lo stile migliore",
-        "image": "fashion",
-        "duration": 2,
-        "effects": {
-          "style": 10,
-          "energy": -15,
-          "reputation": 8
-        },
-        "unlockDay": 4,
-        "requirements": {
-          "style": 60
-        },
-        "possibleOutcomes": [
-          "Hai partecipato alla sfida di stile e tutti hanno ammirato il tuo look da vero maranza!",
-          "La tua combinazione di vestiti ha impressionato anche i più esigenti."
-        ],
-        "category": "evento",
-        "color": "bg-rose-500",
-        "id": 9
-      }
-    ],
-    [
-      10,
-      {
-        "title": "Vai a Scuola",
-        "description": "Frequenta la scuola (solo per mantenere le apparenze)",
-        "image": "school",
-        "duration": 5,
-        "effects": {
-          "energy": -20,
-          "respect": -3,
-          "style": -2
-        },
-        "possibleOutcomes": [
-          "La giornata a scuola è stata lunga ma hai imparato qualcosa di utile.",
-          "I professori ti hanno dato del filo da torcere, ma hai mantenuto il tuo stile maranza anche in classe!"
-        ],
-        "category": "obbligo",
-        "color": "bg-gray-500",
-        "id": 10,
-        "unlockDay": null,
-        "requirements": null
-      }
-    ],
-    [
-      11,
-      {
-        "title": "Meet-up Maranza",
-        "description": "Partecipa a un ritrovo organizzato di maranza della zona",
+        "title": "Crush",
+        "description": "Incontra e impressiona il tuo crush con il tuo stile maranza",
         "image": "meetup",
         "duration": 3,
         "effects": {
-          "reputation": 10,
-          "respect": 5,
-          "energy": -15
+          "reputation": 8,
+          "energy": -15,
+          "money": -20
         },
-        "unlockDay": 5,
         "possibleOutcomes": [
-          "Il meet-up è stato un successo! Hai conosciuto molti altri maranza come te.",
-          "Ti sei fatto notare al ritrovo e hai guadagnato rispetto e reputazione."
+          "Il tuo appuntamento è andato alla grande! Il tuo crush è rimasto impressionato!",
+          "Il tuo stile maranza ha fatto colpo sul tuo crush."
         ],
-        "category": "evento",
-        "color": "bg-indigo-500",
-        "id": 11,
+        "category": "romantico",
+        "color": "bg-rose-500",
+        "id": 8,
+        "unlockDay": null,
         "requirements": null
-      }
-    ],
-    [
-      12,
-      {
-        "title": "Allenamento Freestyle",
-        "description": "Impara nuove mosse di ballo freestyle in un corso improvvisato",
-        "image": "dance",
-        "duration": 2,
-        "effects": {
-          "respect": 6,
-          "energy": -20,
-          "style": 4
-        },
-        "unlockDay": 2,
-        "possibleOutcomes": [
-          "Hai imparato nuove mosse che ti faranno fare bella figura in discoteca!",
-          "Il tuo allenamento di freestyle ha attirato l'attenzione di altri ballerini."
-        ],
-        "category": "fitness",
-        "color": "bg-yellow-500",
-        "id": 12,
-        "requirements": null
-      }
-    ],
-    [
-      13,
-      {
-        "title": "Progetto Musicale",
-        "description": "Crea una base trap o registra un pezzo con altri maranza musicisti",
-        "image": "music",
-        "duration": 4,
-        "effects": {
-          "reputation": 15,
-          "energy": -20,
-          "money": -40
-        },
-        "unlockDay": 6,
-        "requirements": {
-          "reputation": 65
-        },
-        "possibleOutcomes": [
-          "La tua traccia sta iniziando a circolare tra i maranza della città!",
-          "Il tuo pezzo musicale ha ricevuto apprezzamenti sui social."
-        ],
-        "category": "creativo",
-        "color": "bg-green-600",
-        "id": 13
       }
     ]
   ],
@@ -697,20 +655,20 @@
         "userId": 1,
         "day": 1,
         "time": "08:00",
-        "gameStarted": false,
+        "gameStarted": true,
         "hoursLeft": 16,
         "id": 1,
-        "characterId": null
+        "characterId": 1
       }
     ]
   ],
   "userId": 1,
-  "characterId": 1,
+  "characterId": 2,
   "itemId": 15,
   "characterItemId": 1,
   "skillId": 6,
-  "characterSkillId": 1,
+  "characterSkillId": 6,
   "contactId": 1,
-  "activityId": 14,
+  "activityId": 9,
   "gameStateId": 1
 }

@@ -36,284 +36,376 @@ const generateSubActivities = (activityTitle: string, activityCategory: string):
 
   // Sotto-attività specifiche per categoria
   const categorySubActivities: Record<string, { id: number, name: string, duration: number, effects: Record<string, number>, description: string }[]> = {
-    "sociale": [
+    "auto": [
       { 
         id: 2001, 
-        name: "Fai nuove conoscenze", 
+        name: "Modifica motore", 
         duration: 1, 
-        effects: { energy: -10, reputation: 8 },
-        description: "Presentati a nuove persone per ampliare il tuo giro"
+        effects: { energy: -15, respect: 10, money: -30 },
+        description: "Potenzia il motore della tua auto per farla sentire a chilometri di distanza"
       },
       { 
         id: 2002, 
-        name: "Sfoggia il tuo stile", 
+        name: "Installa luci neon", 
         duration: 0.5, 
-        effects: { energy: -5, respect: 5 },
-        description: "Mettiti in mostra con il tuo look maranza"
+        effects: { energy: -5, style: 8, money: -20 },
+        description: "Aggiungi luci neon sotto la tua auto per uno stile unico"
       },
       { 
         id: 2003, 
-        name: "Racconta una storia", 
+        name: "Lucida carrozzeria", 
         duration: 0.5, 
-        effects: { energy: -5, reputation: 4 },
-        description: "Racconta una storia esagerata per impressionare gli altri"
-      }
-    ],
-    "acquisti": [
-      { 
-        id: 2004, 
-        name: "Prova vestiti firmati", 
-        duration: 0.5, 
-        effects: { energy: -10, style: 5 },
-        description: "Prova alcuni vestiti firmati senza comprarli"
-      },
-      { 
-        id: 2005, 
-        name: "Contratta il prezzo", 
-        duration: 0.5, 
-        effects: { energy: -10, money: 15 },
-        description: "Cerca di ottenere uno sconto sui prodotti"
-      },
-      { 
-        id: 2006, 
-        name: "Sfoggia marche costose", 
-        duration: 0.5, 
-        effects: { energy: -5, respect: 4 },
-        description: "Mostra i tuoi capi firmati al centro commerciale"
-      }
-    ],
-    "fitness": [
-      { 
-        id: 2007, 
-        name: "Allenamento intenso", 
-        duration: 1, 
-        effects: { energy: -20, respect: 10 },
-        description: "Fai un allenamento intenso per migliorare il fisico"
-      },
-      { 
-        id: 2008, 
-        name: "Selfie in palestra", 
-        duration: 0.5, 
-        effects: { energy: -5, reputation: 7 },
-        description: "Scatta un selfie allo specchio della palestra"
-      },
-      { 
-        id: 2009, 
-        name: "Mostra i muscoli", 
-        duration: 0.5, 
-        effects: { energy: -5, respect: 6 },
-        description: "Esibisci i muscoli per impressionare gli altri"
-      }
-    ],
-    "divertimento": [
-      { 
-        id: 2010, 
-        name: "Balla al centro", 
-        duration: 1, 
-        effects: { energy: -15, reputation: 12 },
-        description: "Balla al centro della pista mostrando le tue mosse"
-      },
-      { 
-        id: 2011, 
-        name: "Offri da bere", 
-        duration: 0.5, 
-        effects: { money: -20, reputation: 8 },
-        description: "Offri da bere agli amici per fare bella figura"
-      },
-      { 
-        id: 2012, 
-        name: "Fai amicizia col DJ", 
-        duration: 0.5, 
-        effects: { energy: -5, respect: 8 },
-        description: "Avvicinati al DJ e chiedi la tua canzone preferita"
+        effects: { energy: -8, style: 5 },
+        description: "Lucida la carrozzeria per far brillare la tua auto"
       }
     ],
     "lavoro": [
       { 
-        id: 2013, 
-        name: "Lavora intensamente", 
+        id: 2004, 
+        name: "Turno extra", 
         duration: 1, 
-        effects: { energy: -15, money: 40 },
-        description: "Lavora sodo per guadagnare più soldi"
+        effects: { energy: -20, money: 50 },
+        description: "Fai un turno extra per guadagnare più soldi"
+      },
+      { 
+        id: 2005, 
+        name: "Chiedi aumento", 
+        duration: 0.5, 
+        effects: { energy: -5, money: 25, respect: 3 },
+        description: "Metti pressione al tuo capo per avere un aumento"
+      },
+      { 
+        id: 2006, 
+        name: "Networking", 
+        duration: 0.5, 
+        effects: { energy: -5, reputation: 7 },
+        description: "Fai amicizia con colleghi per opportunità future"
+      }
+    ],
+    "educazione": [
+      { 
+        id: 2007, 
+        name: "Studia intensamente", 
+        duration: 1, 
+        effects: { energy: -15, respect: -2 },
+        description: "Dedica tempo allo studio per migliorare le tue competenze"
+      },
+      { 
+        id: 2008, 
+        name: "Copia compiti", 
+        duration: 0.5, 
+        effects: { energy: -5, reputation: 3, respect: -1 },
+        description: "Copia i compiti da un compagno di classe"
+      },
+      { 
+        id: 2009, 
+        name: "Disturba in classe", 
+        duration: 0.5, 
+        effects: { energy: -5, respect: 5, reputation: 3 },
+        description: "Disturba la lezione per fare colpo sui compagni"
+      }
+    ],
+    "sociale": [
+      { 
+        id: 2010, 
+        name: "Organizza uscita", 
+        duration: 1, 
+        effects: { energy: -10, reputation: 10, money: -15 },
+        description: "Organizza un'uscita con la tua crew per rafforzare i legami"
+      },
+      { 
+        id: 2011, 
+        name: "Litiga per territorio", 
+        duration: 0.5, 
+        effects: { energy: -15, respect: 12 },
+        description: "Affronta un'altra crew per difendere il vostro territorio"
+      },
+      { 
+        id: 2012, 
+        name: "Posta foto di gruppo", 
+        duration: 0.5, 
+        effects: { energy: -5, reputation: 8 },
+        description: "Pubblica foto con la tua crew sui social per aumentare il tuo status"
+      }
+    ],
+    "famiglia": [
+      { 
+        id: 2013, 
+        name: "Cena in famiglia", 
+        duration: 1, 
+        effects: { energy: 5, reputation: -5 },
+        description: "Passa del tempo con la tua famiglia, anche se non è molto maranza"
       },
       { 
         id: 2014, 
-        name: "Fai pausa caffè", 
+        name: "Chiedi soldi", 
         duration: 0.5, 
-        effects: { energy: 5, money: 10 },
-        description: "Prendi una pausa caffè per ricaricarti"
+        effects: { money: 15, respect: -5 },
+        description: "Chiedi soldi ai tuoi genitori con una scusa credibile"
       },
       { 
         id: 2015, 
-        name: "Chiedi aumento", 
+        name: "Aiuta in casa", 
         duration: 0.5, 
-        effects: { energy: -5, money: 25 },
-        description: "Prova a chiedere un aumento al capo"
+        effects: { energy: -10, respect: -2 },
+        description: "Aiuta con le faccende di casa per migliorare i rapporti familiari"
       }
     ],
-    "riposo": [
+    "divertimento": [
       { 
         id: 2016, 
-        name: "Pisolino veloce", 
+        name: "Prenota tavolo VIP", 
         duration: 0.5, 
-        effects: { energy: 15 },
-        description: "Fai un pisolino per recuperare energia"
+        effects: { energy: -10, reputation: 15, money: -100 },
+        description: "Prenota un tavolo VIP in discoteca per fare bella figura"
       },
       { 
         id: 2017, 
-        name: "Guarda serie TV", 
+        name: "Balla in centro pista", 
         duration: 1, 
-        effects: { energy: 10 },
-        description: "Rilassati guardando una serie TV"
+        effects: { energy: -15, reputation: 12 },
+        description: "Mettiti al centro della pista e mostra le tue mosse migliori"
       },
       { 
         id: 2018, 
-        name: "Ascolta musica", 
+        name: "Offri drink", 
         duration: 0.5, 
-        effects: { energy: 8 },
-        description: "Ascolta un po' di musica trap per rilassarti"
+        effects: { energy: -5, reputation: 8, money: -30 },
+        description: "Offri drink agli amici per essere generoso"
       }
     ],
-    "evento": [
+    "acquisti": [
       { 
         id: 2019, 
-        name: "Parla di auto", 
+        name: "Sfoggia marchi costosi", 
         duration: 0.5, 
-        effects: { energy: -5, respect: 7 },
-        description: "Discuti di auto modificate con altri appassionati"
+        effects: { energy: -5, style: 8, reputation: 5 },
+        description: "Vai in giro con vestiti firmati per impressionare gli altri"
       },
       { 
         id: 2020, 
-        name: "Fai foto alle auto", 
+        name: "Contratta il prezzo", 
         duration: 0.5, 
-        effects: { energy: -5, reputation: 5 },
-        description: "Scatta foto di auto modificate per i social"
+        effects: { energy: -5, money: 15 },
+        description: "Cerca di ottenere uno sconto sui prodotti che vuoi comprare"
       },
       { 
         id: 2021, 
-        name: "Contatta meccanico", 
+        name: "Compra nuovi accessori", 
         duration: 0.5, 
-        effects: { energy: -5, respect: 4 },
-        description: "Parla con un meccanico di possibili modifiche"
+        effects: { energy: -5, style: 6, money: -25 },
+        description: "Acquista accessori per completare il tuo look maranza"
       }
     ],
-    "obbligo": [
+    "romantico": [
       { 
         id: 2022, 
-        name: "Studia per test", 
+        name: "Invita ad uscire", 
         duration: 1, 
-        effects: { energy: -10, respect: -2 },
-        description: "Dedica un po' di tempo a studiare per un test"
+        effects: { energy: -10, reputation: 5, money: -20 },
+        description: "Invita il tuo crush a uscire per un appuntamento"
       },
       { 
         id: 2023, 
-        name: "Socializza in pausa", 
+        name: "Manda messaggi", 
         duration: 0.5, 
         effects: { energy: -5, reputation: 3 },
-        description: "Socializza con i compagni durante la pausa"
+        description: "Manda messaggi al tuo crush per fargli sapere che ci tieni"
       },
       { 
         id: 2024, 
-        name: "Parla col professore", 
+        name: "Regala qualcosa", 
         duration: 0.5, 
-        effects: { energy: -5, respect: -1 },
-        description: "Parla con un professore per migliorare i voti"
+        effects: { energy: -5, respect: 3, money: -30 },
+        description: "Fai un piccolo regalo per impressionare il tuo crush"
       }
     ]
   };
 
   // Attività specifiche per titolo
   const titleSpecificSubActivities: Record<string, { id: number, name: string, duration: number, effects: Record<string, number>, description: string }[]> = {
-    "Giro in Piazza": [
+    "Garage": [
       { 
         id: 3001, 
-        name: "Incontra il gruppo", 
+        name: "Scarico racing", 
         duration: 0.5, 
-        effects: { energy: -5, reputation: 7 },
-        description: "Ritrova il tuo gruppo di amici in piazza"
+        effects: { energy: -10, respect: 12, money: -50 },
+        description: "Installa uno scarico racing per far sentire la tua auto da lontano"
       },
       { 
         id: 3002, 
-        name: "Sfoggia nuovi vestiti", 
+        name: "Cerchi in lega", 
         duration: 0.5, 
-        effects: { energy: -5, style: 6 },
-        description: "Mostra il tuo nuovo outfit agli amici"
+        effects: { energy: -8, style: 10, money: -40 },
+        description: "Monta nuovi cerchi in lega per uno stile aggressivo"
       },
       { 
         id: 3003, 
-        name: "Racconta storie esagerate", 
+        name: "Abbassa l'auto", 
         duration: 0.5, 
-        effects: { energy: -5, reputation: 8 },
-        description: "Impressiona gli altri con storie esagerate"
+        effects: { energy: -10, style: 8, respect: 7, money: -30 },
+        description: "Abbassa la tua auto per un look ancora più aggressivo"
       }
     ],
-    "Shopping al Centro": [
+    "Lavoro": [
       { 
         id: 3004, 
-        name: "Cerca sconti speciali", 
+        name: "Consegne cibo", 
         duration: 0.5, 
-        effects: { energy: -5, money: 20 },
-        description: "Cerca i migliori sconti nei negozi"
+        effects: { energy: -15, money: 35 },
+        description: "Consegna cibo a domicilio per guadagnare extra"
       },
       { 
         id: 3005, 
-        name: "Prova molti capi", 
-        duration: 0.5, 
-        effects: { energy: -10, style: 3 },
-        description: "Prova diversi outfit nei camerini"
+        name: "Aiuta officina", 
+        duration: 1, 
+        effects: { energy: -20, money: 45, respect: 5 },
+        description: "Aiuta in officina meccanica, impara e guadagna"
       },
       { 
         id: 3006, 
-        name: "Compra accessorio", 
+        name: "Dj set locale", 
         duration: 0.5, 
-        effects: { money: -30, style: 5 },
-        description: "Acquista un piccolo accessorio per migliorare il look"
+        effects: { energy: -15, money: 40, reputation: 10 },
+        description: "Suona come DJ in un locale per guadagnare e farti conoscere"
       }
     ],
-    "Palestra": [
+    "Scuola": [
       { 
         id: 3007, 
-        name: "Allenamento estremo", 
+        name: "Salta lezione", 
         duration: 1, 
-        effects: { energy: -25, respect: 12 },
-        description: "Fai un allenamento estremamente intenso"
+        effects: { energy: 5, respect: 8, reputation: 3 },
+        description: "Salta la lezione per aumentare la tua reputazione da maranza"
       },
       { 
         id: 3008, 
-        name: "Posa davanti allo specchio", 
+        name: "Butta giù compiti", 
         duration: 0.5, 
-        effects: { energy: -5, reputation: 5 },
-        description: "Scatta foto davanti allo specchio della palestra"
+        effects: { energy: -10, respect: -2 },
+        description: "Fai velocemente i compiti per toglierti il pensiero"
       },
       { 
         id: 3009, 
-        name: "Aiuta un principiante", 
+        name: "Fai colpo sui compagni", 
         duration: 0.5, 
-        effects: { energy: -10, respect: 7 },
-        description: "Aiuta un principiante a usare gli attrezzi"
+        effects: { energy: -5, reputation: 7, style: 3 },
+        description: "Impressiona i compagni con il tuo stile da maranza"
       }
     ],
-    "Serata in Discoteca": [
+    "Crew": [
       { 
         id: 3010, 
-        name: "Balla sul cubo", 
+        name: "Riunione di crew", 
         duration: 0.5, 
-        effects: { energy: -15, reputation: 15 },
-        description: "Sali sul cubo e mostra le tue mosse di ballo"
+        effects: { energy: -5, respect: 10, reputation: 5 },
+        description: "Riunisci la tua crew per pianificare le prossime mosse"
       },
       { 
         id: 3011, 
-        name: "Parla col buttafuori", 
+        name: "Graffiti", 
         duration: 0.5, 
-        effects: { energy: -5, respect: 6 },
-        description: "Fai amicizia con il buttafuori per saltare la fila"
+        effects: { energy: -10, reputation: 12, respect: 8 },
+        description: "Fai graffiti con la tua crew per marcare il territorio"
       },
       { 
         id: 3012, 
-        name: "Prenota tavolo VIP", 
+        name: "Video TikTok", 
         duration: 0.5, 
-        effects: { money: -100, reputation: 20 },
-        description: "Prenota un tavolo VIP per impressionare tutti"
+        effects: { energy: -8, reputation: 15 },
+        description: "Gira un video TikTok con la tua crew per diventare virale"
+      }
+    ],
+    "Famiglia": [
+      { 
+        id: 3013, 
+        name: "Discussione", 
+        duration: 0.5, 
+        effects: { energy: -10, respect: -3, reputation: 2 },
+        description: "Discuti con i genitori che non capiscono il tuo stile maranza"
+      },
+      { 
+        id: 3014, 
+        name: "Negozia uscita", 
+        duration: 0.5, 
+        effects: { energy: -5, respect: -1 },
+        description: "Cerca di convincere i genitori a farti uscire più tardi"
+      },
+      { 
+        id: 3015, 
+        name: "Inventa scusa", 
+        duration: 0.5, 
+        effects: { energy: -5, money: 20, respect: -2 },
+        description: "Inventa una scusa per ottenere soldi dai genitori"
+      }
+    ],
+    "Serata": [
+      { 
+        id: 3016, 
+        name: "Fai amicizia con DJ", 
+        duration: 0.5, 
+        effects: { energy: -10, reputation: 12 },
+        description: "Fai amicizia con il DJ per farti mettere la tua canzone preferita"
+      },
+      { 
+        id: 3017, 
+        name: "Flirta in discoteca", 
+        duration: 0.5, 
+        effects: { energy: -10, reputation: 8, respect: 5 },
+        description: "Flirta in discoteca per mostrare il tuo carisma"
+      },
+      { 
+        id: 3018, 
+        name: "Serata VIP", 
+        duration: 1, 
+        effects: { energy: -20, reputation: 20, money: -150 },
+        description: "Organizza una serata VIP con bottiglia e privé"
+      }
+    ],
+    "Shop": [
+      { 
+        id: 3019, 
+        name: "Vestiti firmati", 
+        duration: 0.5, 
+        effects: { energy: -5, style: 12, money: -80 },
+        description: "Acquista vestiti di marca per migliorare il tuo look maranza"
+      },
+      { 
+        id: 3020, 
+        name: "Catena oro", 
+        duration: 0.5, 
+        effects: { style: 15, money: -120, respect: 10 },
+        description: "Compra una catena d'oro per aumentare il tuo prestigio"
+      },
+      { 
+        id: 3021, 
+        name: "Accessori street", 
+        duration: 0.5, 
+        effects: { energy: -5, style: 8, money: -40 },
+        description: "Acquista accessori street per completare il tuo outfit"
+      }
+    ],
+    "Crush": [
+      { 
+        id: 3022, 
+        name: "Appuntamento romantico", 
+        duration: 1, 
+        effects: { energy: -15, money: -50, reputation: 10 },
+        description: "Porta il tuo crush in un posto speciale per fare colpo"
+      },
+      { 
+        id: 3023, 
+        name: "Giro in auto", 
+        duration: 0.5, 
+        effects: { energy: -10, reputation: 8, style: 5 },
+        description: "Porta il tuo crush a fare un giro sulla tua auto modificata"
+      },
+      { 
+        id: 3024, 
+        name: "Dedica canzone", 
+        duration: 0.5, 
+        effects: { energy: -5, reputation: 7 },
+        description: "Dedica una canzone trap al tuo crush per dimostrare i tuoi sentimenti"
       }
     ]
   };
